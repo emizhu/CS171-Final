@@ -17,9 +17,9 @@ StackedChart.prototype.initVis = function() {
     var vis = this;
 
     // Margin object with properties for the four directions
-    vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
+    vis.margin = {top: 40, right: 0, bottom: 100, left: 60};
     vis.width = 1200- vis.margin.left -vis.margin.right,
-    vis.height = 400- vis.margin.top -vis.margin.bottom,
+    vis.height = 500- vis.margin.top -vis.margin.bottom,
     vis.padding = 30;
 
     // SVG drawing area
@@ -126,7 +126,7 @@ StackedChart.prototype.updateVis = function(){
         .attr("x", function(d) { return vis.x(d[0]); })
         .attr("width", function(d) { return vis.x(d[1]) - vis.x(d[0]); })
         .attr("height", vis.height/6 - vis.margin.top)
-        .attr("transform", "translate(60,0)")
+        .attr("transform", "translate(30,0)")
         .on("mouseover", function(d) {
             d3.select(this)
                 .style("fill", "orange");
@@ -147,7 +147,7 @@ StackedChart.prototype.updateVis = function(){
 
     vis.svg.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate(60,0)")
+        .attr("transform", "translate(30,0)")
         .call(d3.axisLeft(vis.y));
 
 }

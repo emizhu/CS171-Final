@@ -12,6 +12,7 @@ queue()
 
      var diffvis = new DiffVis("diffvis", 30, 10, 20, 10);
      var stackedchart = new StackedChart("stackedchart", data);
+     // var lifestyle = new LifeStyle("lifestyle", data);
 
      console.log(data);
 

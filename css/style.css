@@ -1,3 +1,73 @@
+.intro{
+    position: absolute;
+    text-align: start;
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    bottom: 100px;
+    right: 300px;
+    color: white;
+    /*padding-top: 5px;*/
+    /*padding-right: 50px;*/
+    /*padding-bottom: 5px;*/
+    /*padding-left: 50px;*/
+}
+
+h1 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    font-size: 60px;
+    color: black;
+    margin-top: 20px;
+    padding-top:30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+
+h2 {
+    font-weight: bold;
+    font-family: 'Roboto Slab', serif;
+    font-size: 28px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+h3{
+    font-family: 'Roboto Slab', serif;
+    font-size: 28px;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    padding-left: 200px;
+}
+
+p{
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-right: 200px;
+    padding-bottom: 20px;
+    padding-left: 200px;
+}
+
+
+body {
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+}
+
+#stackedchart .x-axis text {
+    font-size: 14px;
+}
+
+
+.axis{
+
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
 .container {
     padding:10px;
 }
@@ -9,94 +79,8 @@
     margin: auto;
 }
 
-h2 {
-    padding-top:30px;
-}
 
 .largephoto {
-    background-color: lightgrey;
+    /*background-color: lightgrey;*/
     height:100vh;
 }
-
-/*body {*/
-    /*font-family: 'Roboto Slab', serif;*/
-/*}*/
-
-/*h1 {*/
-    /*font-family: 'Roboto Slab', serif;*/
-    /*font-weight: bold;*/
-    /*font-size: 36px;*/
-    /*color: black;*/
-    /*margin-top: 40px;*/
-    /*padding-top: 40px;*/
-    /*padding-right: 40px;*/
-    /*padding-bottom: 20px;*/
-    /*padding-left: 200px;*/
-/*}*/
-
-/*h2 {*/
-    /*font-family: 'Roboto Slab', serif;*/
-    /*font-size: 20px;*/
-    /*margin-top: 10px;*/
-    /*margin-bottom: 30px;*/
-/*}*/
-
-/*h3{*/
-    /*font-family: 'Roboto Slab', serif;*/
-    /*font-size: 28px;*/
-    /*padding-top: 40px;*/
-    /*padding-right: 40px;*/
-    /*padding-bottom: 20px;*/
-    /*padding-left: 200px;*/
-/*}*/
-
-/*p{*/
-    /*font-family: 'Roboto Slab', serif;*/
-    /*font-size: 20px;*/
-    /*padding-top: 20px;*/
-    /*padding-right: 200px;*/
-    /*padding-bottom: 20px;*/
-    /*padding-left: 200px;*/
-/*}*/
-
-/*.brush {*/
-    /*fill: #ccc;*/
-    /*fill-opacity: .5;*/
-    /*pointer-events: none;*/
-/*}*/
-
-/*.axis line,*/
-/*.axis path {*/
-    /*fill: none;*/
-    /*stroke: #555;*/
-    /*shape-rendering: crispEdges;*/
-/*}*/
-
-/*.tick text {*/
-    /*font-family: sans-serif;*/
-    /*font-size: 11px;*/
-    /*fill: #555;*/
-/*}*/
-
-/*#priovis .x-axis text {*/
-    /*font-weight: 600;*/
-/*}*/
-
-/*.area {*/
-    /*fill: #825a5a;*/
-/*}*/
-
-/*.area.area-age {*/
-    /*fill: #94a97a;*/
-/*}*/
-
-/*.bar {*/
-    /*fill: #93bebf;*/
-/*}*/
-
-/*.axis{*/
-    /*font-family: 'Roboto Slab', serif;*/
-    /*font-size: 20px;*/
-    /*margin-top: 10px;*/
-    /*margin-bottom: 30px;*/
-/*}*/
