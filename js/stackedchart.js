@@ -9,10 +9,6 @@ StackedChart = function(_parentElement, _data){
     this.initVis();
 }
 
-
-// var data = loadData();
-// var data2017, keys;
-
 StackedChart.prototype.initVis = function() {
     var vis = this;
 
@@ -34,11 +30,11 @@ StackedChart.prototype.initVis = function() {
     // Extend X : 24hours *60 minutes = 1440 minutes
     vis.extendx = 1440;
 
-    vis.x = d3.scaleLinear()		// y = d3.scaleLinear()
-        .range([0, vis.width]);	// .rangeRound([height, 0]);
+    vis.x = d3.scaleLinear()
+        .range([0, vis.width]);
 
-    vis.y = d3.scaleBand()			// x = d3.scaleBand()
-        .rangeRound([vis.height, 0])	// .rangeRound([0, width])
+    vis.y = d3.scaleBand()
+        .rangeRound([vis.height, 0])
         .padding(0.1)
         .round(true);
 
