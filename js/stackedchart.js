@@ -66,6 +66,8 @@ StackedChart.prototype.initVis = function() {
         .style("text-anchor", "middle")
         .attr("font-size", "12px")
         .attr("font-weight", "bold");
+
+    vis.wrangleData();
 }
 
 
@@ -81,18 +83,18 @@ StackedChart.prototype.wrangleData = function(){
 
         //store 2017 only
         vis.data2017 = d3.values(vis.displayData[14]);
-        vis.displayData = vis.data2017[1];
+        vis.data2017  = vis.data2017[1];
 
         // column values
-        keys = data.columns;
+        vis.keys = vis.data.columns;
         console.log(vis.keys);
 
         // filter data
-        vis.displayData.forEach(function (d) {
+        vis.data2017 .forEach(function (d) {
             //convert string to number
             var i;
-            for (i = 0; i < keys.length; i++) {
-                var category = keys[i];
+            for (i = 0; i < vis.keys.length; i++) {
+                var category =vis.keys[i];
                 if (category[0] == 't') {
                     d[category] = +d[category];
                 }}
@@ -108,13 +110,13 @@ AreaChart.prototype.updateVis = function(){
     console.log(vis.keys);
     console.log(vis.data2017);
 
-    y.domain(data2017.map(function(d) { return d.age; }));					// x.domain...
-    x.domain([0,extendx]).nice();	// y.domain...
+    vis.y.domain(vis.data2017.map(function(d) { return d.age; }));					// x.domain...
+    vis.x.domain([0,vis.extendx]).nice();	// y.domain...
     // z.domain(keys);
 
     vis.svg.append("g")
         .selectAll("g")
-        .data(d3.stack().keys(keys)(data2017))
+        .data(d3.stack().keys(vis.keys)(data2017))
         .enter().append("g")
         .attr("fill", function(d, index) { return z(index); })
         .selectAll("rect")
