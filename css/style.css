@@ -1,4 +1,22 @@
+.container {
+    padding:10px;
+}
 
+.sketch {
+    max-height: 400px;
+    max-width: 500px;
+    object-fit: scale-down;
+    margin: auto;
+}
+
+h2 {
+    padding-top:30px;
+}
+
+.largephoto {
+    background-color: lightgrey;
+    height:100vh;
+}
 
 /*body {*/
     /*font-family: 'Roboto Slab', serif;*/
