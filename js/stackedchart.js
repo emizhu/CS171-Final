@@ -18,9 +18,9 @@ StackedChart.prototype.initVis = function() {
 
     // Margin object with properties for the four directions
     vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
-
-    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.width = 1200- vis.margin.left -vis.margin.right,
+    vis.height = 400- vis.margin.top -vis.margin.bottom,
+    vis.padding = 30;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -103,7 +103,7 @@ StackedChart.prototype.wrangleData = function(){
     vis.updateVis();
 }
 
-AreaChart.prototype.updateVis = function(){
+StackedChart.prototype.updateVis = function(){
     var vis = this;
 
     vis.keys= vis.keys.slice(2,19);
@@ -116,31 +116,31 @@ AreaChart.prototype.updateVis = function(){
 
     vis.svg.append("g")
         .selectAll("g")
-        .data(d3.stack().keys(vis.keys)(data2017))
+        .data(d3.stack().keys(vis.keys)(vis.data2017))
         .enter().append("g")
-        .attr("fill", function(d, index) { return z(index); })
+        .attr("fill", function(d, index) { return vis.z(index); })
         .selectAll("rect")
         .data(function(d) { return d; })
         .enter().append("rect")
-        .attr("y", function(d, i) { return 23 + i*(vis.height/keys.length+38)})
-        .attr("x", function(d) { return x(d[0]); })
-        .attr("width", function(d) { return x(d[1]) - x(d[0]); })
-        .attr("height", vis.height/6 - vis.margin.top - vis.margin.bottom)
+        .attr("y", function(d, i) { return 23 + i*(vis.height/vis.keys.length+38)})
+        .attr("x", function(d) { return vis.x(d[0]); })
+        .attr("width", function(d) { return vis.x(d[1]) - vis.x(d[0]); })
+        .attr("height", vis.height/6 - vis.margin.top)
         .attr("transform", "translate(60,0)")
         .on("mouseover", function(d) {
             d3.select(this)
                 .style("fill", "orange");
-            tooltip.transition()
+            vis.tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
-            tooltip.html(d[0] + "<br/>")
+            vis.tooltip.html(d[0] + "<br/>")
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px");
         })
         .on("mouseout", function(d) {
             d3.select(this)
-                .style("fill", function(d, index) { return z(index); });
-            tooltip.transition()
+                .style("fill", function(d, index) { return vis.z(index); });
+            vis.tooltip.transition()
                 .duration(200)
                 .style("opacity", 0);
         });

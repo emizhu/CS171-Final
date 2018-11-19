@@ -1,84 +1,84 @@
 
 
-body {
-    font-family: 'Roboto Slab', serif;
-}
+/*body {*/
+    /*font-family: 'Roboto Slab', serif;*/
+/*}*/
 
-h1 {
-    font-family: 'Roboto Slab', serif;
-    font-weight: bold;
-    font-size: 36px;
-    color: black;
-    margin-top: 40px;
-    padding-top: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    padding-left: 200px;
-}
+/*h1 {*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-weight: bold;*/
+    /*font-size: 36px;*/
+    /*color: black;*/
+    /*margin-top: 40px;*/
+    /*padding-top: 40px;*/
+    /*padding-right: 40px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 200px;*/
+/*}*/
 
-h2 {
-    font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
+/*h2 {*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-size: 20px;*/
+    /*margin-top: 10px;*/
+    /*margin-bottom: 30px;*/
+/*}*/
 
-h3{
-    font-family: 'Roboto Slab', serif;
-    font-size: 28px;
-    padding-top: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    padding-left: 200px;
-}
+/*h3{*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-size: 28px;*/
+    /*padding-top: 40px;*/
+    /*padding-right: 40px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 200px;*/
+/*}*/
 
-p{
-    font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    padding-top: 20px;
-    padding-right: 200px;
-    padding-bottom: 20px;
-    padding-left: 200px;
-}
+/*p{*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-size: 20px;*/
+    /*padding-top: 20px;*/
+    /*padding-right: 200px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 200px;*/
+/*}*/
 
-.brush {
-    fill: #ccc;
-    fill-opacity: .5;
-    pointer-events: none;
-}
+/*.brush {*/
+    /*fill: #ccc;*/
+    /*fill-opacity: .5;*/
+    /*pointer-events: none;*/
+/*}*/
 
-.axis line,
-.axis path {
-    fill: none;
-    stroke: #555;
-    shape-rendering: crispEdges;
-}
+/*.axis line,*/
+/*.axis path {*/
+    /*fill: none;*/
+    /*stroke: #555;*/
+    /*shape-rendering: crispEdges;*/
+/*}*/
 
-.tick text {
-    font-family: sans-serif;
-    font-size: 11px;
-    fill: #555;
-}
+/*.tick text {*/
+    /*font-family: sans-serif;*/
+    /*font-size: 11px;*/
+    /*fill: #555;*/
+/*}*/
 
-#priovis .x-axis text {
-    font-weight: 600;
-}
+/*#priovis .x-axis text {*/
+    /*font-weight: 600;*/
+/*}*/
 
-.area {
-    fill: #825a5a;
-}
+/*.area {*/
+    /*fill: #825a5a;*/
+/*}*/
 
-.area.area-age {
-    fill: #94a97a;
-}
+/*.area.area-age {*/
+    /*fill: #94a97a;*/
+/*}*/
 
-.bar {
-    fill: #93bebf;
-}
+/*.bar {*/
+    /*fill: #93bebf;*/
+/*}*/
 
-.axis{
-    font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
+/*.axis{*/
+    /*font-family: 'Roboto Slab', serif;*/
+    /*font-size: 20px;*/
+    /*margin-top: 10px;*/
+    /*margin-bottom: 30px;*/
+/*}*/
