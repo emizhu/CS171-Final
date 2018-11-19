@@ -24,11 +24,11 @@ DiffVis.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    vis.calendar = vis.svg.append("g");
-    vis.calendar.append("path")
-        .attr("fill", "transparent")
-        .attr("stroke", "black")
-        .attr("d", "M 0 0 H " + (vis.width - 200));
+    // vis.calendar = vis.svg.append("g");
+    // vis.calendar.append("path")
+    //     .attr("fill", "transparent")
+    //     .attr("stroke", "black")
+    //     .attr("d", "M 0 0 H " + (vis.width - 200));
 
     vis.legend = vis.svg.append("g")
         .attr("transform", "translate(0, 50)");
@@ -42,7 +42,7 @@ DiffVis.prototype.initVis = function() {
     vis.legend.append("text")
         .attr("x", 30)
         .attr("y",15)
-        .text("1 square = 1 hour of time");
+        .text("1 square = 1 hour of time spent on Activity 1");
 
     vis.left = vis.svg.append("g")
         .attr("class", "left-vis")
@@ -51,6 +51,18 @@ DiffVis.prototype.initVis = function() {
     vis.right = vis.svg.append("g")
         .attr("class", "right-vis")
         .attr("transform", "translate(400, 100)");
+
+    vis.labelLeft = vis.left
+        .append("text")
+        .attr("y", 0)
+        .attr("x", 150)
+        .text("Group 1");
+
+    vis.labelRight = vis.right
+        .append("text")
+        .attr("y", 0)
+        .attr("x", 150)
+        .text("Group 2");
 
     vis.wrangleData();
 
@@ -98,7 +110,7 @@ DiffVis.prototype.drawVis = function() {
                 .attr("width", 8)
                 .attr("height", 8)
                 .attr("x", 15 * (j % 24))
-                .attr("y",15* Math.floor(j/24));
+                .attr("y",15* Math.floor(j/24)+10);
         },time1 * j);
     });
 
@@ -112,7 +124,7 @@ DiffVis.prototype.drawVis = function() {
                     .attr("width", 8)
                     .attr("height", 8)
                     .attr("x", 15 * (j % 24))
-                    .attr("y",15* Math.floor(j/24));
+                    .attr("y",15* Math.floor(j/24)+10);
             },time2 * j);
         });
 
@@ -137,10 +149,10 @@ DiffVis.prototype.showDetails = function() {
         .attr("width", 8)
         .attr("height", 8)
         .attr("x", function(d, i) {
-            return 15 * ((vis.final1b+i) % 12);
+            return 15 * ((vis.final1b+i) % 24);
         })
         .attr("y",function(d, i) {
-            return 15* Math.floor((vis.final1b+i)/24);
+            return 15* Math.floor((vis.final1b+i)/24)+10;
         });
 
     // var x1 = 15 * (vis.final1b % 20) + 4;
@@ -171,7 +183,7 @@ DiffVis.prototype.showDetails = function() {
         .attr("fill", "red")
         .attr("width", 18)
         .attr("height", 18)
-        .attr("x", 300)
+        .attr("x", 450)
         .attr("y", 0)
         .on("click", function(d) {
             if (!vis.clicked) {
@@ -181,9 +193,9 @@ DiffVis.prototype.showDetails = function() {
 
     vis.legend.append("text")
         .attr("class", "desc")
-        .attr("x", 330)
+        .attr("x", 500)
         .attr("y", 15)
-        .text("click me");
+        .text("Click to Add Activity 2");
 }
 
 DiffVis.prototype.showSecond = function() {
@@ -209,7 +221,7 @@ DiffVis.prototype.showSecond = function() {
                 .attr("width", 8)
                 .attr("height", 8)
                 .attr("x", 15 * ((vis.final1a + j) % 24))
-                .attr("y",15* Math.floor((vis.final1a+j)/24));
+                .attr("y",15* Math.floor((vis.final1a+j)/24)+10);
         },time1 * j);
     });
 
@@ -223,7 +235,7 @@ DiffVis.prototype.showSecond = function() {
                 .attr("width", 8)
                 .attr("height", 8)
                 .attr("x", 15 * ((vis.final1b+j) % 24))
-                .attr("y",15* Math.floor((vis.final1b+j)/24));
+                .attr("y",15* Math.floor((vis.final1b+j)/24)+10);
         },time2 * j);
     });
 }
