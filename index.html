@@ -7,6 +7,7 @@
     <!-- Load CSS libraries -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
@@ -54,30 +55,60 @@
 
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <h2>How does your lifestyle compare to someone else's?</h2>
 
-            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="placeholder">
                         <div>Placeholding Notes: sketch to show lifestyle differences. User will select options.</div>
-                        <img class="sketch" src="img/lifestyle.jpg"/>
+                        <!--img class="sketch" src="img/lifestyle.jpg"/-->
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div><b>CALL OUT MAJOR DIFFERENCES IN TIME USE</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-                        aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-                        felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                        eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
-                        viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                        Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
-                        tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit
-                    </div>
+        <div class="row">
+            <!--<div class="col-md-2">-->
+                <!--<div><b>CALL OUT MAJOR DIFFERENCES IN TIME USE</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.-->
+                    <!--Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,-->
+                    <!--ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,-->
+                    <!--aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum-->
+                    <!--felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <div class="col-md-2">
+                <div id="checkboxes1">
+                    Sex<br>
+                    <input type="checkbox" class="checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
+                    <input type="checkbox" class="checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>
+                    <br>
+                    Employed<br>
+                    <input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>
+                    <input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>
+                    <input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>
                 </div>
             </div>
+
+            <div class="col-lg-7">
+                <div id ="lifestyle"></div>
+            </div>
+
+            <div class="col-md-2">
+                <div id="checkboxes2">
+                    Sex<br>
+                    <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
+                    <input type="checkbox" class="checkbox" id="Female2" value="Female" checked onchange="onToggle()">Female<br>
+                    <br>
+                    Employed<br>
+                    <input type="checkbox" class="checkbox" id="Full_time2" value="Full_time" checked onchange="onToggle()">Full Time<br>
+                    <input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>
+                    <input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>
+                </div>
+            </div>
+
+
+        </div>
+
 
         <div>Interactive Storyboard for Visualization:<br>
             <img src="img/Compare1.png" width="500px"/>
@@ -134,10 +165,14 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/queue.v1.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+
+
 
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>
     <script src="js/stackedchart.js"></script>
+    <script src="js/lifestyle.js"></script>
     
     <!-- Visualization objects -->
     <script src="js/main.js"></script>
