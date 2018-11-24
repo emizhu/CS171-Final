@@ -7,54 +7,54 @@
     <!-- Load CSS libraries -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jquery.fullpage.css">
+    <link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
 
-    <div  class = "largephoto">photo placeholder</div>
-    <!--<img src="img/time1.png" alt="img/time1.png" style="width:100%">-->
 
-    <div class="intro"><br>
-        <h1>We Know What You Did Last Year</h1><br></div>
+<div id="fullpage">
 
-    <div class="container">
+    <div class ="section fp-auto-height">
 
-        <h2>How Do American Spend Their Time? </h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        <img src="img/fastpeople2.jpg" alt="img/fastpeople.jpg" style="width:100%; height: auto;">
+        <div id="intro">
+            <h1>We Know What You Did Last Year</h1><br>
+        </div>
+    </div>
+    <div class="section">
+        <div id="hours"> 689,328 </div><p>Life expectancy for Americans is 689,328 hours (78.7 years). <br> How would you like to spend your time?</p>
+    </div>
+    <div class="section">
+            <h2>How Do Other Americans Spend Their Time? </h2>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
             Aenean commodo ligula eget dolor. Aenean massa.
             Cum sociis natoque penatibus et magnis dis parturient montes,
             nascetur ridiculus mus. Donec quam felis, ultricies nec,
             pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-        <div class="col-md-12">
-            <div id ="stackedchart"></div>
+            <div class="col-md-12" align="middle">
+                <div id = "stackedchart"></div>
+                <div id = "activityLegend"></div>
+            </div>
+    </div>
+    <div class="section">
+        <div id="placeholder">
+            <p>Placeholding Notes: This preliminary version of the visualization shows how much time each
+            group on average spends on the activity over a one year period. The visualization
+            has the option of showing the aggregate of time spent on two different visualizations
+            (e.g. housework and childcare) for two different groups (e.g. full-time employed married
+            men vs. women).
+            <br><br>
+            Though not implemented yet, we plan to add an axis label that names
+            each group, another label indicating that one row contains 24 blocks to represent "one day",
+            some text or tooltip after the time lapse to explicitly state the difference in number of hours
+            (e.g. 121 in the example), and a calendar time lapse (e.g. scrolling through the months of the year)
+    so that it's clear to the user that each time lapse corresponds to one year of time.</p>
         </div>
-        <div>Interactive Storyboard for Visualization:<br>
-            <img src="img/StackedChart.png" width="500px"/>
-        </div>
-
-
-    <div id="placeholder">
-        Placeholding Notes: This preliminary version of the visualization shows how much time each
-        group on average spends on the activity over a one year period. The visualization
-        has the option of showing the aggregate of time spent on two different visualizations
-        (e.g. housework and childcare) for two different groups (e.g. full-time employed married
-        men vs. women).
-        <br><br>
-        Though not implemented yet, we plan to add an axis label that names
-        each group, another label indicating that one row contains 24 blocks to represent "one day",
-        some text or tooltip after the time lapse to explicitly state the difference in number of hours
-        (e.g. 121 in the example), and a calendar time lapse (e.g. scrolling through the months of the year)
-        so that it's clear to the user that each time lapse corresponds to one year of time.
-    </div>
-    <div id="diffvis"></div>
-    <div>Interactive Storyboard for Visualization:<br>
-        <img src="img/diffVis.png" width="500px"/>
+        <div id="diffvis"></div>
     </div>
 
-
-
-    </div>
-
-    <div class="container">
+    <div class="section">
         <h2>How does your lifestyle compare to someone else's?</h2>
 
             <div class="row">
@@ -78,55 +78,53 @@
                     </div>
                 </div>
             </div>
-
-        <div>Interactive Storyboard for Visualization:<br>
-            <img src="img/Compare1.png" width="500px"/>
-            <img src="img/Compare2.png" width="500px"/>
-        </div>
     </div>
 
-
-    <div class="container">
+    <div class="section">
         <h2>Who are the survey respondents?</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="placeholder">
+                        <div>Placeholding Notes: Each line represents an individual. We aren't sure if this will be too slow/heavy as there are 20,000 respondent.</div>
+                        <img class="sketch" src="img/demographics.jpg"/>
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="placeholder">
-                    <div>Placeholding Notes: Each line represents an individual. We aren't sure if this will be too slow/heavy as there are 20,000 respondent.</div>
-                    <img class="sketch" src="img/demographics.jpg"/>
+                <div class="col-md-6">
+                    <div><b>DETAILS ON DATA COLLECTION</b>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
+                        aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                        felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                        eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
+                        viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
+                        Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
+                        tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-6">
-                <div><b>DETAILS ON DATA COLLECTION</b>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                    ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-                    aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-                    felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                    eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
-                    viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                    Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus,
-                    tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit
-                </div>
-            </div>
-        </div>
-
 
     </div>
-
-
-    <div class="about">
+    <div class="section">
         <h2>About American Time Use Data</h2>
         <p>The dataset measure how individuals divide their time between
             different activities, including work, childcare, and leisure.
             Each entry in the dataset corresponds to one individual, and captures their demographic
-     data and their exact time breakdown over a 24-hour period.</p>
-        <h2>Reference</h2>
-
+            data and their exact time breakdown over a 24-hour period.</p>
     </div>
-
+    <div class="section">
+        <h2>Reference</h2>
+        CREDIT: Shutterstock Images
+    </div>
+    <div class="section">
         <div class = "largephoto">photo placeholder</div>
+    </div>
+</div>
+
+    <!-- Load PullPage libraries -->
+    <!--<script type="text/javascript" src="js/vendors/scrolloverflow.min.js"></script>-->
+    <script type="text/javascript" src="js/fullpage.js"></script>
 
     <!-- Load JS libraries -->
     <script src="js/jquery.min.js"></script>
@@ -141,5 +139,9 @@
     
     <!-- Visualization objects -->
     <script src="js/main.js"></script>
+
+    <!-- Color Legend -->
+    <script src="js/d3-legend.js"></script>
+
 </body>
 </html>
