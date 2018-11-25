@@ -31,7 +31,7 @@ queue()
          console.log(error);
      }
 
-     dataAge = data;
+     //dataAge = data;
      dataLifestyle = data_lifestyle;
 
 //nest data by year
