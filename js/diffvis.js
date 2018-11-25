@@ -433,7 +433,7 @@ DiffVis.prototype.showTooltip = function (bool) {
         x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % 48) - vis.boxMargin+vis.sideMargin;
         y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10+ vis.boxWidth;
         x6 = vis.sideMargin;
-        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10+ vis.boxWidth;
+        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10+ vis.boxWidth - vis.boxMargin;
         x8 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48)+vis.sideMargin;
         y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10;
 
