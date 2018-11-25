@@ -1,3 +1,23 @@
+.outline1:hover {
+    fill: rgba(79, 147, 203, 0.30);
+}
+
+.outline2:hover {
+    fill: rgba(188, 188, 188, 0.30)
+}
+
+.outline3:hover {
+    fill: rgba(255, 0, 0, 0.30);
+}
+
+.outline4:hover {
+    fill: rgba(188, 188, 223, 0.30);
+}
+
+.outline5:hover {
+    fill: rgba(230, 188, 188, 0.30);
+}
+
 #intro{
     font-family: 'Lato',sans-serif;
     position: absolute;
@@ -5,7 +25,7 @@
     font-size: 30px;
     bottom: 700px;
     right: 300px;
-    color: dimgray;
+    color: #e6bcbc;
 }
 
 h1 {
@@ -94,11 +114,11 @@ div {
     background-color: lightgrey;
     height:100vh;
 }
-<<<<<<< HEAD
 
 .label {
-    tex-anchor: middle;
-=======
+    text-anchor: middle;
+}
+
 .grid,
 .Xaxis line {
     fill: none;
@@ -110,5 +130,40 @@ div {
 
 .section {
     text-align:center;
->>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
 }
+
+.d3-tip {
+    line-height: 1;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Creates a small triangle extender for the tooltip
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}*/
+
+/* Style northward tooltips specifically */
+.d3-tip.n:after {
+    margin: -2px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+.axis-label {
+    text-anchor: middle;
+    font-size: 10px;
+    fill: rgb(150, 150, 178);
+}
+

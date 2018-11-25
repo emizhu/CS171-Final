@@ -5,12 +5,12 @@
  var text_slide_01 ="Life expectancy for Americans is 689,328 hours (78.7 years). How would you like to spend your time?";
  var slideRun = {2:true};
 
- new fullpage('#fullpage', {
-     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
-     menu: '#myMenu',
-     sectionsColor: ['white', 'lightgrey', 'white', 'white', 'white'],
-     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE',
-    });
+ // new fullpage('#fullpage', {
+ //     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+ //     menu: '#myMenu',
+ //     sectionsColor: ['white', 'lightgrey', 'white', 'white', 'white'],
+ //     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE',
+ //    });
 
 
  //Load Data
@@ -53,7 +53,9 @@ queue()
      data = data2017;
 
 
-     var diffvis = new DiffVis("diffvis", 30, 10, 20, 10);
+     // Married, full-time employed, currently working women vs men with children in household
+     //Childcare = 0301 + 0302 + 0303 codes
+     var diffvis = new DiffVis("diffvis", 88.91, 59.72, 111.89, 51.12, "Women", "Men", "Childcare", "Housework");
      var stackedchart = new StackedChart("stackedchart", data, dataCategory);
      // var lifestyle = new LifeStyle("lifestyle", data);
  }
