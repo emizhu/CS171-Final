@@ -1,3 +1,25 @@
+.outline1:hover {
+    fill: rgba(79, 147, 203, 0.30);
+}
+
+.outline2:hover {
+    fill: rgba(188, 188, 188, 0.30)
+}
+
+.outline3:hover {
+    fill: rgba(255, 0, 0, 0.30);
+}
+
+.outline4:hover {
+    fill: rgba(188, 188, 223, 0.30);
+}
+
+.outline5:hover {
+    fill: rgba(230, 188, 188, 0.30);
+}
+
+#intro{
+    font-family: 'Lato',sans-serif;
 .intro{
     position: absolute;
     text-align: start;
@@ -5,6 +27,7 @@
     font-size: 30px;
     bottom: 100px;
     right: 300px;
+    color: #e6bcbc;
     color: white;
     /*padding-top: 5px;*/
     /*padding-right: 50px;*/
@@ -66,8 +89,15 @@ div {
     font-size: 14px;
 }
 
+#hours{
+    font-weight: bolder;
+    font-size: 200px;
+}
 
-.axis{
+
+.Xaxis,
+.Yaxis,
+.axis {
 
     font-size: 14px;
     margin-top: 10px;
@@ -91,6 +121,27 @@ div {
     height:100vh;
 }
 
+.label {
+    text-anchor: middle;
+}
+
+.grid,
+.Xaxis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 1px;
+    opacity: 0.4;
+    shape-rendering: crispEdges;
+}
+
+.section {
+    text-align:center;
+}
+
+
+
+
+/*lifestyle*/
 /*https://bl.ocks.org/d3noob/629790fc15cc1afba0253f29a4d246e7*/
 /*format x-axis on lifestyle chart*/
 g.x-axis line{
@@ -100,7 +151,7 @@ g.x-axis path{
     stroke: lightgray;
 }
 /*g.x-axis text{*/
-    /*stroke: lightgray;*/
+/*stroke: lightgray;*/
 /*}*/
 
 
