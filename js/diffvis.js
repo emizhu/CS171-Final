@@ -12,17 +12,23 @@ DiffVis = function(_parentElement, _time1a, _time1b, _time2a, _time2b){
 DiffVis.prototype.initVis = function() {
     var vis = this;
 
-    vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
+    vis.margin = {top: 40, right: 60, bottom: 60, left: 60};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
+    vis.totalwidth = vis.width + vis.margin.left + vis.margin.right;
+    vis.sideMargin = 30;
+    vis.boxMargin = 5;
+    vis.boxWidth = ((vis.totalwidth/2) - vis.sideMargin - (24*vis.boxMargin))/24;
+
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
+        // .append("g")
+        // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
 
     // vis.calendar = vis.svg.append("g");
     // vis.calendar.append("path")
@@ -32,6 +38,7 @@ DiffVis.prototype.initVis = function() {
 
     vis.legend = vis.svg.append("g")
         .attr("transform", "translate(0, 50)");
+
     vis.legend.append("rect")
         .attr("fill", "steelblue")
         .attr("width", 18)
@@ -50,18 +57,20 @@ DiffVis.prototype.initVis = function() {
 
     vis.right = vis.svg.append("g")
         .attr("class", "right-vis")
-        .attr("transform", "translate(400, 100)");
+        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 100)");
 
     vis.labelLeft = vis.left
         .append("text")
+        .attr("class", "label")
         .attr("y", 0)
-        .attr("x", 150)
+        .attr("x", (vis.totalwidth/4) - vis.sideMargin)
         .text("Group 1");
 
     vis.labelRight = vis.right
         .append("text")
+        .attr("class", "label")
         .attr("y", 0)
-        .attr("x", 150)
+        .attr("x", vis.totalwidth/4)
         .text("Group 2");
 
     vis.wrangleData();
@@ -91,6 +100,7 @@ DiffVis.prototype.wrangleData = function() {
 DiffVis.prototype.drawVis = function() {
     var vis = this;
 
+
     var array1a = Array(Math.round(vis.total1a)).fill(0);
     var array1b = Array(Math.round(vis.total1b)).fill(0);
 
@@ -98,8 +108,8 @@ DiffVis.prototype.drawVis = function() {
     var time1 = timetotal/array1a.length;
     var time2 = timetotal/array1b.length;
 
-    vis.final1a = array1a.length;
-    vis.final1b = array1b.length;
+    vis.finala = array1a.length;
+    vis.finalb = array1b.length;
 
     array1a.forEach(function(d, j) {
         setTimeout(function() {
@@ -107,10 +117,10 @@ DiffVis.prototype.drawVis = function() {
             vis.left.append("rect")
                 .attr("class", "square1a")
                 .attr("fill", "steelblue")
-                .attr("width", 8)
-                .attr("height", 8)
-                .attr("x", 15 * (j % 24))
-                .attr("y",15* Math.floor(j/24)+10);
+                .attr("width", vis.boxWidth)
+                .attr("height", vis.boxWidth)
+                .attr("x", (vis.boxWidth+vis.boxMargin) * (j % 24))
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/24)+10);
         },time1 * j);
     });
 
@@ -121,10 +131,10 @@ DiffVis.prototype.drawVis = function() {
                 vis.right.append("rect")
                     .attr("class", "square1a")
                     .attr("fill", "steelblue")
-                    .attr("width", 8)
-                    .attr("height", 8)
-                    .attr("x", 15 * (j % 24))
-                    .attr("y",15* Math.floor(j/24)+10);
+                    .attr("width", vis.boxWidth)
+                    .attr("height", vis.boxWidth)
+                    .attr("x", vis.sideMargin + (vis.boxWidth+vis.boxMargin) * (j % 24))
+                    .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/24)+10);
             },time2 * j);
         });
 
@@ -137,7 +147,7 @@ DiffVis.prototype.drawVis = function() {
 DiffVis.prototype.showDetails = function() {
     var vis = this;
 
-    var diff = Array(Math.round(vis.final1a - vis.final1b)).fill(0);
+    var diff = Array(Math.round(vis.finala - vis.finalb)).fill(0);
     //
     var blanks = vis.right.selectAll(".blank")
         .data(diff);
@@ -146,13 +156,13 @@ DiffVis.prototype.showDetails = function() {
         .append("rect")
         .attr("class", "blank")
         .attr("fill", "#bcbcbc")
-        .attr("width", 8)
-        .attr("height", 8)
+        .attr("width", vis.boxWidth)
+        .attr("height", vis.boxWidth)
         .attr("x", function(d, i) {
-            return 15 * ((vis.final1b+i) % 24);
+            return (vis.boxWidth+vis.boxMargin) * ((vis.finalb+i) % 24) + vis.sideMargin;
         })
         .attr("y",function(d, i) {
-            return 15* Math.floor((vis.final1b+i)/24)+10;
+            return (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+i)/24)+10;
         });
 
     // var x1 = 15 * (vis.final1b % 20) + 4;
@@ -218,10 +228,10 @@ DiffVis.prototype.showSecond = function() {
             vis.left.append("rect")
                 .attr("class", "square1a")
                 .attr("fill", "red")
-                .attr("width", 8)
-                .attr("height", 8)
-                .attr("x", 15 * ((vis.final1a + j) % 24))
-                .attr("y",15* Math.floor((vis.final1a+j)/24)+10);
+                .attr("width", vis.boxWidth)
+                .attr("height", vis.boxWidth)
+                .attr("x", (vis.boxWidth+vis.boxMargin) * ((vis.finala + j) % 24))
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((vis.finala+j)/24)+10);
         },time1 * j);
     });
 
@@ -232,12 +242,17 @@ DiffVis.prototype.showSecond = function() {
             vis.right.append("rect")
                 .attr("class", "square1a")
                 .attr("fill", "red")
-                .attr("width", 8)
-                .attr("height", 8)
-                .attr("x", 15 * ((vis.final1b+j) % 24))
-                .attr("y",15* Math.floor((vis.final1b+j)/24)+10);
+                .attr("width", vis.boxWidth)
+                .attr("height", vis.boxWidth)
+                .attr("x", (vis.boxWidth+vis.boxMargin) * ((vis.finalb+j) % 24)+vis.sideMargin)
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((vis.finalb+j)/24)+10);
         },time2 * j);
     });
+
+    vis.finala += array2a.length;
+    vis.finala += array2b.length;
+
+    vis.showDetails();
 }
 
 DiffVis.prototype.calMove = function () {

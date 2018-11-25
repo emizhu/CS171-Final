@@ -32,25 +32,23 @@
         </div>
 
 
-    <div id="placeholder">
-        Placeholding Notes: This preliminary version of the visualization shows how much time each
-        group on average spends on the activity over a one year period. The visualization
-        has the option of showing the aggregate of time spent on two different visualizations
-        (e.g. housework and childcare) for two different groups (e.g. full-time employed married
-        men vs. women).
-        <br><br>
-        Though not implemented yet, we plan to add an axis label that names
-        each group, another label indicating that one row contains 24 blocks to represent "one day",
-        some text or tooltip after the time lapse to explicitly state the difference in number of hours
-        (e.g. 121 in the example), and a calendar time lapse (e.g. scrolling through the months of the year)
-        so that it's clear to the user that each time lapse corresponds to one year of time.
-    </div>
-    <div id="diffvis"></div>
-    <div>Interactive Storyboard for Visualization:<br>
-        <img src="img/diffVis.png" width="500px"/>
-    </div>
-
-
+        <div id="placeholder">
+            Placeholding Notes: This preliminary version of the visualization shows how much time each
+            group on average spends on the activity over a one year period. The visualization
+            has the option of showing the aggregate of time spent on two different visualizations
+            (e.g. housework and childcare) for two different groups (e.g. full-time employed married
+            men vs. women).
+            <br><br>
+            Though not implemented yet, we plan to add an axis label that names
+            each group, another label indicating that one row contains 24 blocks to represent "one day",
+            some text or tooltip after the time lapse to explicitly state the difference in number of hours
+            (e.g. 121 in the example), and a calendar time lapse (e.g. scrolling through the months of the year)
+            so that it's clear to the user that each time lapse corresponds to one year of time.
+        </div>
+        <div id="diffvis"></div>
+        <div>Interactive Storyboard for Visualization:<br>
+            <img src="img/diffVis.png" width="500px"/>
+        </div>
 
     </div>
 
@@ -86,9 +84,14 @@
     </div>
 
 
+
+    <div class="container">
+        <div id = "demovis"></div>
+    </div>
     <div class="container">
         <h2>Who are the survey respondents?</h2>
 
+        <div class = "row"></div>
         <div class="row">
             <div class="col-md-6">
                 <div class="placeholder">
@@ -134,10 +137,13 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/queue.v1.min.js"></script>
+    <script src="js/d3-sankey.js"></script>
+    <script src="js/d3-sankey.min.js"></script>
 
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>
     <script src="js/stackedchart.js"></script>
+    <script src="js/demoVis.js"></script>
     
     <!-- Visualization objects -->
     <script src="js/main.js"></script>

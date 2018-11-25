@@ -90,3 +90,7 @@ div {
     background-color: lightgrey;
     height:100vh;
 }
+
+.label {
+    tex-anchor: middle;
+}
