@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/js/stackedchart.js" description="&#10;    vis.bars.enter().append(&quot;g&quot;)&#10;        .attr(&quot;f..." line="169" />
+  </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="fc6f8ce8-a6e1-4fff-b154-e50da83d05f4" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/js/demoVis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -8,6 +12,179 @@
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/diffvis.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/diffvis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+=======
+    <list default="true" id="fc6f8ce8-a6e1-4fff-b154-e50da83d05f4" name="Default Changelist" comment="Update Data">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/animate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/jquery.fullpage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/style_2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/atussum_0317_four_digits_cat.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/atussum_0317_two_digits_cat.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/blurred2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/crowd-of-people-walking-on-city-street-sidewalk-4k-slow-motion_ekill3re__F0000.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/fastpeople.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/fastpeople2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jquery.fullPage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/d3-legend.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/fullpage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/fullpage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/vis_clock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.extensions.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/dist/fullpage.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/easings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/easings.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/easings.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/scrolloverflow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/scrolloverflow.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/fullpage.js/vendors/scrolloverflow.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/AUTHORS.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.slim.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/jsonp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/load.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/parseXML.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/location.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/nonce.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/rquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/ajax/xhr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/attr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/classes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/prop.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/attributes/val.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/callbacks.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/DOMEval.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/access.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/camelCase.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/nodeName.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/parseHTML.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/ready-no-deferred.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/ready.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/readyException.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/stripAndCollapse.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/toType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/core/var/rsingleTag.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/addGetHookIf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/adjustCSS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/curCSS.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/hiddenVisibleSelectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/showHide.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/cssExpand.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/getStyles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/isHiddenWithinTree.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rboxStyle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rnumnonpx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/css/var/swap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/Data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/acceptData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/dataPriv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/data/var/dataUser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deferred.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deferred/exceptionHook.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/deprecated.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/dimensions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects/Tween.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/effects/animatedSelector.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/ajax.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/alias.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/focusin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/event/trigger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/exports/amd.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/exports/global.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/_evalUrl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/buildFragment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/getAll.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/setGlobalEval.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rcheckableType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rscriptType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rtagName.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/wrapMap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/offset.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/queue.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/queue/delay.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector-native.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector-sizzle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/selector.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/serialize.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/findFilter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/dir.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/rneedsContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/siblings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/ObjectFunctionString.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/arr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/class2type.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/concat.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/document.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/documentElement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/fnToString.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/getProto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/hasOwn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/indexOf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/isFunction.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/isWindow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/pnum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/push.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/rcssNum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/rnothtmlwhite.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/support.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/var/toString.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jquery/src/wrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CS171-Final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS171-Final.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/atussum_2017_edit.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/atussum_2017_edittedvalu.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/atussum_2017_formatted.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/the-melting-watch.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/time1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/time2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/time3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/time3bw.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/unix_time.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/stackedchart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/stackedchart.js" afterDir="false" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,12 +201,16 @@
         <counts>
           <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.27" value="1" />
+<<<<<<< HEAD
           <entry key="project.open.time.9" value="1" />
           <entry key="project.opened" value="9" />
+=======
+          <entry key="project.opened" value="5" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -50,16 +231,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="css" value="122" />
           <entry key="html" value="1341" />
           <entry key="js" value="4911" />
+=======
+          <entry key="css" value="90" />
+          <entry key="html" value="1128" />
+          <entry key="js" value="4078" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="CSS" value="122" />
           <entry key="HTML" value="1341" />
           <entry key="JavaScript" value="4911" />
+=======
+          <entry key="CSS" value="90" />
+          <entry key="HTML" value="1128" />
+          <entry key="JavaScript" value="4078" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -68,40 +261,55 @@
     <session id="-1510854280">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="82" />
-          <entry key="html" value="281" />
-          <entry key="js" value="287" />
+          <entry key="css" value="230" />
+          <entry key="html" value="972" />
+          <entry key="js" value="10720" />
           <entry key="txt" value="70" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="82" />
-          <entry key="HTML" value="275" />
-          <entry key="JavaScript" value="293" />
+          <entry key="CSS" value="230" />
+          <entry key="HTML" value="940" />
+          <entry key="JavaScript" value="10757" />
           <entry key="PLAIN_TEXT" value="70" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="2" />
-          <entry key="csv" value="1" />
+          <entry key="css" value="7" />
+          <entry key="csv" value="2" />
+          <entry key="html" value="1" />
           <entry key="jpg" value="3" />
-          <entry key="js" value="10" />
+          <entry key="js" value="17" />
+          <entry key="json" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="2" />
+          <entry key="CSS" value="7" />
+          <entry key="HTML" value="1" />
           <entry key="Image" value="3" />
-          <entry key="JavaScript" value="10" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="JSON" value="2" />
+          <entry key="JavaScript" value="17" />
+          <entry key="PLAIN_TEXT" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.create.new" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -110,12 +318,88 @@
     <favorites_list name="CS171-Final" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
               <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/vis_clock.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="3" selection-start-line="3" selection-end-line="17" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/style_2.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="482">
+              <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/stackedchart.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4660">
+              <caret line="233" selection-start-line="233" selection-end-line="233" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/fullpage.js/package.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/jquery/package.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/d3-legend.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="61" selection-start-column="61" selection-end-column="61" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
             </state>
           </provider>
         </entry>
@@ -131,8 +415,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>svg</find>
-      <find>outline</find>
       <find>20</find>
       <find>timetotal</find>
       <find>12</find>
@@ -140,18 +422,50 @@
       <find>+10</find>
       <find>path</find>
       <find>add</find>
+<<<<<<< HEAD
       <find>group1</find>
       <find>final1a</find>
       <find>final1b</find>
       <find>showd</find>
+=======
+      <find>section</find>
+      <find>div</find>
+      <find>wrap</find>
+      <find>tool</find>
+      <find>tooltip</find>
+      <find>legendClassArray</find>
+      <find>filtereddata</find>
+      <find>data2017</find>
+      <find>datanew</find>
+      <find>vis.data2017</find>
+      <find>datacat</find>
+      <find>data</find>
+      <find>filtered</find>
+      <find>tempdata</find>
+      <find>key</find>
+      <find>activity</find>
+      <find>keyselected</find>
+      <find>bar</find>
+      <find>active_link</find>
+      <find>format</find>
+      <find>customYAxis</find>
+      <find>intro</find>
+      <find>customxAxis</find>
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/js/stackedchart.js" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/js/diffvis.js" />
@@ -159,6 +473,15 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/demoVis.js" />
         <option value="$PROJECT_DIR$/js/main.js" />
+=======
+        <option value="$PROJECT_DIR$/js/diffvis.js" />
+        <option value="$PROJECT_DIR$/jquery.fullPage.min.js" />
+        <option value="$PROJECT_DIR$/js/vis_clock.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/js/stackedchart.js" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
       </list>
     </option>
   </component>
@@ -169,10 +492,17 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="62" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="773" />
+=======
+    <option name="x" value="641" />
+    <option name="y" value="59" />
+    <option name="width" value="1268" />
+    <option name="height" value="798" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -182,7 +512,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,6 +528,14 @@
               <item name="CS171-Final" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS171-Final" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+            </path>
+            <path>
+              <item name="CS171-Final" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CS171-Final" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
             </path>
             <path>
               <item name="CS171-Final" type="b2602c69:ProjectViewProjectNode" />
@@ -209,20 +546,27 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/CS171/Lab_9_Hyeonji_Im" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hyeonji\Documents\GIT-Machina\CS171-Final\css" />
       <recent name="C:\Users\hyeonji\Documents\GIT-Machina\CS171-Final" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hyeonji\Documents\GIT-Machina\CS171-Final\js" />
+      <recent name="C:\Users\hyeonji\Documents\GIT-Machina\CS171-Final\css" />
       <recent name="C:\Users\hyeonji\Documents\GIT-Machina\CS171-Final" />
     </key>
   </component>
@@ -264,9 +608,18 @@
       <workItem from="1542565748433" duration="27000" />
       <workItem from="1542585871609" duration="351000" />
       <workItem from="1542587239614" duration="4763000" />
+<<<<<<< HEAD
       <workItem from="1542600324594" duration="963000" />
       <workItem from="1542664936061" duration="4242000" />
       <workItem from="1543107618273" duration="298000" />
+=======
+      <workItem from="1542602489589" duration="3145000" />
+      <workItem from="1542609669760" duration="13269000" />
+      <workItem from="1542682075255" duration="668000" />
+      <workItem from="1542682947310" duration="46238000" />
+      <workItem from="1542819039266" duration="22922000" />
+      <workItem from="1542958958182" duration="43973000" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
     </task>
     <task id="LOCAL-00001" summary="html update for test">
       <created>1542587346613</created>
@@ -324,13 +677,24 @@
       <option name="project" value="LOCAL" />
       <updated>1542597536528</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Update Data">
+      <created>1542598997993</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1542598997993</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="26759000" />
+=======
+    <option name="totallyTimeSpent" value="153628000" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -340,24 +704,41 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="62" y="23" width="1280" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8868852" visible="true" weight="0.33995235" />
       <window_info id="Structure" order="1" sideWeight="0.50080776" side_tool="true" weight="0.15911485" />
       <window_info id="Favorites" order="2" sideWeight="0.11311475" side_tool="true" weight="0.34105432" />
+=======
+    <frame x="641" y="59" width="1268" height="798" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8825449" weight="0.3258547" />
+      <window_info id="Structure" order="1" sideWeight="0.11745514" side_tool="true" weight="0.3125" />
+      <window_info id="Favorites" order="2" sideWeight="0.11745514" side_tool="true" weight="0.3258547" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4995197" weight="0.32932165" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3318649" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" visible="true" weight="0.32892805" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32719395" />
+=======
+      <window_info active="true" anchor="bottom" id="TODO" order="6" sideWeight="0.49512196" visible="true" weight="0.32781956" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.498374" weight="0.36842105" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50487804" side_tool="true" visible="true" weight="0.32781956" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.498374" weight="0.44962406" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -422,6 +803,17 @@
     <MESSAGE value="Update Data" />
     <option name="LAST_COMMIT_MESSAGE" value="Update Data" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/stackedchart.js</url>
+          <line>97</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/jquery.min.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -451,12 +843,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/img/8SzwQc8j2KJbFHDbZTe4DACMsiYZhf19bc9uXLYd54sLpjqHMrPw7DubAShXLXajNwGfeePNZa5xjSeb5Yo2rXpPHgBXkrVXB7r42ktJSFHfnz1m5vN.jpg" />
-    <entry file="file://$PROJECT_DIR$/img/the-melting-watch.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/img/the-melting-watch.jpg" />
     <entry file="file://$PROJECT_DIR$/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/js/_build.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -499,11 +890,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" selection-start-line="25" selection-end-line="27" selection-end-column="73" />
+=======
+    <entry file="file://$PROJECT_DIR$/js/vivus.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/_build.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/diffvis.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="249" column="28" selection-start-line="249" selection-start-column="28" selection-end-line="249" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jquery.fullPage.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/fullpage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="54" lean-forward="true" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/fullpage.css" />
+    <entry file="file://$PROJECT_DIR$/css/jquery.fullpage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="167" column="14" lean-forward="true" selection-start-line="167" selection-start-column="14" selection-end-line="167" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/atussum_0317_two_digits_cat.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/vis_clock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" selection-start-line="3" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/demoVis.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="75">
           <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
         </state>
@@ -516,6 +966,24 @@
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+=======
+        <state relative-caret-position="482">
+          <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style_2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+>>>>>>> 9d98b99b6b19674a43e50d44bfaad68452d55cf0
         </state>
       </provider>
     </entry>
@@ -524,8 +992,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/stackedchart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2160">
-          <caret line="144" column="37" selection-start-line="144" selection-start-column="37" selection-end-line="144" selection-end-column="37" />
+        <state relative-caret-position="4660">
+          <caret line="233" selection-start-line="233" selection-end-line="233" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/fullpage.js/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/jquery/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/d3-legend.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="61" selection-start-column="61" selection-end-column="61" />
         </state>
       </provider>
     </entry>
