@@ -279,7 +279,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("height", vis.height/6 - vis.margin.top -10)
             .attr("fill", function(d) {
                     return vis.z(colorindex);
-            });
+            }) ;
     }
     else{
         // Plot Stacked Bar Chart
@@ -299,14 +299,24 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("transform", "translate(20,0)")
             .on("mouseover", function(d,i) {
                 d3.select(this)
-                console.log(d);
-                // .style("fill", "orange");
+
+
                 vis.tooltip.transition()
                     .duration(100)
-                    .style("opacity", .9);
-                vis.tooltip.html(parseInt((d[1]-d[0])) + " Minutes")
-                    .style("left", (d3.event.pageX +3) + "px")
-                    .style("top", (d3.event.pageY +10) + "px");
+                    .style("opacity",1);
+
+                if (keyselected.length === 3){
+                    console.log(d.data[keyselected]);
+                    vis.tooltip.html(parseInt(d.data[keyselected]) + " Minutes")
+                        .style("left", (d3.event.pageX + 3) + "px")
+                        .style("top", (d3.event.pageY + 10) + "px");
+                }
+                else {
+                    console.log("min");
+                    vis.tooltip.html(parseInt((d[1] - d[0])) + " Minutes")
+                        .style("left", (d3.event.pageX + 3) + "px")
+                        .style("top", (d3.event.pageY + 10) + "px");
+                }
             })
             .on("mouseout", function(d) {
 
