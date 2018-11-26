@@ -11,7 +11,12 @@ var lifestyle;
  new fullpage('#fullpage', {
      anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
      menu: '#myMenu',
-     sectionsColor: ['white', 'lightgrey', 'white', 'white', 'white'],
+     navigation: true,
+     navigationPosition: 'left',
+     // navigationTooltips: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+     showActiveTooltip: false,
+     slidesNavigation: true,
+     sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE',
     });
 
