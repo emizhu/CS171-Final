@@ -60,41 +60,6 @@ body {
 
 
 
-/*Emily*/
-
-.outline1:hover {
-    fill: rgba(79, 147, 203, 0.30);
-}
-
-.outline2:hover {
-    fill: rgba(188, 188, 188, 0.30)
-}
-
-.outline3:hover {
-    fill: rgba(255, 0, 0, 0.30);
-}
-
-.outline4:hover {
-    fill: rgba(188, 188, 223, 0.30);
-}
-
-.outline5:hover {
-    fill: rgba(230, 188, 188, 0.30);
-}
-
-.axis-label {
-    text-anchor: middle;
-    font-size: 10px;
-    fill: black;
-}
-
-.label {
-    text-anchor: middle;
-}
-
-
-
-
 /*stacked chart*/
 
 #stackedchart .x-axis text {
