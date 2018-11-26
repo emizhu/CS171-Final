@@ -16,21 +16,16 @@ LifeStyle = function(_parentElement, _data){
 LifeStyle.prototype.initVis = function() {
     var vis = this;
 
+    //Customize here
+    //----------------------------------------------------------
     // Margin object with properties for the four directions
     vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-    vis.width = 550- vis.margin.left -vis.margin.right,
-    vis.height = 450- vis.margin.top -vis.margin.bottom,
+    vis.width = 650- vis.margin.left -vis.margin.right,
+    vis.height = 650- vis.margin.top -vis.margin.bottom,
     vis.padding = 10;
 
-    // SVG drawing area
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
     //color range for comparisons
-    vis.color = ["cyan","black"];
+    vis.color = ["darkcyan","deeppink"];
 
     //these values must EXACTLY match the headers in vis.displayData
     vis.checkboxCategories = ["sex", "full_part_time"];
@@ -40,10 +35,25 @@ LifeStyle.prototype.initVis = function() {
         "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
         "religious",	"volunteer",	"phone",	"traveling",	"misc"];
     vis.lineNumber = vis.headers.length;
-    vis.lineLength = 200;
-    vis.angle = 360/vis.lineNumber;
-    vis.angleRadian = 360/vis.lineNumber * Math.PI / 180;
+    vis.lineLength = 300;
+    vis.circleradius = 7;
     vis.labelBuffer = 20;
+    vis.innerAxis = 100;
+    //----------------------------------------------------------
+
+    // SVG drawing area
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+    vis.angle = 360/vis.lineNumber;
+    vis.angleRadian = vis.angle * Math.PI / 180;
+    vis.outerArcLength = vis.lineLength * vis.angleRadian;
+    vis.angleRadianNew = vis.outerArcLength/(vis.lineLength-vis.innerAxis);
+    vis.angleNew = vis.angleRadianNew/(Math.PI / 180);
+
 
     //filter data for 2017 only
     vis.displayData = vis.data.filter(function(d) {
@@ -51,22 +61,6 @@ LifeStyle.prototype.initVis = function() {
     });
 
     for (i = 0; i < vis.headers.length; i++) {
-
-        //Create axes
-        //----------------------------------------------------------
-        // create scales
-        vis["x" + i] = d3.scaleLinear()
-            .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
-            .range([0,vis.lineLength]);
-        vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
-
-        vis["svgx" + i]= vis.svg.append("g")
-            .attr("class","axis")
-            .attr("class","x-axis")
-            .attr("transform", "translate(" + vis.width/2 + "," + vis.height/2 + ") " + "rotate(" + vis.angle*i + ")" )
-            .call(vis["xAxis" + i].ticks(0));
-        //----------------------------------------------------------
-
 
         //Axis labels
         //----------------------------------------------------------
@@ -82,8 +76,6 @@ LifeStyle.prototype.initVis = function() {
 
         vis["svgarc" + i]= vis.svg.append("path")
             .style("fill", "none")
-            // .style("stroke", "#0B9B29")
-            // .style("stroke-width", stroke)
             .attr('stroke-linejoin', 'round')
             .attr("class","arc")
             .attr("d", outerArc())
@@ -91,12 +83,12 @@ LifeStyle.prototype.initVis = function() {
 
         //get position of arc
         //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
-        var point = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
+        var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
 
         //append text labels
         var text = vis.svg.append("text")
-            .attr("x", point.x)
-            .attr("y", point.y)
+            .attr("x", pointLabel.x)
+            .attr("y", pointLabel.y)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
             .attr("font-size", "10px")
@@ -105,6 +97,55 @@ LifeStyle.prototype.initVis = function() {
             .attr("class","x-axis")
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
         //----------------------------------------------------------
+
+        //get starting points for transformation based on vis.innerAxis
+        //----------------------------------------------------------
+        var innerRadius = vis.innerAxis;
+
+        var innerArc = d3.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(innerRadius)
+            .startAngle(i * Math.PI / 180)
+            .endAngle((i+1) * vis.angleRadian);
+
+        vis["svgarcinner" + i]= vis.svg.append("path")
+            .style("fill", "none")
+            // .style("stroke", "#0B9B29")
+            // .style("stroke-width", 1)
+            .attr('stroke-linejoin', 'round')
+            .attr("class","arc")
+            .attr("d", innerArc())
+            .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
+
+        //get position of arc
+        //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
+        var pointInner = vis["svgarcinner" + i].node().getPointAtLength(vis["svgarcinner" + i].node().getTotalLength() /2);
+
+
+
+
+
+
+        //Create axes
+        //----------------------------------------------------------
+        // create scales
+        vis["x" + i] = d3.scaleLinear()
+            .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
+            .range([0,vis.lineLength]);
+        vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
+
+        vis["svgx" + i]= vis.svg.append("g")
+            .attr("class","axis")
+            .attr("class","x-axis")
+            // .attr("transform",  "translate(" + (pointInner.x + vis.width/2) +
+            //     "," +  ( pointInner.y + vis.height/2) + ")" +
+            //     "rotate(" + vis.angle*i + ")" )
+            .attr("transform", "translate(" + vis.width/2 + "," + vis.height/2   + ") " + "rotate(" + vis.angle*i + ")" )
+            .call(vis["xAxis" + i].ticks(0));
+        //----------------------------------------------------------
+
+
+
 
     };
 
@@ -117,7 +158,7 @@ LifeStyle.prototype.initVis = function() {
         .offset([-20,0])
         .html(function(d){
             //return value rounded to 1 decimal point
-            return (Math.round( d * 10 ) / 10);
+            return ("Average time: " +Math.round( d * 10 ) / 10 + " min");
         });
 
     //convert categories to numeric
@@ -308,7 +349,7 @@ LifeStyle.prototype.updateVis = function(){
                 return vis.color[value];
             })
             .attr("cx", function(d) { return vis["x" + i](d); })
-            .attr("r", 4)
+            .attr("r", vis.circleradius)
             ;
         circle.exit().remove();
 
