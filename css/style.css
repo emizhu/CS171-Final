@@ -59,6 +59,10 @@ body {
 }
 
 
+#fp-nav ul li a span {
+    background: black;
+
+}
 
 /*Emily*/
 
@@ -94,10 +98,14 @@ body {
 
 
 
-
 /*stacked chart*/
 
-#stackedchart .x-axis text {
+#stackedchart{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.x-axis text {
     font-size: 14px;
 }
 
@@ -106,10 +114,11 @@ body {
     font-size: 200px;
 }
 
+.legend,
 .Xaxis,
 .Yaxis,
 .axis {
-
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 30px;
@@ -123,7 +132,6 @@ body {
     opacity: 0.4;
     shape-rendering: crispEdges;
 }
-
 
 
 
