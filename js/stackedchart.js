@@ -1,5 +1,6 @@
 var keyselected;
 var colorindex;
+var facts;
 
 StackedChart = function(_parentElement, _data, _dataCategory){
     this.parentElement = _parentElement;
@@ -20,9 +21,6 @@ StackedChart.prototype.initVis = function() {
     vis.filtered = vis.data;
     console.log(keyselected.length);
     vis.active_link = "0"; //to control legend selections and hover
-    var legendClicked; //to control legend selections
-    var legendClassArray = []; //store legend classes to select bars in plotSingle()
-    var y_orig; //to store original y-posn
 
 
 // Margin object with properties for the four directions
@@ -32,6 +30,13 @@ StackedChart.prototype.initVis = function() {
         vis.padding = 30;
 
 // SVG drawing area
+    var facts = vis.svg_text = d3.select(".facts").append("text")
+        .append("g")
+        .attr("x", 10).attr("y", 10)
+        .attr("class", "facts")
+        .text("Click Square Colors to See Each Activities") ;
+
+
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height)
@@ -43,6 +48,9 @@ StackedChart.prototype.initVis = function() {
         .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 30)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + 50+ ")");
+
+
+
 //Create linear scales by using the D3 scale functions
 // Extend X : 24hours *60 minutes = 1440 minutes
     vis.max = 1440;
@@ -102,7 +110,6 @@ StackedChart.prototype.initVis = function() {
     }
 
 
-
 // Define Legends
     vis.legend = vis.svg_legend.selectAll(".legend")
         .data(vis.dataCat.columns)
@@ -149,8 +156,8 @@ StackedChart.prototype.initVis = function() {
         .on("click",function(d){
             vis.filtered = vis.data;
             keyselected =  vis.dataCat.columns;
-            console.log(keyselected);
             vis.updateVis_filtered();
+            vis.updateText();
         });
 
     vis.legend.append("text")
@@ -260,8 +267,6 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
 
-
-
     if (keyselected.length === 3){
         // Plot Single Bar Chart
         vis.svg.selectAll(".bars")
@@ -311,7 +316,18 @@ StackedChart.prototype.updateVis_filtered = function(){
 
         console.log("2");
     }
+
+     }
+
+StackedChart.prototype.updateText = function() {
+
+    var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
+
+    // facts.select(".text")
+    //     .transition()
+    //     .text(work) ;
+
+    console.log("test");
+
 }
-
-
 
