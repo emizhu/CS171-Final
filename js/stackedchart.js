@@ -333,9 +333,9 @@ StackedChart.prototype.updateText = function() {
 
     var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
 
-    // facts.select(".text")
-    //     .transition()
-    //     .text(work) ;
+     facts.selectAll("text")
+         .transition()
+        .text("work") ;
 
     console.log("test");
 
