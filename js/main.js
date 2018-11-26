@@ -9,15 +9,16 @@ var lifestyle;
  var slideRun = {2:true};
 
  new fullpage('#fullpage', {
-     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
-     menu: '#myMenu',
+
      navigation: true,
-     navigationPosition: 'left',
+     menu: '#myMenu',
+     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+     // navigationPosition: 'right',
      // navigationTooltips: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
-     showActiveTooltip: false,
-     slidesNavigation: true,
+     // showActiveTooltip: false,
+     // slidesNavigation: true,
      sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
-     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE',
+     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
     });
 
 
