@@ -242,9 +242,9 @@ StackedChart.prototype.updateVis_filtered = function(){
     // console.log(vis.filtered);
     // console.log(keyselected);
 
-    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts);
-    vis.svg = d3.select("body").transition();
 
+    vis.svg = d3.select("body").transition();
+    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts);
     // Update domains
     vis.max = d3.max(vis.filtered.map(function(d){
         if (keyselected.length === 3){
@@ -345,12 +345,13 @@ StackedChart.prototype.updateVis_filtered = function(){
 function getText(index, datacat, averagetime, facts) {
 
     if (index ==null){
+
         var summary= " <p> The average American spent ______  hours a day on ______</p>";
         document.getElementById("facts").innerHTML=summary;
     }
     else {
         var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-                        + datacat[index] + ".</b><br><br>" + facts[index] +"</p>";
+                        + datacat[index] + ".</b></p><br>" + facts[index] ;
 
         document.getElementById("facts").innerHTML = summary;
     }
