@@ -1,6 +1,6 @@
 var keyselected;
 var colorindex;
-var facts;
+var averagetime;
 
 StackedChart = function(_parentElement, _data, _dataCategory){
     this.parentElement = _parentElement;
@@ -30,11 +30,15 @@ StackedChart.prototype.initVis = function() {
         vis.padding = 30;
 
 // SVG drawing area
-    var facts = vis.svg_text = d3.select(".facts").append("text")
-        .append("g")
+    vis.facts = d3.select(".facts").append("text")
         .attr("x", 10).attr("y", 10)
-        .attr("class", "facts")
-        .text("Click Square Colors to See Each Activities") ;
+        .attr("class", "facts");
+
+    vis.svg_legend = d3.select("#" + vis.parentElement).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 30)
+        .append("g")
+        .attr("transform", "translate(" + vis.margin.left + "," + 50+ ")");
 
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -43,11 +47,7 @@ StackedChart.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + 0+ ")");
 
-    vis.svg_legend = d3.select("#" + vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 30)
-        .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + 50+ ")");
+
 
 
 
@@ -118,7 +118,10 @@ StackedChart.prototype.initVis = function() {
         .attr("transform", function(d, i) { return "translate("+ i*30+"," + 0 +")"; });
 
     var rect = 18;
+
     vis.dataCat2 = d3.values(vis.dataCat[0]);
+    vis.dataAverage = d3.values(vis.dataCat[1]);
+    console.log(vis.dataAverage);
     vis.legend.append("rect")
         .attr("x", 210).attr("y", -40)
         .attr("width", rect).attr("height", rect)
@@ -133,9 +136,11 @@ StackedChart.prototype.initVis = function() {
             }
         })
         .on("click",function(d){
+
             var test = d3.select(this);
             keyselected = test._groups[0][0].__data__;
             console.log(keyselected);
+
             vis.wrangleData(keyselected);
         });
 
@@ -154,10 +159,15 @@ StackedChart.prototype.initVis = function() {
              }
          })
         .on("click",function(d){
+
+
+            vis.bars.exit().remove();//remove unneeded circles
             vis.filtered = vis.data;
             keyselected =  vis.dataCat.columns;
+
             vis.updateVis_filtered();
-            vis.updateText();
+            colorindex = null;
+
         });
 
     vis.legend.append("text")
@@ -216,7 +226,8 @@ StackedChart.prototype.wrangleData = function(keyselected){
     var actTypes = vis.dataCat.columns;
     //
     // vis.svg = d3.select("body").transition();
-
+    averagetime = actTypes.indexOf(keyselected,1) ;
+    console.log(averagetime);
     colorindex = actTypes.indexOf(keyselected,0) ;
     console.log(colorindex);
     // actTypes = actTypes.filter(function(value, i, arr){
@@ -241,6 +252,7 @@ StackedChart.prototype.updateVis_filtered = function(){
     // console.log(vis.filtered);
     // console.log(keyselected);
 
+    getText(colorindex, vis.dataCat2, vis.dataAverage);
     vis.svg = d3.select("body").transition();
 
     // Update domains
@@ -266,24 +278,30 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.select(".domain").remove();
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
+    if (keyselected.length === 3) {
 
-    if (keyselected.length === 3){
+        vis.bars.exit().remove();
         // Plot Single Bar Chart
         vis.svg.selectAll(".bars")
             .transition()
-            .attr("y", function(d, i) { return  40+ i*(vis.height/6 - 10) })
-            .attr("x", function(d) {   return vis.x(d[0]); })
-            .attr("width", function(d) {
-                    return vis.x(d.data[keyselected]);
+
+            .attr("y", function (d, i) {
+                return 40 + i * (vis.height / 6 - 10)
             })
-            .attr("height", vis.height/6 - vis.margin.top -10)
-            .attr("fill", function(d) {
-                    return vis.z(colorindex);
-            }) ;
+            .attr("x", function (d) {
+                return vis.x(d[0]);
+            })
+            .attr("width", function (d) {
+                return vis.x(d.data[keyselected]);
+            })
+            .attr("height", vis.height / 6 - vis.margin.top - 10)
+            .attr("fill", vis.z(colorindex));
+
     }
     else{
         // Plot Stacked Bar Chart
-        vis.bars.enter().append("g")
+
+        var bar = vis.bars.enter().append("g")
             .attr("fill", function(d, index) {
                 console.log(1);
                 return vis.z(index);})
@@ -310,6 +328,9 @@ StackedChart.prototype.updateVis_filtered = function(){
                     vis.tooltip.html(parseInt(d.data[keyselected]) + " Minutes")
                         .style("left", (d3.event.pageX + 3) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
+
+                    // var summary= " <p> The average American spent <b>9.59</b> hours a day on <b>" + vis.dataCat[keyselected] + "</b>.</p>";
+                    // document.getElementById("facts").innerHTML=summary;
                 }
                 else {
                     console.log("min");
@@ -324,20 +345,33 @@ StackedChart.prototype.updateVis_filtered = function(){
                     .duration(100)
                     .style("opacity", 0); });
 
+
         console.log("2");
     }
 
+
      }
 
-StackedChart.prototype.updateText = function() {
+// StackedChart.prototype.updateText = function() {
+//
+//     var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
+//
+//     facts.transition()
+//         .text("work") ;
+//
+//     console.log("test");
+//
+// }
 
-    var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
 
-    // facts.select(".text")
-    //     .transition()
-    //     .text(work) ;
+function getText(index, datacat, averagetime) {
 
-    console.log("test");
-
+    if (index ==null){
+        var summary= " <p><b>  Click Square Color to See Each Activities </b></p>";
+        document.getElementById("facts").innerHTML=summary;
+    }
+    else {
+        var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>" + datacat[index] + ".</b></p>";
+        document.getElementById("facts").innerHTML = summary;
+    }
 }
-

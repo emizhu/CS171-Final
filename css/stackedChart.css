@@ -1,0 +1,37 @@
+/*stacked chart*/
+
+#stackedchart{
+
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.x-axis text {
+    font-size: 14px;
+}
+
+#hours{
+    font-weight: bolder;
+    font-size: 200px;
+}
+
+.legend,
+.Xaxis,
+.Yaxis,
+.axis {
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.grid,
+.Xaxis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 1px;
+    opacity: 0.4;
+    shape-rendering: crispEdges;
+}
+
+
