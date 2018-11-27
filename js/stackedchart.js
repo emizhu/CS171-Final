@@ -22,7 +22,6 @@ StackedChart.prototype.initVis = function() {
     console.log(keyselected.length);
     vis.active_link = "0"; //to control legend selections and hover
 
-
 // Margin object with properties for the four directions
     vis.margin = {top: 40, right: 30, bottom: 20, left:40};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
@@ -48,9 +47,6 @@ StackedChart.prototype.initVis = function() {
         .attr("transform", "translate(" + vis.margin.left + "," + 0+ ")");
 
 
-
-
-
 //Create linear scales by using the D3 scale functions
 // Extend X : 24hours *60 minutes = 1440 minutes
     vis.max = 1440;
@@ -68,8 +64,6 @@ StackedChart.prototype.initVis = function() {
     vis.colors = d3.schemeCategory20;
     vis.colors = vis.colors.slice(0, 18);
 
-
-    // vis.x.domain([0,vis.max]);
     console.log(vis.data);
     vis.y.domain(vis.data.map(function(d) { return d.age; }));
     vis.z = d3.scaleOrdinal()
@@ -139,6 +133,8 @@ StackedChart.prototype.initVis = function() {
 
             var test = d3.select(this);
             keyselected = test._groups[0][0].__data__;
+
+
             console.log(keyselected);
 
             vis.wrangleData(keyselected);
@@ -161,7 +157,7 @@ StackedChart.prototype.initVis = function() {
         .on("click",function(d){
 
 
-            vis.bars.exit().remove();//remove unneeded circles
+            //remove unneeded circles
             vis.filtered = vis.data;
             keyselected =  vis.dataCat.columns;
 
@@ -211,8 +207,7 @@ StackedChart.prototype.initVis = function() {
         .attr("font-weight", "bold");
 
     vis.bars = vis.svg.append("g")
-        .selectAll("g")
-        .data(d3.stack().keys(keyselected)(vis.filtered));
+        .selectAll("g") ;
 
     vis.updateVis_filtered();
 }
@@ -222,17 +217,12 @@ StackedChart.prototype.wrangleData = function(keyselected){
 
     var vis = this;
 
-    // var actSelected = activityType;
     var actTypes = vis.dataCat.columns;
-    //
-    // vis.svg = d3.select("body").transition();
+
     averagetime = actTypes.indexOf(keyselected,1) ;
     console.log(averagetime);
     colorindex = actTypes.indexOf(keyselected,0) ;
     console.log(colorindex);
-    // actTypes = actTypes.filter(function(value, i, arr){
-    //     if (value != keyselected){
-    //         return value;}});
 
     vis.filtered =[];
     vis.data.map(function(d){
@@ -267,7 +257,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
     vis.x.domain([0, vis.max]);
 
-    // Update X Axis
+// Update X Axis
     vis.svg.select(".Xaxis")
         .attr("transform", "translate(20," + (vis.height -vis.margin.bottom -8) + ")")
         .transition()
@@ -279,20 +269,22 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
     if (keyselected.length === 3) {
-
-        vis.bars.exit().remove();
-        // Plot Single Bar Chart
+// Plot Single Bar Chart
         vis.svg.selectAll(".bars")
             .transition()
 
-            .attr("y", function (d, i) {
+            .attr("y", function (d, i) { console.log(d[i]);
                 return 40 + i * (vis.height / 6 - 10)
             })
             .attr("x", function (d) {
                 return vis.x(d[0]);
             })
-            .attr("width", function (d) {
-                return vis.x(d.data[keyselected]);
+            .attr("width", function (d, i) {
+                if (d[0] ===0){
+                    return vis.x(d.data[keyselected]);
+            } else{
+                    return 0;
+                }
             })
             .attr("height", vis.height / 6 - vis.margin.top - 10)
             .attr("fill", vis.z(colorindex));
@@ -301,7 +293,8 @@ StackedChart.prototype.updateVis_filtered = function(){
     else{
         // Plot Stacked Bar Chart
 
-        var bar = vis.bars.enter().append("g")
+         vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
+            .enter().append("g")
             .attr("fill", function(d, index) {
                 console.log(1);
                 return vis.z(index);})
@@ -309,7 +302,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .data(function(d) { return d;})
             .enter().append("rect")
             .attr("class", "bars")
-            .attr("y", function(d, i) { return  40+ i*(vis.height/6 - 10) })
+            .attr("y", function(d, i) {   return  40+ i*(vis.height/6 - 10) })
             .attr("x", function(d) {   return vis.x(d[0]); })
             .attr("width", function(d) {
                 return vis.x(d[1]) - vis.x(d[0]); })
@@ -317,7 +310,6 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("transform", "translate(20,0)")
             .on("mouseover", function(d,i) {
                 d3.select(this)
-
 
                 vis.tooltip.transition()
                     .duration(100)
@@ -345,23 +337,9 @@ StackedChart.prototype.updateVis_filtered = function(){
                     .duration(100)
                     .style("opacity", 0); });
 
-
         console.log("2");
     }
-
-
-     }
-
-// StackedChart.prototype.updateText = function() {
-//
-//     var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
-//
-//     facts.transition()
-//         .text("work") ;
-//
-//     console.log("test");
-//
-// }
+}
 
 
 function getText(index, datacat, averagetime) {
@@ -374,4 +352,13 @@ function getText(index, datacat, averagetime) {
         var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>" + datacat[index] + ".</b></p>";
         document.getElementById("facts").innerHTML = summary;
     }
+
+    if (datacat[index] == "Work"){
+        var work = " <p>On an average day in 2017, 24 percent of full-time employed workers spent some time working while at home.<br> " +
+        "The share of full-time employed workers performing work at home rose from 18 percent per day in 2003 to 24 percent in 2009, " +
+        "and remained relatively flat from 2009 to 2017.</p>";
+    document.getElementById("result").innerHTML = work;}
+
+    console.log(datacat[index]);
 }
+
