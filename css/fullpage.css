@@ -71,15 +71,15 @@ html.fp-enabled,
     transform: translate3d(0,0,0);
 }
 .fp-controlArrow.fp-prev {
-    left: 15px;
+    left: 46px;
     width: 0;
     border-width: 38.5px 34px 38.5px 0;
-    border-color: transparent #fff transparent transparent;
+    border-color: transparent #000 transparent transparent;
 }
 .fp-controlArrow.fp-next {
-    right: 15px;
+    right: 46px;
     border-width: 38.5px 0 38.5px 34px;
-    border-color: transparent transparent transparent #fff;
+    border-color: transparent transparent transparent #000;
 }
 .fp-scrollable {
     overflow: hidden;
@@ -107,7 +107,7 @@ html.fp-enabled,
     right: 17px;
 }
 #fp-nav.fp-left {
-    left: 17px;
+    left: 5px;
 }
 .fp-slidesNav{
     position: absolute;
@@ -186,8 +186,8 @@ html.fp-enabled,
 }
 #fp-nav ul li .fp-tooltip {
     position: absolute;
-    top: -2px;
-    color: #fff;
+    top: -4px;
+    color: #000;
     font-size: 14px;
     font-family: arial, helvetica, sans-serif;
     white-space: nowrap;
@@ -209,7 +209,7 @@ html.fp-enabled,
     right: 20px;
 }
 #fp-nav ul li .fp-tooltip.fp-left {
-    left: 20px;
+    left: 17px;
 }
 .fp-auto-height.fp-section,
 .fp-auto-height .fp-slide,
