@@ -1,24 +1,30 @@
 /*general*/
 #intro {
-    font-family: 'Lato', sans-serif;
+
     position: absolute;
     text-align: start;
     font-size: 30px;
-    bottom: 500px;
-    right: 300px;
-    color: dimgray;
+    bottom: 350px;
+    right: 370px;
+    opacity: 0.6;
+    stroke-width: 1;
+    -webkit-text-stroke-color: white;
+
 }
 
 h1 {
     text-align: center;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Work Sans', sans-serif;
+    /*font-family: 'Roboto Mono', monospace;*/
+    /*font-family: 'Ubuntu', sans-serif;*/
+    /*font-family: 'Oswald', sans-serif;*/
+    /*font-family: 'Inconsolata', monospace;*/
     font-weight: bold;
     font-size: 60px;
-    color: black;
-    margin-top: 20px;
+    margin-top: 700px;
     padding-top:20px;
     padding-right: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     padding-left: 30px;
 }
 
@@ -27,18 +33,18 @@ h2 {
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
     font-size: 28px;
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
 /*Description under the title*/
 h3{
-    font-family: 'Roboto Slab', serif;
-    font-size: 18px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
     padding-top: 2px;
-    padding-right: 40px;
+    padding-right: 100px;
     padding-bottom: 5px;
-    padding-left: 200px;
+    padding-left: 100px;
 }
 
 p{

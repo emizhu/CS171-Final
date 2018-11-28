@@ -11,8 +11,12 @@
 }
 
 #hours{
+    color: #404040;
     font-weight: bolder;
     font-size: 200px;
+    animation-duration: 1s;
+    animation-delay: 2s;
+    /*animation-iteration-count: infinite;*/
 }
 
 .legend,

@@ -14,7 +14,7 @@ var lifestyle;
      menu: '#myMenu',
      anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
      navigationPosition: 'right',
-     navigationTooltips: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+     navigationTooltips: ['01', '02', '03', '04', '05','06', '07', '08', '09'],
      showActiveTooltip: true,
      slidesNavigation: true,
      sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
