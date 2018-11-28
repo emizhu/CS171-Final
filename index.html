@@ -18,6 +18,7 @@
 
 <div id="fullpage">
 
+
     <div class ="section fp-auto-height">
 
         <img src="img/fastpeople2.jpg" alt="img/fastpeople.jpg" style="width:100%; height: auto;">
@@ -28,7 +29,7 @@
 
 
     <div class="section">
-        <div id="hours"> 689,328 </div><p>Life expectancy for Americans is 689,328 hours (78.7 years). <br> How would you like to spend your time?</p>
+        <div class="animated zoomIn" id="hours"> 689,328 </div><p>Life expectancy for Americans is 689,328 hours (78.7 years). <br> How would you like to spend your time?</p>
     </div>
 
 
@@ -36,8 +37,16 @@
 
         <h2>How Do Other Americans Spend Their Time? </h2>
         <p>Click a square color to see each activity</p>
-        <div id="facts" align="middle"></div>
-        <div id="result" align="middle"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="legend" align="middle"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="facts" align="middle"></div>
+                <div id="result" align="middle"></div>
+            </div>
+        </div>
         <div class="col-md-12" align="middle">
             <div id = "stackedchart"></div>
         </div>
@@ -148,12 +157,7 @@
 
     </div>
 
-    <div class="section">
-        <div class="container">
-            <h2>Who are the Survey Respondents?</h2>
-            <div id = "demovis"></div>
-        </div>
-    </div>
+
 
 
 

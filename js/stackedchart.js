@@ -33,11 +33,11 @@ StackedChart.prototype.initVis = function() {
         .attr("x", 10).attr("y", 10)
         .attr("class", "facts");
 
-    vis.svg_legend = d3.select("#" + vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 30)
+    vis.svg_legend = d3.select("#legend").append("svg")
+        .attr("width", vis.width*0.6 + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 10)
         .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + 50+ ")");
+        .attr("transform", "translate(" + (vis.margin.left +75) + "," + 50+ ")");
 
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -84,7 +84,7 @@ StackedChart.prototype.initVis = function() {
     // Y Axis
     vis.svg.append("text")
         .attr("class", "axis")
-        .style("text-anchor", "end")
+        .style("text-anchor", "middle")
         .attr("x", -10).attr("y", 30)
         .text("Age");
 
@@ -115,7 +115,9 @@ StackedChart.prototype.initVis = function() {
 
     vis.dataCat2 = d3.values(vis.dataCat[0]);
     vis.dataAverage = d3.values(vis.dataCat[1]);
-    console.log(vis.dataAverage);
+    vis.facts = d3.values(vis.dataCat[3]);
+    console.log(vis.facts);
+    // console.log(vis.dataAverage);
     vis.legend.append("rect")
         .attr("x", 210).attr("y", -40)
         .attr("width", rect).attr("height", rect)
@@ -182,11 +184,11 @@ StackedChart.prototype.initVis = function() {
             return "rotate(-45)" })
         .text("All");
 
-    vis.svg_legend.append("text")
-        .attr("class", "legend")
-        .attr("x", 90).attr("y", -28)
-        .style("text-anchor", "end")
-        .text("Activity Types");
+    // vis.svg_legend.append("text")
+    //     .attr("class", "legend")
+    //     .attr("x", 90).attr("y", -28)
+    //     .style("text-anchor", "end")
+    //     .text("Activity Types");
 
 // Define Tooltips
     vis.tooltip = d3.select("body").append("div")
@@ -220,9 +222,7 @@ StackedChart.prototype.wrangleData = function(keyselected){
     var actTypes = vis.dataCat.columns;
 
     averagetime = actTypes.indexOf(keyselected,1) ;
-    console.log(averagetime);
     colorindex = actTypes.indexOf(keyselected,0) ;
-    console.log(colorindex);
 
     vis.filtered =[];
     vis.data.map(function(d){
@@ -242,9 +242,9 @@ StackedChart.prototype.updateVis_filtered = function(){
     // console.log(vis.filtered);
     // console.log(keyselected);
 
-    getText(colorindex, vis.dataCat2, vis.dataAverage);
-    vis.svg = d3.select("body").transition();
 
+    vis.svg = d3.select("body").transition();
+    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts);
     // Update domains
     vis.max = d3.max(vis.filtered.map(function(d){
         if (keyselected.length === 3){
@@ -342,23 +342,18 @@ StackedChart.prototype.updateVis_filtered = function(){
 }
 
 
-function getText(index, datacat, averagetime) {
+function getText(index, datacat, averagetime, facts) {
 
     if (index ==null){
-        var summary= " <p><b>  Click Square Color to See Each Activities </b></p>";
+
+        var summary= " <p> The average American spent ______  hours a day on ______</p>";
         document.getElementById("facts").innerHTML=summary;
     }
     else {
-        var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>" + datacat[index] + ".</b></p>";
+        var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
+                        + datacat[index] + ".</b></p><br>" + facts[index] ;
+
         document.getElementById("facts").innerHTML = summary;
     }
-
-    if (datacat[index] == "Work"){
-        var work = " <p>On an average day in 2017, 24 percent of full-time employed workers spent some time working while at home.<br> " +
-        "The share of full-time employed workers performing work at home rose from 18 percent per day in 2003 to 24 percent in 2009, " +
-        "and remained relatively flat from 2009 to 2017.</p>";
-    document.getElementById("result").innerHTML = work;}
-
-    console.log(datacat[index]);
 }
 
