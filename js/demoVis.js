@@ -1,40 +1,43 @@
-DemoVis = function(_parentElement, _data){
+DemoVis = function(_parentElement, _data, _selection){
     this.parentElement = _parentElement;
     this.data = _data;
+    this.selection = _selection;
 
     this.initVis();
 }
 
 DemoVis.prototype.initVis = function() {
     var vis = this;
-    console.log(vis.data);
+    vis.tree = [];
+    vis.options = ["Sex", "Race", "Metro status", "Age", "Labor force status"];
+    //gender / race / metro / age / employment
 
-    vis.margin = {top: 40, right: 60, bottom: 60, left: 60};
+    // console.log(vis.data);
+    // console.log(vis.data[0]);
+    // console.log(vis.selection);
+    vis.data.forEach(function(d) {
+        vis.tree.push({
+            "group": d[vis.options[vis.selection]]
+        });
+    });
 
-    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    var a2 = JSON.parse(JSON.stringify(vis.tree));
 
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
+    a2.sort(function (x, y) {
+        if (x['name'] < y['name']) {
+            return -1;
+        }
+        if (x['name'] > y['name']) {
+            return 1;
+        }
+        return 0;
+    });
 
-    vis.wrangleData();
 }
 
 DemoVis.prototype.wrangleData = function() {
-
 }
 
-// svg.append("g")
-//     .attr("stroke", "#000")
-//     .selectAll("rect")
-//     .data(nodes)
-//     .enter().append("rect")
-//     .attr("x", d => d.x0)
-//     .attr("y", d => d.y0)
-//     .attr("height", d => d.y1 - d.y0)
-//     .attr("width", d => d.x1 - d.x0)
-//     .attr("fill", d => color(d.name))
-//     .append("title")
-//     .text(d => `${d.name}\n${format(d.value)}`);
-
+DemoVis.prototype.drawSankey = function() {
+//     }
+}

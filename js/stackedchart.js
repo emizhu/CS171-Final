@@ -1,6 +1,6 @@
 var keyselected;
 var colorindex;
-var facts;
+var averagetime;
 
 StackedChart = function(_parentElement, _data, _dataCategory){
     this.parentElement = _parentElement;
@@ -22,7 +22,6 @@ StackedChart.prototype.initVis = function() {
     console.log(keyselected.length);
     vis.active_link = "0"; //to control legend selections and hover
 
-
 // Margin object with properties for the four directions
     vis.margin = {top: 40, right: 30, bottom: 20, left:40};
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
@@ -30,11 +29,15 @@ StackedChart.prototype.initVis = function() {
         vis.padding = 30;
 
 // SVG drawing area
-    var facts = vis.svg_text = d3.select(".facts").append("text")
-        .append("g")
+    vis.facts = d3.select(".facts").append("text")
         .attr("x", 10).attr("y", 10)
-        .attr("class", "facts")
-        .text("Click Square Colors to See Each Activities") ;
+        .attr("class", "facts");
+
+    vis.svg_legend = d3.select("#legend").append("svg")
+        .attr("width", vis.width*0.6 + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 10)
+        .append("g")
+        .attr("transform", "translate(" + (vis.margin.left +75) + "," + 50+ ")");
 
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -42,13 +45,6 @@ StackedChart.prototype.initVis = function() {
         .attr("height", vis.height)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + 0+ ")");
-
-    vis.svg_legend = d3.select("#" + vis.parentElement).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 30)
-        .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + 50+ ")");
-
 
 
 //Create linear scales by using the D3 scale functions
@@ -68,8 +64,6 @@ StackedChart.prototype.initVis = function() {
     vis.colors = d3.schemeCategory20;
     vis.colors = vis.colors.slice(0, 18);
 
-
-    // vis.x.domain([0,vis.max]);
     console.log(vis.data);
     vis.y.domain(vis.data.map(function(d) { return d.age; }));
     vis.z = d3.scaleOrdinal()
@@ -90,7 +84,7 @@ StackedChart.prototype.initVis = function() {
     // Y Axis
     vis.svg.append("text")
         .attr("class", "axis")
-        .style("text-anchor", "end")
+        .style("text-anchor", "middle")
         .attr("x", -10).attr("y", 30)
         .text("Age");
 
@@ -118,7 +112,12 @@ StackedChart.prototype.initVis = function() {
         .attr("transform", function(d, i) { return "translate("+ i*30+"," + 0 +")"; });
 
     var rect = 18;
+
     vis.dataCat2 = d3.values(vis.dataCat[0]);
+    vis.dataAverage = d3.values(vis.dataCat[1]);
+    vis.facts = d3.values(vis.dataCat[3]);
+    console.log(vis.facts);
+    // console.log(vis.dataAverage);
     vis.legend.append("rect")
         .attr("x", 210).attr("y", -40)
         .attr("width", rect).attr("height", rect)
@@ -133,9 +132,13 @@ StackedChart.prototype.initVis = function() {
             }
         })
         .on("click",function(d){
+
             var test = d3.select(this);
             keyselected = test._groups[0][0].__data__;
+
+
             console.log(keyselected);
+
             vis.wrangleData(keyselected);
         });
 
@@ -154,10 +157,15 @@ StackedChart.prototype.initVis = function() {
              }
          })
         .on("click",function(d){
+
+
+            //remove unneeded circles
             vis.filtered = vis.data;
             keyselected =  vis.dataCat.columns;
+
             vis.updateVis_filtered();
-            vis.updateText();
+            colorindex = null;
+
         });
 
     vis.legend.append("text")
@@ -176,11 +184,11 @@ StackedChart.prototype.initVis = function() {
             return "rotate(-45)" })
         .text("All");
 
-    vis.svg_legend.append("text")
-        .attr("class", "legend")
-        .attr("x", 90).attr("y", -28)
-        .style("text-anchor", "end")
-        .text("Activity Types");
+    // vis.svg_legend.append("text")
+    //     .attr("class", "legend")
+    //     .attr("x", 90).attr("y", -28)
+    //     .style("text-anchor", "end")
+    //     .text("Activity Types");
 
 // Define Tooltips
     vis.tooltip = d3.select("body").append("div")
@@ -201,8 +209,7 @@ StackedChart.prototype.initVis = function() {
         .attr("font-weight", "bold");
 
     vis.bars = vis.svg.append("g")
-        .selectAll("g")
-        .data(d3.stack().keys(keyselected)(vis.filtered));
+        .selectAll("g") ;
 
     vis.updateVis_filtered();
 }
@@ -212,16 +219,10 @@ StackedChart.prototype.wrangleData = function(keyselected){
 
     var vis = this;
 
-    // var actSelected = activityType;
     var actTypes = vis.dataCat.columns;
-    //
-    // vis.svg = d3.select("body").transition();
 
+    averagetime = actTypes.indexOf(keyselected,1) ;
     colorindex = actTypes.indexOf(keyselected,0) ;
-    console.log(colorindex);
-    // actTypes = actTypes.filter(function(value, i, arr){
-    //     if (value != keyselected){
-    //         return value;}});
 
     vis.filtered =[];
     vis.data.map(function(d){
@@ -241,8 +242,9 @@ StackedChart.prototype.updateVis_filtered = function(){
     // console.log(vis.filtered);
     // console.log(keyselected);
 
-    vis.svg = d3.select("body").transition();
 
+    vis.svg = d3.select("body").transition();
+    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts);
     // Update domains
     vis.max = d3.max(vis.filtered.map(function(d){
         if (keyselected.length === 3){
@@ -255,7 +257,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
     vis.x.domain([0, vis.max]);
 
-    // Update X Axis
+// Update X Axis
     vis.svg.select(".Xaxis")
         .attr("transform", "translate(20," + (vis.height -vis.margin.bottom -8) + ")")
         .transition()
@@ -266,24 +268,33 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.select(".domain").remove();
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
-
-    if (keyselected.length === 3){
-        // Plot Single Bar Chart
+    if (keyselected.length === 3) {
+// Plot Single Bar Chart
         vis.svg.selectAll(".bars")
             .transition()
-            .attr("y", function(d, i) { return  40+ i*(vis.height/6 - 10) })
-            .attr("x", function(d) {   return vis.x(d[0]); })
-            .attr("width", function(d) {
-                    return vis.x(d.data[keyselected]);
+
+            .attr("y", function (d, i) { console.log(d[i]);
+                return 40 + i * (vis.height / 6 - 10)
             })
-            .attr("height", vis.height/6 - vis.margin.top -10)
-            .attr("fill", function(d) {
-                    return vis.z(colorindex);
-            }) ;
+            .attr("x", function (d) {
+                return vis.x(d[0]);
+            })
+            .attr("width", function (d, i) {
+                if (d[0] ===0){
+                    return vis.x(d.data[keyselected]);
+            } else{
+                    return 0;
+                }
+            })
+            .attr("height", vis.height / 6 - vis.margin.top - 10)
+            .attr("fill", vis.z(colorindex));
+
     }
     else{
         // Plot Stacked Bar Chart
-        vis.bars.enter().append("g")
+
+         vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
+            .enter().append("g")
             .attr("fill", function(d, index) {
                 console.log(1);
                 return vis.z(index);})
@@ -291,7 +302,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .data(function(d) { return d;})
             .enter().append("rect")
             .attr("class", "bars")
-            .attr("y", function(d, i) { return  40+ i*(vis.height/6 - 10) })
+            .attr("y", function(d, i) {   return  40+ i*(vis.height/6 - 10) })
             .attr("x", function(d) {   return vis.x(d[0]); })
             .attr("width", function(d) {
                 return vis.x(d[1]) - vis.x(d[0]); })
@@ -299,7 +310,6 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("transform", "translate(20,0)")
             .on("mouseover", function(d,i) {
                 d3.select(this)
-
 
                 vis.tooltip.transition()
                     .duration(100)
@@ -310,6 +320,9 @@ StackedChart.prototype.updateVis_filtered = function(){
                     vis.tooltip.html(parseInt(d.data[keyselected]) + " Minutes")
                         .style("left", (d3.event.pageX + 3) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
+
+                    // var summary= " <p> The average American spent <b>9.59</b> hours a day on <b>" + vis.dataCat[keyselected] + "</b>.</p>";
+                    // document.getElementById("facts").innerHTML=summary;
                 }
                 else {
                     console.log("min");
@@ -326,18 +339,21 @@ StackedChart.prototype.updateVis_filtered = function(){
 
         console.log("2");
     }
+}
 
-     }
 
-StackedChart.prototype.updateText = function() {
+function getText(index, datacat, averagetime, facts) {
 
-    var work = "In 2017, 82 percent of employed persons worked on an average weekday, compared with 33 percent on an average weekend day, the U.S. Bureau of Labor Statistics reported today. Multiple jobholders were more likely to work on an average weekend day than were single jobholders--57 percent, compared with 30 percent.";
+    if (index ==null){
 
-     facts.selectAll("text")
-         .transition()
-        .text("work") ;
+        var summary= " <p> The average American spent ______  hours a day on ______</p>";
+        document.getElementById("facts").innerHTML=summary;
+    }
+    else {
+        var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
+                        + datacat[index] + ".</b></p><br>" + facts[index] ;
 
-    console.log("test");
-
+        document.getElementById("facts").innerHTML = summary;
+    }
 }
 

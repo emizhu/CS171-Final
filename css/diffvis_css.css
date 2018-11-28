@@ -1,3 +1,13 @@
+.desc, .instructions {
+    margin-left: 100px;
+    margin-right:100px;
+    font-size:14px;
+}
+
+.fp-bottom {
+    bottom:25px;
+}
+
 .df-p {
     padding-top: 20px;
     padding-right: 100px;
@@ -21,8 +31,8 @@
     line-height: 1;
     font-weight: bold;
     padding: 5px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.7);
+    color: #000000;
     border-radius: 1px;
 }
 
@@ -32,7 +42,7 @@
 .wrapper3 .dv-tooltip-box,
 .wrapper4 .dv-tooltip-box,
 .wrapper5 .dv-tooltip-box{
-    fill:rgba(0, 0, 0, 0.8);
+    fill: rgba(255, 255, 255, 0.8);
     opacity: 0;
     pointer-events: none;
     -webkit-transition: all .25s ease-out;
@@ -74,7 +84,7 @@
 .wrapper3 .dv-tooltip-text,
 .wrapper4 .dv-tooltip-text,
 .wrapper5 .dv-tooltip-text{
-    fill:white;
+    fill:black;
     font-size: 10px;
     text-anchor: middle;
     opacity: 0;
@@ -132,7 +142,7 @@
 }
 
 .wrapper1:hover .outline1{
-    fill: rgba(79, 147, 203, 0.30);
+    fill: rgba(255, 255, 255, 0.5);
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
     -ms-transition: all .25s ease-out;
@@ -140,8 +150,9 @@
     transition: all .25s ease-out;
 }
 
-.wrapper2:hover .outline2 {
-    fill: rgba(188, 188, 188, 0.30);
+.wrapper2:hover .outline2,
+.wrapper4:hover, .outline4{
+    fill: rgba(255, 255, 255, 0.5);
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
     -ms-transition: all .25s ease-out;
@@ -150,7 +161,7 @@
 }
 
 .wrapper3:hover .outline3 {
-    fill: rgba(255, 0, 0, 0.30);
+    fill: rgba(255, 255, 255, 0.5);
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
     -ms-transition: all .25s ease-out;
@@ -158,12 +169,14 @@
     transition: all .25s ease-out;
 }
 
-.wrapper4:hover .outline4 {
-    fill: rgba(188, 188, 223, 0.30);
-}
 
 .wrapper5:hover .outline5 {
-    fill: rgba(230, 188, 188, 0.30);
+    fill: rgba(255, 255, 255, 0.5);
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
 }
 
 
