@@ -1,6 +1,7 @@
 //#todo make tooltip color match circles
 //#todo make checkboxes match circles
 //#todo create better text for axis labels
+//#todo add more checkboxes
 
 LifeStyle = function(_parentElement, _data){
     this.parentElement = _parentElement;
@@ -9,7 +10,6 @@ LifeStyle = function(_parentElement, _data){
 
     this.initVis();
 }
-
 
 
 
@@ -25,7 +25,7 @@ LifeStyle.prototype.initVis = function() {
     vis.padding = 10;
 
     //color range for comparisons
-    vis.color = ["darkcyan","deeppink"];
+    vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
 
     //these values must EXACTLY match the headers in vis.displayData
     vis.checkboxCategories = ["sex", "full_part_time"];
@@ -35,10 +35,10 @@ LifeStyle.prototype.initVis = function() {
         "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
         "religious",	"volunteer",	"phone",	"traveling",	"misc"];
     vis.lineNumber = vis.headers.length;
-    vis.lineLength = 300;
+    vis.lineLength = 250;
     vis.circleradius = 7;
-    vis.labelBuffer = 20;
-    vis.innerAxis = 100;
+    vis.labelBuffer = 30;
+    vis.innerAxis = 30;
     //----------------------------------------------------------
 
     // SVG drawing area
@@ -98,54 +98,31 @@ LifeStyle.prototype.initVis = function() {
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
         //----------------------------------------------------------
 
-        //get starting points for transformation based on vis.innerAxis
-        //----------------------------------------------------------
-        var innerRadius = vis.innerAxis;
-
-        var innerArc = d3.arc()
-            .innerRadius(innerRadius)
-            .outerRadius(innerRadius)
-            .startAngle(i * Math.PI / 180)
-            .endAngle((i+1) * vis.angleRadian);
-
-        vis["svgarcinner" + i]= vis.svg.append("path")
-            .style("fill", "none")
-            // .style("stroke", "#0B9B29")
-            // .style("stroke-width", 1)
-            .attr('stroke-linejoin', 'round')
-            .attr("class","arc")
-            .attr("d", innerArc())
-            .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
-
-        //get position of arc
-        //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
-        var pointInner = vis["svgarcinner" + i].node().getPointAtLength(vis["svgarcinner" + i].node().getTotalLength() /2);
-
-
-
-
-
 
         //Create axes
         //----------------------------------------------------------
         // create scales
         vis["x" + i] = d3.scaleLinear()
             .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
-            .range([0,vis.lineLength]);
+            .range([vis.innerAxis,vis.lineLength]);
         vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
+
+        console.log("extent: " + d3.extent(vis.displayData, function(d){return d[vis.headers[i]];})  );
 
         vis["svgx" + i]= vis.svg.append("g")
             .attr("class","axis")
-            .attr("class","x-axis")
+            .attr("class","life-x-axis")
             // .attr("transform",  "translate(" + (pointInner.x + vis.width/2) +
             //     "," +  ( pointInner.y + vis.height/2) + ")" +
             //     "rotate(" + vis.angle*i + ")" )
-            .attr("transform", "translate(" + vis.width/2 + "," + vis.height/2   + ") " + "rotate(" + vis.angle*i + ")" )
+            .attr("transform", "translate(" + vis.width/2 + ","  + (vis.height/2)   + ") " + "rotate(" + vis.angle*i + ")" )
+            //.attr("transform", "rotate(" + vis.angle*i + ") " + "translate(" + vis.width/2 + ","  + (vis.height/2) + ")" )
+            // .attr("transform", "rotate(" + vis.angle*i + ") " + "translate(" + (pointInner.y + vis.innerAxis)+ ","  + pointInner.x + ")" )
             .call(vis["xAxis" + i].ticks(0));
         //----------------------------------------------------------
 
-
-
+        $("#checkboxes0").css("color",vis.color[0]);
+        $("#checkboxes1").css("color",vis.color[1]);
 
     };
 
@@ -155,8 +132,12 @@ LifeStyle.prototype.initVis = function() {
     //http://bl.ocks.org/Caged/6476579
     vis.tip = d3.tip()
         .attr("class","d3-tip")
+       // .style("background", d3.schemeCategory10[2])
+       // .style("color", d3.schemeCategory10[0])
         .offset([-20,0])
         .html(function(d){
+            d3.select(".d3-tip").style("background-color", d3.schemeCategory20[2]);
+            // d3.select(".d3-tip").style("background", d3.schemeCategory20[2]);
             //return value rounded to 1 decimal point
             return ("Average time: " +Math.round( d * 10 ) / 10 + " min");
         });
@@ -341,6 +322,9 @@ LifeStyle.prototype.updateVis = function(){
             .append("circle")
             .merge(circle)
             .on("mouseover",vis.tip.show)
+            // .on("mouseover",function(d){
+            //     vis.tip.show
+            // })
             .on("mouseout",vis.tip.hide)
             .transition().duration(800)
             .attr("fill", function(d) {

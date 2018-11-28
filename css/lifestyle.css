@@ -4,21 +4,23 @@
 /*format x-axis on lifestyle chart*/
 /*--------------------------------------------------*/
 /*https://bl.ocks.org/d3noob/629790fc15cc1afba0253f29a4d246e7*/
-g.x-axis line{
+g.life-x-axis line{
     stroke: lightgray;
 }
-g.x-axis path{
+g.life-x-axis path{
     stroke: lightgray;
 }
 /*--------------------------------------------------*/
 
 
 
-.checkbox, .checkboxes {
-/*align left*/
+.checkboxes {
+    text-align: left;
 }
 
-
+/*.life-x-axis {*/
+    /*transform: translate(lifestyle.width/2 + ","  + vis.height/2);*/
+/*}*/
 
 /*tooltips*/
 /*--------------------------------------------------*/
@@ -27,7 +29,7 @@ g.x-axis path{
     line-height: 1;
     font-weight: bold;
     padding: 5px;
-    background: rgba(0, 0, 0, 0.8);
+    /*background: rgba(0, 0, 0, 0.8);*/
     color: #fff;
     border-radius: 1px;
 }

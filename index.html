@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/stackedChart.css">
     <link rel="stylesheet" href="css/lifestyle.css">
 
+
 </head>
 
 <body>
@@ -94,7 +95,7 @@
             <div class="row">
 
                 <div class="col-md-2">
-                    <div class="checkboxes">
+                    <div id="checkboxes0" class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
                         <input type="checkbox" class="checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>
@@ -111,7 +112,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <div class="checkboxes">
+                    <div id="checkboxes1"  class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
                         <input type="checkbox" class="checkbox" id="Female2" value="Female" checked onchange="onToggle()">Female<br>
@@ -161,6 +162,8 @@
     <script src="js/d3-tip.js"></script>
     <script src="js/d3-sankey.js"></script>
     <script src="js/d3-sankey.min.js"></script>
+    <!--https://github.com/d4rkr00t/percentile-->
+    <script src="js/index_percentile.js"></script>
 
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>

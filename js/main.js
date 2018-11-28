@@ -2,6 +2,7 @@
 var dataAge = [];
 var dataLifestyle = [];
 var lifestyle;
+var stackedchart;
 
  var textTypeInterval = 40;
  var basePause = 1000;
@@ -72,7 +73,7 @@ queue()
      var leisurevis = new DiffVis("transvis", 48.52, 36.54, null, null, "Metropolitan", "Non-Metropolitan", "Transportation for Work", null);
      var leisurevis = new DiffVis("labor", 407.9, 230.9, null, null, "Off Labor Market", "Currently Employed", "Lesiure Time", null);
 
-     var stackedchart = new StackedChart("stackedchart", data, dataCategory);
+     stackedchart = new StackedChart("stackedchart", data, dataCategory);
 
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
