@@ -43,13 +43,13 @@ DiffVis.prototype.initVis = function() {
 
     vis.timetotal = 1;
 
-    vis.margin = {top: 40, right: 120, bottom: 60, left: 120};
+    vis.margin = {top: 40, right: 140, bottom: 60, left: 140};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
     vis.totalwidth = vis.width + vis.margin.left + vis.margin.right;
-    vis.sideMargin = 40;
+    vis.sideMargin = 25;
     vis.boxMargin = 2;
     vis.boxWidth = ((vis.width/2) - (vis.sideMargin) - (vis.rownum*vis.boxMargin))/vis.rownum;
 
@@ -76,12 +76,12 @@ DiffVis.prototype.initVis = function() {
             .attr("fill", d3.schemeCategory20[0])
             .attr("width", 15)
             .attr("height", 15)
-            .attr("x", vis.margin.left)
+            .attr("x", vis.margin.left + 5)
             .attr("y",43);
 
         vis.legend.append("text")
             .attr("class", "legend-text")
-            .attr("x", vis.margin.left + 20)
+            .attr("x", vis.margin.left + 25)
             .attr("y", 55)
             .attr("font-size", 12)
             .text("1 square = " +vis.legendtime + " spent on " + vis.activity1);
@@ -90,11 +90,11 @@ DiffVis.prototype.initVis = function() {
             .attr("fill", d3.schemeCategory20[2])
             .attr("width", 15)
             .attr("height", 15)
-            .attr("x", vis.margin.left)
+            .attr("x", vis.margin.left + 5)
             .attr("y",63);
 
         vis.legend.append("text")
-            .attr("x", vis.margin.left + 20)
+            .attr("x", vis.margin.left + 25)
             .attr("y", 75)
             .attr("font-size", 12)
             .text("1 square = " +vis.legendtime + " spent on " + vis.activity2);
@@ -104,12 +104,12 @@ DiffVis.prototype.initVis = function() {
             .attr("fill", d3.schemeCategory20[0])
             .attr("width", 15)
             .attr("height", 15)
-            .attr("x", vis.margin.left)
+            .attr("x", vis.margin.left + 5)
             .attr("y",53);
 
         vis.legend.append("text")
             .attr("class", "legend-text")
-            .attr("x", vis.margin.left + 20)
+            .attr("x", vis.margin.left + 25)
             .attr("y", 65)
             .attr("font-size", 12)
             .text("1 square = " +vis.legendtime + " spent on " + vis.activity1);
@@ -120,9 +120,9 @@ DiffVis.prototype.initVis = function() {
         + vis.margin.left + vis.boxWidth + 70;
 
     vis.calendarlabel = vis.legend.append("text")
-        .attr("x", vis.legendstart-40)
-        .attr("y", 38)
-        // .attr("text-anchor", "middle")
+        .attr("x", vis.legendstart+ (vis.totalwidth-vis.margin.right-vis.sideMargin - vis.legendstart)/2)
+        .attr("y", 30)
+        .attr("text-anchor", "middle")
         .attr("font-size", 16)
         .text("Click the arrow to start the animation!");
 
@@ -330,11 +330,8 @@ DiffVis.prototype.drawVis = function() {
             vis.calendararrow
                 .attr("fill", d3.schemeCategory20[2]);
 
-            vis.calendarlabel = vis.legend.append("text")
-                .text("Click the arrow to start the animation!");
-
             vis.calendarlabel
-                .text("Click the arrow to add " + vis.activity2)
+                .text("Click the arrow to add " + vis.activity2 + "!");
 
             vis.calendararrow
                 .on("click", function (d) {

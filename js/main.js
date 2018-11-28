@@ -16,7 +16,7 @@ var lifestyle;
      anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
      navigationPosition: 'left',
      navigationTooltips: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
-     showActiveTooltip: true,
+     // showActiveTooltip: true,
      slidesNavigation: true,
      sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'

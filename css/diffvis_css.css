@@ -1,3 +1,9 @@
+.desc, .instructions {
+    margin-left: 100px;
+    margin-right:100px;
+    font-size:14px;
+}
+
 .fp-bottom {
     bottom:25px;
 }
