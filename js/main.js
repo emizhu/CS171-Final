@@ -9,10 +9,16 @@ var lifestyle;
  var slideRun = {2:true};
 
  new fullpage('#fullpage', {
-     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+
+     navigation: true,
      menu: '#myMenu',
-     sectionsColor: ['white', 'lightgrey', 'white', 'white', 'white'],
-     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE',
+     anchors: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+     // navigationPosition: 'right',
+     // navigationTooltips: ['page_01', 'page_02', 'page_03', 'page_04', 'page_05','page_06', 'page_07', 'page_08', 'page_09'],
+     // showActiveTooltip: false,
+     // slidesNavigation: true,
+     sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
+     licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
     });
 
 
@@ -62,7 +68,10 @@ queue()
 
      // Married, full-time employed, currently working women vs men with children in household
      //Childcare = 0301 + 0302 + 0303 codes
-     var diffvis = new DiffVis("diffvis", 88.91, 59.72, 111.89, 51.12, "Women", "Men", "Childcare", "Housework");
+     var gendervis = new DiffVis("gendervis", 88.91, 59.72, 111.89, 51.12, "Women", "Men", "Childcare", "Housework");
+     var leisurevis = new DiffVis("transvis", 48.52, 36.54, null, null, "Metropolitan", "Non-Metropolitan", "Transportation for Work", null);
+     var leisurevis = new DiffVis("labor", 407.9, 230.9, null, null, "Off Labor Market", "Currently Employed", "Lesiure Time", null);
+
      var stackedchart = new StackedChart("stackedchart", data, dataCategory);
 
      //create visualization for different lifestyles

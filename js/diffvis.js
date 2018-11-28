@@ -1,4 +1,5 @@
-DiffVis = function(_parentElement, _time1a, _time1b, _time2a, _time2b, _group1, _group2, _activity1, _activity2) {
+DiffVis = function(_parentElement, _time1a, _time1b, _time2a, _time2b, _group1, _group2, _activity1,
+                   _activity2) {
     this.parentElement = _parentElement;
     this.time1a = _time1a;
     this.time1b = _time1b;
@@ -10,23 +11,42 @@ DiffVis = function(_parentElement, _time1a, _time1b, _time2a, _time2b, _group1, 
     this.activity2 = _activity2;
 
     this.initVis();
-}
+};
 
 
 DiffVis.prototype.initVis = function() {
     var vis = this;
 
-    vis.timetotal = 100;
+    if (vis.time1a>200) {
+        vis.rownum = 14;
+        vis.hours = 24;
+        vis.legendtime = "24 hours";
+        vis.label = "1 row = 14 days = 1/2 month"
+    }
+    else if (vis.activity2) {
+        vis.rownum = 48;
+        vis.hours = 1;
+        vis.legendtime = "1 hour";
+        vis.label = "1 row = 48 hours = 2 days"
+    }
+    else if (vis.time1a<100) {
+        vis.rownum = 24;
+        vis.hours = 1;
+        vis.legendtime = "1 hour";
+        vis.label = "1 row = 24 hours = 1 day"
+    }
+
+    vis.timetotal = 1;
 
     vis.margin = {top: 40, right: 60, bottom: 60, left: 60};
 
-    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.totalwidth = vis.width + vis.margin.left + vis.margin.right;
     vis.sideMargin = 30;
     vis.boxMargin = 5;
-    vis.boxWidth = ((vis.totalwidth/2) - (2*vis.sideMargin) - (48*vis.boxMargin))/48;
+    vis.boxWidth = ((vis.width/2) - (vis.sideMargin) - (vis.rownum*vis.boxMargin))/vis.rownum;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -42,45 +62,102 @@ DiffVis.prototype.initVis = function() {
     //     .attr("stroke", "black")
     //     .attr("d", "M 0 0 H " + (vis.width - 200));
 
-    vis.legend = vis.svg.append("g")
-    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");;
+    vis.legend = vis.svg.append("g");
+    // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    var dist =vis.boxWidth*48*2 + vis.boxMargin*48*2 + vis.sideMargin;
-    var bez1 = -1 *dist/10;
-    var bez2 = -1*dist/25;
-    var enddist = dist+bez1;
 
-    // vis.calendar = vis.legend.append("path")
-    //     .attr
-    //     // .attr("d", "M0,"  + (-1*bez2) +"C" + (-1*bez1) + "," + bez2 + " " + enddist + "," + bez2 + " " + dist + "," + (-1*bez2))
-    //     .attr("stroke", "black")
-    //     .attr("fill", "transparent");
+    if (vis.activity2) {
+        vis.legend.append("rect")
+            .attr("fill", "steelblue")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("x", vis.margin.left)
+            .attr("y",43);
 
-    vis.legend.append("rect")
-        .attr("fill", "steelblue")
-        .attr("width", vis.boxWidth)
-        .attr("height", vis.boxWidth)
-        .attr("x", vis.totalwidth/2)
-        .attr("y",50);
+        vis.legend.append("text")
+            .attr("class", "legend-text")
+            .attr("x", vis.margin.left + 20)
+            .attr("y", 55)
+            .attr("font-size", 12)
+            .text("1 square = " +vis.legendtime + " spent on " + vis.activity1);
 
-    vis.legend.append("text")
-        .attr("x", vis.width/2)
-        .attr("y", 65+vis.boxWidth)
-        .attr("font-size", 15)
-        .attr("text-anchor", "middle")
-        .text("1 square = 1 hour of time spent on " + vis.activity1);
+        vis.legend.append("rect")
+            .attr("fill", "red")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("x", vis.margin.left)
+            .attr("y",63);
+
+        vis.legend.append("text")
+            .attr("x", vis.margin.left + 20)
+            .attr("y", 75)
+            .attr("font-size", 12)
+            .text("1 square = " +vis.legendtime + " spent on " + vis.activity2);
+    }
+    else {
+        vis.legend.append("rect")
+            .attr("fill", "steelblue")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("x", vis.margin.left)
+            .attr("y",53);
+
+        vis.legend.append("text")
+            .attr("class", "legend-text")
+            .attr("x", vis.margin.left + 20)
+            .attr("y", 65)
+            .attr("font-size", 12)
+            .text("1 square = " +vis.legendtime + " spent on " + vis.activity1);
+    }
+
+
+    vis.legendstart = vis.legend.selectAll(".legend-text").node().getBBox().width
+        + vis.margin.left + vis.boxWidth + 70;
+
+    vis.calendarlabel = vis.legend.append("text")
+        .attr("x", vis.legendstart-40)
+        .attr("y", 38)
+        // .attr("text-anchor", "middle")
+        .attr("font-size", 16)
+        .text("Click the arrow to start the animation!");
+
+    vis.calendarline = vis.legend.append("path")
+        .attr("d", "M" + vis.legendstart + " 60 " + "L " + (vis.totalwidth-vis.margin.right-vis.sideMargin) + " 60 ")
+        .attr("stroke", "black");
+
+    var months = [ "Jan", "Feb", "March", "Apr", "May", "June",
+        "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+    vis.increment = (vis.totalwidth-vis.margin.right - vis.legendstart-vis.sideMargin)/11;
+
+    for (var i = 0; i < 12; i++) {
+        vis.legend.append("path")
+            .attr("d", "M" + (vis.legendstart + i*vis.increment) + " 65 " + "L " + (vis.legendstart + i*vis.increment) + " 55 ")
+            .attr("stroke", "black");
+
+        vis.legend.append("text")
+            .attr("x", vis.legendstart + i*vis.increment)
+            .attr("y", 80)
+            .attr("text-anchor", "middle")
+            .attr("font-size", 10)
+            .text(months[i]);
+    }
+
+
+    vis.calendararrow = vis.legend.append("path")
+        .attr("d", "M" + (vis.legendstart-2) + " 70 " + " L " + (vis.legendstart + 14) + " 60 " + " L " + (vis.legendstart-2) + " 50")
+        .attr("fill", "steelblue");
 
     vis.left = vis.svg.append("g")
         .attr("class", "left-vis")
-        .attr("transform",  "translate(" + vis.margin.left + ",100)");
+        .attr("transform",  "translate(" + vis.margin.left + ",120)");
 
     vis.right = vis.svg.append("g")
         .attr("class", "right-vis")
-        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 100)");
+        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 120)");
 
     vis.left
         .append("text")
-        .attr("class", "label")
+        .attr("class", "dv-label")
         .attr("y", 0)
         .attr("x", (vis.totalwidth/4) - vis.sideMargin)
         .text(vis.group1);
@@ -89,7 +166,7 @@ DiffVis.prototype.initVis = function() {
         .append("line")
         .attr("x1", 0)
         .attr("y1", 24)
-        .attr("x2", vis.boxMargin*47 + vis.boxWidth*48)
+        .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)
         .attr("y2", 24)
         .attr("stroke", "rgba(188, 188, 188)")
         .attr("stroke-width", 1);
@@ -105,23 +182,23 @@ DiffVis.prototype.initVis = function() {
 
     vis.left
         .append("line")
-        .attr("x1", vis.boxMargin*47 + vis.boxWidth*48)
+        .attr("x1", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)
         .attr("y1", 20)
-        .attr("x2", vis.boxMargin*47 + vis.boxWidth*48)
+        .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)
         .attr("y2", 28)
         .attr("stroke", "rgba(188, 188, 188)")
         .attr("stroke-width", 1);
 
     vis.left
         .append("text")
-        .attr("x", (vis.boxMargin*47 + vis.boxWidth*48)/2)
+        .attr("x", (vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)/2)
         .attr("y", 22)
-        .attr("class", "axis-label")
-        .text('one row = 48 hours = 2 days');
+        .attr("class", "dv-axis-label")
+        .text(vis.label);;
 
      vis.right
         .append("text")
-        .attr("class", "label")
+        .attr("class", "dv-label")
         .attr("y", 0)
         .attr("x", vis.totalwidth/4)
         .text(vis.group2);
@@ -130,7 +207,7 @@ DiffVis.prototype.initVis = function() {
         .append("line")
         .attr("x1", vis.sideMargin)
         .attr("y1", 24)
-        .attr("x2", vis.boxMargin*47 + vis.boxWidth*48 + vis.sideMargin)
+        .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum + vis.sideMargin)
         .attr("y2", 24)
         .attr("stroke", "rgba(188, 188, 188)")
         .attr("stroke-width", 1);
@@ -146,43 +223,52 @@ DiffVis.prototype.initVis = function() {
 
     vis.right
         .append("line")
-        .attr("x1", vis.boxMargin*47 + vis.boxWidth*48 + vis.sideMargin)
+        .attr("x1", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum + vis.sideMargin)
         .attr("y1", 20)
-        .attr("x2", vis.boxMargin*47 + vis.boxWidth*48 + vis.sideMargin)
+        .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum + vis.sideMargin)
         .attr("y2", 28)
         .attr("stroke", "rgba(188, 188, 188)")
         .attr("stroke-width", 1);
 
     vis.right
         .append("text")
-        .attr("x", (vis.boxMargin*47 + vis.boxWidth*48)/2 + vis.sideMargin)
+        .attr("x", (vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)/2 + vis.sideMargin)
         .attr("y", 22)
-        .attr("class", "axis-label")
-        .text('one row = 48 hours = 2 days');
+        .attr("class", "dv-axis-label")
+        .text(vis.label);;
 
+    vis.init = true;
     vis.wrangleData();
 
-}
+    vis.calendararrow
+        .on("click", function (d) {
+            console.log("clicked");
+            vis.startAnimation(true);
+        } );
+
+};
 
 DiffVis.prototype.wrangleData = function() {
     var vis = this;
     // total = one year = time * 365
     // speed = units/time (10s)
     // 12 seconds = 1 second per month
-    vis.total1a = (vis.time1a*365)/60;
+
+
+    vis.total1a = (vis.time1a*365)/(60*vis.hours);
     vis.lapse1a = 10/vis.total1a;
 
-    vis.total1b = (vis.time1b*365)/60;
+    vis.total1b = (vis.time1b*365)/(60*vis.hours);
     vis.lapse1b = 10/vis.total1b;
 
-    vis.total2a = (vis.time2a*365)/60;
+    vis.total2a = (vis.time2a*365)/(60*vis.hours);
     vis.lapse3a = 10/vis.total2a;
 
-    vis.total2b = (vis.time2b*365)/60;
+    vis.total2b = (vis.time2b*365)/(60*vis.hours);
     vis.lapse2b = 10/vis.total2b;
 
     vis.drawVis();
-}
+};
 
 DiffVis.prototype.drawVis = function() {
     var vis = this;
@@ -206,38 +292,58 @@ DiffVis.prototype.drawVis = function() {
 
     array1a.forEach(function(d, j) {
         setTimeout(function() {
-            // console.log(i);
             vis.leftrect.append("rect")
                 .attr("class", "square1a")
                 .attr("fill", "steelblue")
                 .attr("width", vis.boxWidth)
                 .attr("height", vis.boxWidth)
-                .attr("x", (vis.boxWidth+vis.boxMargin) * (j % 48))
-                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/48)+10);
+                .attr("x", (vis.boxWidth+vis.boxMargin) * (j % vis.rownum))
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/vis.rownum)+10);
         },time1 * j);
     });
 
 
     array1b.forEach(function(d, j) {
             setTimeout(function() {
-                // console.log(i);
                 vis.rightrect.append("rect")
                     .attr("class", "square1a")
                     .attr("fill", "steelblue")
                     .attr("width", vis.boxWidth)
                     .attr("height", vis.boxWidth)
-                    .attr("x", vis.sideMargin + (vis.boxWidth+vis.boxMargin) * (j % 48))
-                    .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/48)+10);
+                    .attr("x", vis.sideMargin + (vis.boxWidth+vis.boxMargin) * (j % vis.rownum))
+                    .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/vis.rownum)+10);
             },time2 * j);
         });
 
     setTimeout(function () {
         vis.drawBlanks();
-        vis.showButton();
         vis.showTooltip(false);
+
+        if (vis.init && vis.activity2) {
+            vis.showSecond();
+        }
+        else if (vis.activity2) {
+            vis.calendararrow
+                .attr("fill", "red");
+
+            vis.calendarlabel
+                .text("Click the label to add " + vis.activity2)
+
+            vis.calendararrow
+                .on("click", function (d) {
+                    console.log("clicked");
+                    vis.startAnimation(false);
+                });
+        }
+        vis.calendararrow
+            .transition()
+            .ease(d3.easeElastic)
+            .attr("transform", "translate(0, 0)")
+            .duration(200);
+
     }, vis.timetotal+600);
 
-}
+};
 
 DiffVis.prototype.showButton = function() {
 
@@ -248,28 +354,30 @@ DiffVis.prototype.showButton = function() {
         .attr("width", 18)
         .attr("height", 18)
         .attr("x", 450)
-        .attr("y", 0)
-        .on("click", function(d) {
-            if (!vis.clicked) {
-                vis.showSecond();
-            }
-        });
+        .attr("y", 0);
 
-    vis.legend.append("text")
-        .attr("class", "desc")
-        .attr("x", 500)
-        .attr("y", 15)
+    vis.buttonlabel = vis.legend.append("text")
         .text("Click to Add " + vis.activity2);
-}
+
+    if (vis.init) {
+        vis.showSecond();
+    }
+    else {
+        vis.button
+            .on("click", function(d) {
+                vis.showSecond();
+            });
+    }
+};
 
 DiffVis.prototype.showSecond = function() {
     var vis = this;
 
-    vis.button.remove();
-
-    vis.legend.selectAll(".desc").remove();
-    vis.rightrect.selectAll(".blank").remove();
-    vis.rightrect.selectAll(".outline").remove();
+    // vis.blanks.remove();
+    vis.blanks = vis.rightrect.selectAll(".blanks");
+    console.log(vis.blanks);
+    vis.blanks.remove();
+    // vis.wrapper2.remove();
 
     var array2a = Array(Math.round(vis.total2a)).fill(0);
     var array2b = Array(Math.round(vis.total2b)).fill(0);
@@ -289,65 +397,72 @@ DiffVis.prototype.showSecond = function() {
                 .attr("fill", "red")
                 .attr("width", vis.boxWidth)
                 .attr("height", vis.boxWidth)
-                .attr("x", (vis.boxWidth+vis.boxMargin) * ((finala+j) % 48))
-                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((finala+j)/48)+10);
+                .attr("x", (vis.boxWidth+vis.boxMargin) * ((finala+j) % vis.rownum))
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((finala+j)/vis.rownum)+10);
         },time1 * j);
     });
 
 
     array2b.forEach(function(d, j) {
         setTimeout(function() {
-            // console.log(i);
             vis.rightrect
                 .append("rect")
                 // .attr("class", "square1a")
                 .attr("fill", "red")
                 .attr("width", vis.boxWidth)
                 .attr("height", vis.boxWidth)
-                .attr("x", (vis.boxWidth+vis.boxMargin) * ((finalb+j) % 48)+vis.sideMargin)
-                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((finalb+j)/48)+10);
+                .attr("x", (vis.boxWidth+vis.boxMargin) * ((finalb+j) % vis.rownum)+vis.sideMargin)
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor((finalb+j)/vis.rownum)+10);
         },time2 * j);
     });
 
 
-    console.log("here:" + finala);
-    console.log("there:" + finalb);
-    console.log(array2a.length);
-
     vis.finala += array2a.length;
     vis.finalb += array2b.length;
 
-    console.log("what:" + vis.finala);
-    console.log(finalb);
 
     setTimeout(function () {
         vis.drawBlanks();
         vis.showTooltip(true);
+
+        vis.calendararrow
+            .attr("fill", "steelblue");
+
+        vis.calendararrow
+            .on("click", function (d) {
+                console.log("clicked");
+                vis.startAnimation(true);
+            } );
+
+        vis.calendararrow
+            .transition()
+            .ease(d3.easeElastic)
+            .attr("transform", "translate(0, 0)")
+            .duration(200);
+
     }, vis.timetotal+600);
-}
+};
 
 DiffVis.prototype.drawBlanks = function() {
     var vis = this;
 
     var check = vis.finala - vis.finalb;
-    console.log(check);
-    console.log(vis.total1a - vis.total1b);
     var diff = Array(Math.round(check)).fill(0);
 
-    var blanks = vis.rightrect.selectAll(".blank")
+    vis.blanks = vis.rightrect.selectAll(".blank")
         .data(diff);
 
-    blanks.enter()
+    vis.blanks.enter()
         .append("rect")
         .attr("class", function (d, i){
             if (check == Math.round(vis.total1a - vis.total1b)) {
-                return "blank1";
+                return "blanks";
             }
             else if (i <= vis.total1a - vis.total1b) {
-                return "blank2";
+                return "blanks";
             }
             else {
-                return "blank3";
+                return "blanks";
             }
         })
         .attr("fill", function (d, i) {
@@ -365,236 +480,355 @@ DiffVis.prototype.drawBlanks = function() {
         .attr("width", vis.boxWidth)
         .attr("height", vis.boxWidth)
         .attr("x", function(d, i) {
-            return (vis.boxWidth+vis.boxMargin) * ((vis.finalb+i) % 48) + vis.sideMargin;
+            return (vis.boxWidth+vis.boxMargin) * ((vis.finalb+i) % vis.rownum) + vis.sideMargin;
         })
         .attr("y",function(d, i) {
-            return (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+i)/48)+10;
+            return (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+i)/vis.rownum)+10;
         });
-}
+};
 
 DiffVis.prototype.showTooltip = function (bool) {
     var vis = this;
-    var x1, y1, x2, y3, x4, y5, x6, y7, x8, y9;
+    let x1, y1, x2, y3, x4, y5, x6, y7, x8, y9;
+    const padding = 3;
+    var center_x, center_y;
+
+    vis.placeholder = vis.svg.append("text")
+        .attr("class", "placeholder")
+        .attr("fill", "black")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("Those who are " + vis.group1 + " spend approximately " + Math.round(vis.savea*vis.hours) + " hours a year on " + vis.activity1);
+
+    vis.placeholder = vis.svg.selectAll(".placeholder");
+
+    var bbox = vis.placeholder.node().getBBox();
+
+    vis.svg.selectAll(".placeholder").remove();
 
     if (!bool) {
 
         x1 = 0;
         y1 = 10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth;
-        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10 - vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % 48) - vis.boxMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10+ vis.boxWidth;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth;
+        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/vis.rownum)+10 - vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.savea) % vis.rownum) - vis.boxMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/vis.rownum)+10+ vis.boxWidth;
         x6 = 0;
         y7 = 10;
 
-        vis.tool_tip1 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+y3/2,0])
-            .html(vis.group1 + " spend approximately " + Math.round(vis.total1a) + " hours a year on " + vis.activity1);
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
 
-        vis.svg.call(vis.tool_tip1);
+        vis.wrapper = vis.leftrect.append("g")
+            .attr("class", 'wrapper1');
 
-        vis.leftrect.append("path")
+        vis.wrapper.append("path")
             .attr("class", "outline1")
             .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
                 + " V " + y5 + " H " + x6 + " V " + y7)
-            .attr("fill","transparent")
-            .on('mouseover', vis.tool_tip1.show)
-            .on('mouseout', vis.tool_tip1.hide);
+            .attr("fill","transparent");
+
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text("Those who are " + vis.group1 + " spend approximately " + Math.round(vis.savea*vis.hours) + " hours a year on " + vis.activity1);
+
 
         x1 = vis.sideMargin;
         y1 = 10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth+vis.sideMargin;
-        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10 - vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48) - vis.boxMargin+vis.sideMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10+ vis.boxWidth;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth+vis.sideMargin;
+        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/vis.rownum)+10 - vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.saveb) % vis.rownum) - vis.boxMargin+vis.sideMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/vis.rownum)+10+ vis.boxWidth;
         x6 = vis.sideMargin;
         y7 = 10;
 
-        vis.tool_tip2 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+y3/2,0])
-            .html(vis.group2 + " spend approximately " + Math.round(vis.total1b) + " hours a year on " + vis.activity1);
 
-        vis.svg.call(vis.tool_tip2);
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
 
-        vis.rightrect.append("path")
+        vis.wrapper = vis.rightrect.append("g")
+            .attr("class", 'wrapper1');
+
+        vis.wrapper.append("path")
             .attr("class", "outline1")
             .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
                 + " V " + y5 + " H " + x6 + " V " + y7)
-            .attr("fill","transparent")
-            .on('mouseover', vis.tool_tip2.show)
-            .on('mouseout', vis.tool_tip2.hide);
+            .attr("fill","transparent");
 
-        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48)+vis.sideMargin;
-        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth+vis.sideMargin;
-        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10 -  vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % 48) - vis.boxMargin+vis.sideMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10+ vis.boxWidth;
+
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text("Those who are " + vis.group2 + " spend approximately " + Math.round(vis.saveb*vis.hours) + " hours a year on " + vis.activity1);
+
+
+        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum)+vis.sideMargin;
+        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth+vis.sideMargin;
+        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/vis.rownum)+10 -  vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % vis.rownum) - vis.boxMargin+vis.sideMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/vis.rownum)+10+ vis.boxWidth;
         x6 = vis.sideMargin;
-        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10+ vis.boxWidth - vis.boxMargin;
-        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48)+vis.sideMargin;
-        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10;
+        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10+ vis.boxWidth + vis.boxMargin;
+        x8 = x1;
+        y9 = y1;
 
-        vis.tool_tip3 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+(y5-y1)/2,0])
-            .html(vis.group1 + " spend approximately " + Math.round(vis.total1a - vis.total1b) + " more hours a year on "
-                + vis.activity1 + " than " + vis.group2);
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
 
-        vis.svg.call(vis.tool_tip3);
+        vis.wrapper2 = vis.rightrect.append("g")
+            .attr("class", 'wrapper2');
 
-        vis.rightrect.append("path")
+        vis.wrapper2.append("path")
             .attr("class", "outline2")
-            .attr("fill", "transparent")
-            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
-                + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
-            .on('mouseover', vis.tool_tip3.show)
-            .on('mouseout', vis.tool_tip3.hide);
+            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4 + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
+            .attr("fill","transparent");
+
+        vis.wrapper2.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
+
+        vis.wrapper2.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text("Those who are " + vis.group1 + " spend approximately " + Math.round((vis.total1a - vis.total1b)*vis.hours)
+                + " more hours a year on " + vis.activity1 + " than " + "those who are " + vis.group2);
+
     }
 
     else {
         vis.rightrect.selectAll(".outline2").remove();
 
-        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.savea) % 48);
-        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/48)+10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth;
-        y3 =(vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10 - vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % 48) - vis.boxMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/48)+10+ vis.boxWidth;
+        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.savea) % vis.rownum);
+        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/vis.rownum)+10;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth;
+        y3 =(vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/vis.rownum)+10 - vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finala) % vis.rownum) - vis.boxMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finala)/vis.rownum)+10+ vis.boxWidth;
         x6 = 0;
-        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/48)+10 + vis.boxMargin+vis.boxWidth;
-        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.savea) % 48);
-        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/48)+10;
+        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/vis.rownum)+10 + vis.boxMargin+vis.boxWidth;
+        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.savea) % vis.rownum);
+        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.savea)/vis.rownum)+10;
 
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
 
-        vis.tool_tip4 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+(y5-y1)/2,0])
-            .html(vis.group1 + " spend approximately " + Math.round(vis.total2a) + " hours a year on "
-                + vis.activity2);
+        vis.wrapper = vis.leftrect.append("g")
+            .attr("class", 'wrapper3');
 
-        vis.svg.call(vis.tool_tip4);
-
-        vis.leftrect.append("path")
+        vis.wrapper.append("path")
             .attr("class", "outline3")
-            .attr("fill", "transparent")
+            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
+                + " V " + y5 + " H " + x6 + " V " + y7)
+            .attr("fill","transparent");
+
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text("Those who are " + vis.group1 + " spend approximately " + Math.round(vis.total2a*vis.hours) + " hours a year on " + vis.activity2);
+
+
+
+        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.saveb) % vis.rownum)+vis.sideMargin;
+        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/vis.rownum)+10;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth + vis.sideMargin;
+        y3 =(vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10 - vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum) - vis.boxMargin + vis.sideMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10+ vis.boxWidth;
+        x6 = vis.sideMargin;
+        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/vis.rownum)+10 + vis.boxMargin+vis.boxWidth;
+        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.saveb) % vis.rownum) + vis.sideMargin;
+        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/vis.rownum)+10;
+
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
+
+        vis.wrapper = vis.rightrect.append("g")
+            .attr("class", 'wrapper3');
+
+        vis.wrapper.append("path")
+            .attr("class", "outline3")
+            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
+                + " V " + y5 + " H " + x6 + " V " + y7)
+            .attr("fill","transparent");
+
+
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text(vis.group2 + " spend approximately " + Math.round(vis.total2b*vis.hours) + " hours a year on " + vis.activity2);
+
+        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum)+vis.sideMargin;
+        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth+vis.sideMargin;
+        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a - vis.total1b)/vis.rownum)+10 -  vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb+vis.total1a - vis.total1b) % vis.rownum) +vis.sideMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a - vis.total1b)/vis.rownum)+10+ vis.boxWidth;
+        x6 = vis.sideMargin;
+        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10 + vis.boxWidth+vis.boxMargin;
+        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum)+vis.sideMargin;
+        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10;
+
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
+
+        vis.wrapper = vis.rightrect.append("g")
+            .attr("class", 'wrapper4');
+
+        vis.wrapper.append("path")
+            .attr("class", "outline4")
             .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
                 + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
-            .on('mouseover', vis.tool_tip4.show)
-            .on('mouseout', vis.tool_tip4.hide);
+            .attr("fill","transparent");
 
-        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.saveb) % 48)+vis.sideMargin;
-        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/48)+10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth + vis.sideMargin;
-        y3 =(vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10 - vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48) - vis.boxMargin + vis.sideMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10+ vis.boxWidth;
-        x6 = vis.sideMargin;
-        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/48)+10 + vis.boxMargin+vis.boxWidth;
-        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.saveb) % 48) + vis.sideMargin;
-        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.saveb)/48)+10;
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
 
-        vis.tool_tip5 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+(y5-y1)/2,0])
-            .html(vis.group2 + " spend approximately " + Math.round(vis.total2b) + " hours a year on "
-                + vis.activity2);
-
-        vis.svg.call(vis.tool_tip5);
-
-        vis.rightrect.append("path")
-            .attr("class", "outline3")
-            .attr("fill", "transparent")
-            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
-                + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
-            .on('mouseover', vis.tool_tip5.show)
-            .on('mouseout', vis.tool_tip5.hide);
-
-        x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48)+vis.sideMargin;
-        y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth+vis.sideMargin;
-        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a - vis.total1b)/48)+10 -  vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb+vis.total1a - vis.total1b) % 48) +vis.sideMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a - vis.total1b)/48)+10+ vis.boxWidth;
-        x6 = vis.sideMargin;
-        y7 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10 + vis.boxWidth+vis.boxMargin;
-        x8 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % 48)+vis.sideMargin;
-        y9 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/48)+10;
-
-        vis.tool_tip6 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+(y5-y1)/2,0])
-            .html(vis.group1 + " spend approximately " + Math.round(vis.total1a - vis.total1b) + " more hours a year on "
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text(vis.group1 + " spend approximately " + Math.round(vis.total1a - vis.total1b) + " more hours a year on "
                 + vis.activity1 + " than " + vis.group2);
 
-        vis.svg.call(vis.tool_tip6);
-
-        vis.rightrect.append("path")
-            .attr("class", "outline4")
-            .attr("fill", "transparent")
-            .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
-                + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
-            .on('mouseover', vis.tool_tip6.show)
-            .on('mouseout', vis.tool_tip6.hide);
 
         x1 = x4 + vis.boxMargin;
         y1 = y3 + vis.boxMargin;
         y7 = y5 + vis.boxMargin;
-        x2 = (vis.boxWidth+vis.boxMargin) * 47 + vis.boxWidth+vis.sideMargin;
-        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b)/48)+10 -  vis.boxMargin;
-        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b) % 48) +vis.sideMargin+10 - vis.boxMargin;
-        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b)/48)+10+ vis.boxWidth;
+        x2 = (vis.boxWidth+vis.boxMargin) * (vis.rownum-1) + vis.boxWidth+vis.sideMargin;
+        y3 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b)/vis.rownum)+10 -  vis.boxMargin;
+        x4 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b) % vis.rownum) +vis.sideMargin+10 - vis.boxMargin;
+        y5 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+vis.total1a +vis.total2a- vis.total1b-vis.total2b)/vis.rownum)+10+ vis.boxWidth;
         x6 = vis.sideMargin;
         x8 = x1;
         y9 = y1;
 
-        vis.tool_tip7 = d3.tip()
-            .attr("class", "d3-tip")
-            .offset([10+(y5-y1)/2,0])
-            .html(vis.group1 + " spend approximately " + Math.round(vis.total2a - vis.total2b) + " more hours a year on "
-                + vis.activity2 + " than " + vis.group2);
+        center_x =(x2-x6)/2 +x6;
+        center_y = (y5-y1)/2 + y1;
 
-        vis.svg.call(vis.tool_tip7);
+        vis.wrapper = vis.rightrect.append("g")
+            .attr("class", 'wrapper5');
 
-        vis.rightrect.append("path")
+        vis.wrapper.append("path")
             .attr("class", "outline5")
-            .attr("fill", "transparent")
             .attr("d", "M" + x1 + " " + y1 + " H " + x2 + " V " + y3 + " H " + x4
                 + " V " + y5 + " H " + x6 + " V " + y7 + " H " + x8 + " V " + y9)
-            .on('mouseover', vis.tool_tip7.show)
-            .on('mouseout', vis.tool_tip7.hide);
+            .attr("fill","transparent");
 
+        vis.wrapper.append("rect")
+            .attr("class", "dv-tooltip-box")
+            .attr("x", center_x - bbox.width/2+50)
+            .attr("y", center_y - bbox.height/2-padding)
+            .attr("width", bbox.width-100)
+            .attr("height", bbox.height+2*padding);
 
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+5-padding)
+            .text(vis.group1 + " spend approximately " + Math.round((vis.total2a - vis.total2b)*vis.hours) + " more hours a year on "
+                + vis.activity2 + " than " + vis.group2);
     }
 
 
-}
+};
 
-DiffVis.prototype.calMove = function () {
+DiffVis.prototype.startAnimation = function(bool) {
     var vis = this;
 
-    var start = Date.now(); // remember start time
+    vis.arrowend = vis.totalwidth-vis.margin.right-vis.sideMargin-vis.legendstart;
+    vis.timetotal = 10000;
+    vis.init = false;
 
-    var timer = setInterval(function() {
-        // how much time passed from the start?
-        let timePassed = Date.now() - start;
-
-        if (timePassed >= vis.timetotal) {
-            clearInterval(timer); // finish the animation after 2 seconds
-            return;
-        }
-
-        // draw the animation at the moment timePassed
-        draw(timePassed);
-
-    }, 20);
-
-// as timePassed goes from 0 to 2000
-// left gets values from 0px to 400px
-    function draw(timePassed) {
-        train.style.left = timePassed / 5 + 'px';
+    if (bool) {
+        vis.leftrect.remove();
+        vis.rightrect.remove();
+        vis.drawVis();
     }
+    else {
+        vis.showSecond()
+    }
+
+    vis.calendararrow
+        .transition()
+        .ease(d3.easeLinear)
+        .attr("transform", "translate(" +vis.arrowend + ", 0)")
+        .duration(vis.timetotal);
+
 }
+//
+// DiffVis.prototype.calMove = function () {
+//     var vis = this;
+//
+//     var start = Date.now(); // remember start time
+//
+//     var timer = setInterval(function() {
+//         // how much time passed from the start?
+//         let timePassed = Date.now() - start;
+//
+//         if (timePassed >= vis.timetotal) {
+//             clearInterval(timer); // finish the animation after 2 seconds
+//             return;
+//         }
+//
+//         // draw the animation at the moment timePassed
+//         draw(timePassed);
+//
+//     }, 20);
+//
+// // as timePassed goes from 0 to 2000
+// // left gets values from 0px to 400px
+//     function draw(timePassed) {
+//         train.style.left = timePassed / 5 + 'px';
+//     }
+// }
 

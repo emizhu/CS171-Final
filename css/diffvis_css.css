@@ -1,0 +1,170 @@
+.df-p {
+    padding-top: 20px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    font-size: 13px;
+}
+
+.dv-axis-label {
+    text-anchor: middle;
+    font-size: 10px;
+    fill: black;
+}
+
+.dv-label {
+    text-anchor: middle;
+}
+
+
+.dv-d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 1px;
+}
+
+
+.wrapper1 .dv-tooltip-box,
+.wrapper2 .dv-tooltip-box,
+.wrapper3 .dv-tooltip-box,
+.wrapper4 .dv-tooltip-box,
+.wrapper5 .dv-tooltip-box{
+    fill:rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+
+
+.wrapper1:hover .dv-tooltip-box,
+.wrapper2:hover .dv-tooltip-box,
+.wrapper3:hover .dv-tooltip-box,
+.wrapper4:hover .dv-tooltip-box,
+.wrapper5:hover .dv-tooltip-box{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* IE can just show/hide with no transition */
+.lte8 .wrapper1 .dv-tooltip-box,
+.lte8 .wrapper2 .dv-tooltip-box,
+.lte8 .wrapper3 .dv-tooltip-box,
+.lte8 .wrapper4 .dv-tooltip-box,
+.lte8 .wrapper5 .dv-tooltip-box{
+    display: none;
+}
+
+.lte8 .wrapper1:hover .dv-tooltip-box,
+.lte8 .wrapper2:hover .dv-tooltip-box,
+.lte8 .wrapper3:hover .dv-tooltip-box,
+.lte8 .wrapper4:hover .dv-tooltip-box,
+.lte8 .wrapper5:hover .dv-tooltip-box{
+    display: block;
+}
+
+.wrapper1 .dv-tooltip-text,
+.wrapper2 .dv-tooltip-text,
+.wrapper3 .dv-tooltip-text,
+.wrapper4 .dv-tooltip-text,
+.wrapper5 .dv-tooltip-text{
+    fill:white;
+    font-size: 10px;
+    text-anchor: middle;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper1 .dv-tooltip-text:before,
+.wrapper2 .dv-tooltip-text:before,
+.wrapper3 .dv-tooltip-text:before,
+.wrapper4 .dv-tooltip-text:before{
+    content: " ";
+}
+
+/* CSS Triangles - see Trevor's post */
+.wrapper1 .dv-tooltip-text:after,
+.wrapper2 .dv-tooltip-text:after,
+.wrapper3 .dv-tooltip-text:after,
+.wrapper4 .dv-tooltip-text:after,
+.wrapper5 .dv-tooltip-text:after{
+    content: " ";
+    height: 0;
+    width: 0;
+}
+
+.wrapper1:hover .dv-tooltip-text,
+.wrapper2:hover .dv-tooltip-text,
+.wrapper3:hover .dv-tooltip-text,
+.wrapper4:hover .dv-tooltip-text,
+.wrapper5:hover .dv-tooltip-text{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* IE can just show/hide with no transition */
+.lte8 .wrapper1 .dv-tooltip-text,
+.lte8 .wrapper2 .dv-tooltip-text,
+.lte8 .wrapper3 .dv-tooltip-text,
+.lte8 .wrapper4 .dv-tooltip-text,
+.lte8 .wrapper5 .dv-tooltip-text{
+    display: none;
+}
+
+.lte8 .wrapper1:hover .dv-tooltip-text,
+.lte8 .wrapper2:hover .dv-tooltip-text,
+.lte8 .wrapper3:hover .dv-tooltip-text,
+.lte8 .wrapper4:hover .dv-tooltip-text,
+.lte8 .wrapper5:hover .dv-tooltip-text{
+    display: block;
+}
+
+.wrapper1:hover .outline1{
+    fill: rgba(79, 147, 203, 0.30);
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+
+.wrapper2:hover .outline2 {
+    fill: rgba(188, 188, 188, 0.30);
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+
+.wrapper3:hover .outline3 {
+    fill: rgba(255, 0, 0, 0.30);
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+}
+
+.wrapper4:hover .outline4 {
+    fill: rgba(188, 188, 223, 0.30);
+}
+
+.wrapper5:hover .outline5 {
+    fill: rgba(230, 188, 188, 0.30);
+}
+
+
+
