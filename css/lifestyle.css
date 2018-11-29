@@ -13,6 +13,10 @@ g.life-x-axis path{
 /*--------------------------------------------------*/
 
 
+.lifestyle-x-labels {
+    font-size: 20px;
+}
+
 
 .checkboxes {
     text-align: left;

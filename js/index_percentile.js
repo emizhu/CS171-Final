@@ -77,4 +77,4 @@ function percentile(p, list, fn) {
   return list[kIndex];
 }
 
-module.exports = percentile;
+// module.exports = percentile;
