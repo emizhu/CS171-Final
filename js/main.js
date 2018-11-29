@@ -1,6 +1,7 @@
 //create global arrays
 var dataAge = [];
 var dataLifestyle = [];
+var dataCat = [];
 var lifestyle;
 var stackedchart;
 
@@ -40,6 +41,7 @@ queue()
 
      //dataAge = data;
      dataLifestyle = data_lifestyle;
+     dataCat = dataCategory;
 
 //nest data by year
 
