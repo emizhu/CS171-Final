@@ -234,7 +234,6 @@ StackedChart.prototype.wrangleData = function(keyselected){
 
     vis.updateVis_filtered();
 }
-
 StackedChart.prototype.updateVis_filtered = function(){
 
     var vis = this;
@@ -282,7 +281,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("width", function (d, i) {
                 if (d[0] ===0){
                     return vis.x(d.data[keyselected]);
-            } else{
+                } else{
                     return 0;
                 }
             })
@@ -293,7 +292,7 @@ StackedChart.prototype.updateVis_filtered = function(){
     else{
         // Plot Stacked Bar Chart
 
-         vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
+        vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
             .enter().append("g")
             .attr("fill", function(d, index) {
                 console.log(1);
@@ -351,9 +350,8 @@ function getText(index, datacat, averagetime, facts) {
     }
     else {
         var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-                        + datacat[index] + ".</b></p><br>" + facts[index] ;
+            + datacat[index] + ".</b></p><br>" + facts[index] ;
 
         document.getElementById("facts").innerHTML = summary;
     }
 }
-
