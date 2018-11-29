@@ -1,7 +1,7 @@
 //#todo make tooltip color match circles
 //#todo make checkboxes match circles
-//#todo create better text for axis labels
 //#todo add more checkboxes
+//#todo percentiles
 
 LifeStyle = function(_parentElement, _data){
     this.parentElement = _parentElement;
@@ -26,20 +26,23 @@ LifeStyle.prototype.initVis = function() {
 
     //color range for comparisons
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
-
-    //these values must EXACTLY match the headers in vis.displayData
     vis.checkboxCategories = ["sex", "full_part_time"];
 
-    //time categories to be displayed
-    vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
-        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
     vis.lineNumber = vis.headers.length;
     vis.lineLength = 250;
     vis.circleradius = 7;
     vis.labelBuffer = 30;
     vis.innerAxis = 30;
     //----------------------------------------------------------
+
+    //create array with labels - can edit text in atussum_0317_two_digits_cat.csv
+    //DO NOT CHANGE ORDER OF ROWS/COLUMNS IN THE CSV - only text in column 2
+    var i = 0;
+    vis.labels = [];
+    for (i = 0; i < dataCat["columns"].length; i++) {
+        vis.labels.push(dataCat[0][dataCat["columns"][i]]);
+    };
+    vis.labels.splice(1, 0, "Sleep"); // at index position 1, remove 0 elements, then add "Sleep"
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -59,6 +62,12 @@ LifeStyle.prototype.initVis = function() {
     vis.displayData = vis.data.filter(function(d) {
         return d.year == "2017";
     });
+
+    //headers for filtering data
+    //these values must EXACTLY match the headers in vis.displayData
+    vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
+        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
+        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
 
     for (i = 0; i < vis.headers.length; i++) {
 
@@ -92,7 +101,7 @@ LifeStyle.prototype.initVis = function() {
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
             .attr("font-size", "10px")
-            .text(vis.headers[i])
+            .text(vis.labels[i])
             .attr("class","x-labels")
             .attr("class","x-axis")
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
