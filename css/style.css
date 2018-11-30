@@ -70,47 +70,6 @@ body {
 
 }
 
-
-/*lifestyle*/
-/*https://bl.ocks.org/d3noob/629790fc15cc1afba0253f29a4d246e7*/
-/*format x-axis on lifestyle chart*/
-g.x-axis line{
-    stroke: lightgray;
-}
-g.x-axis path{
-    stroke: lightgray;
-}
-
-/*http://bl.ocks.org/Caged/6476579*/
-.d3-tip {
-    line-height: 1;
-    font-weight: bold;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 1px;
-}
-
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-    box-sizing: border-box;
-    display: inline;
-    font-size: 8px;
-    width: 100%;
-    line-height: 1;
-    color: rgba(0, 0, 0, 0.8);
-    content: "\25BC";
-    position: absolute;
-    text-align: center;
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-    margin: -1px 0 0 0;
-    top: 100%;
-    left: 0;
-}
-
-.container {
-    padding:10px;
+#about_table {
+    text-align:left;
 }
