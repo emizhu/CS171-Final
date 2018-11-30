@@ -4,6 +4,7 @@ var colorindex;
 var colorindexDetail;
 var averagetime;
 var barHeight;
+var Y_pos = 58;
 
 StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
@@ -41,16 +42,16 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg_legend = d3.select("#legend").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height*0.4 + vis.margin.top + vis.margin.bottom + 10)
+        .attr("height", vis.height*0.4 + vis.margin.top + vis.margin.bottom - 20)
         .append("g")
-        .attr("transform", "translate(" + (vis.margin.left) + "," + 120+ ")");
+        .attr("transform", "translate(" + (vis.margin.left )  + "," + 120+ ")");
 
 
     vis.svg = d3.select("#stackedchart").append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height)
+        .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
+        .attr("height", vis.height*0.6)
         .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + (-vis.margin.top) + ")");
+        .attr("transform", "translate(" + (vis.margin.left  + vis.margin.right)  + "," +(-20)+ ")");
 
 
 //Create linear scales by using the D3 scale functions
@@ -59,7 +60,7 @@ StackedChart.prototype.initVis = function() {
 
     vis.x = d3.scaleLinear()
         .domain([0,vis.max])
-        .range([0, vis.width]);
+        .range([0, vis.width  ]);
 
     vis.y = d3.scaleBand()
         .rangeRound([-vis.onethirdheight + vis.padding , -50])
@@ -100,7 +101,7 @@ StackedChart.prototype.initVis = function() {
     vis.svg.append("text")
         .attr("class", "axis")
         .style("text-anchor", "middle")
-        .attr("x", -10).attr("y", 30)
+        .attr("x", -5).attr("y", 30)
         .text("Age");
 
     // X Axis
@@ -109,7 +110,7 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg.append("text")
         .attr("class", "axis")
-        .attr("x", vis.width -45).attr("y", vis.onethirdheight-vis.margin.bottom +5)
+        .attr("x", vis.width/2 ).attr("y", vis.onethirdheight-vis.margin.bottom +35)
         .text("Time (Min)");
 
     function customYAxis(g) {
@@ -348,7 +349,8 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
 
-    barHeight = (vis.onethirdheight / 6 - vis.margin.top -24);
+    barHeight = (vis.onethirdheight / 6 - vis.margin.top -18);
+
 
     if (keyselected.length === 3) {
 
@@ -358,7 +360,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .transition()
             .duration(500)
             .attr("y", function (d, i) { console.log(d[i]);
-                return 40 + i * (barHeight +  vis.padding)
+                return Y_pos + i * (barHeight +  vis.padding)
             })
             .attr("x", function (d) {
                 return vis.x(d[0]);
@@ -387,7 +389,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .data(function(d) { return d;})
             .enter().append("rect")
             .attr("class", "bars")
-            .attr("y", function(d, i) {   return  40+ i*(barHeight + vis.padding) })
+            .attr("y", function(d, i) {   return  Y_pos+ i*(barHeight + vis.padding) })
             .attr("x", function(d) {   return vis.x(d[0]); })
             .attr("width", function(d) {
                 return vis.x(d[1]) - vis.x(d[0]); })
@@ -442,7 +444,7 @@ StackedChart.prototype.updateVisDetails = function(){
         .data(function(d) { return d;})
         .enter().append("rect")
         .attr("class", "bars")
-        .attr("y", function(d, i) {   return  40 + i*(barHeight +  vis.padding) })
+        .attr("y", function(d, i) {   return  Y_pos + i*(barHeight +  vis.padding) })
         .attr("x", function(d) {   return vis.x(d[0]); })
         .attr("width", function(d) {
             return vis.x(d[1]) - vis.x(d[0]); })
