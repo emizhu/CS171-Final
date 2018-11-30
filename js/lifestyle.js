@@ -22,8 +22,9 @@ LifeStyle.prototype.initVis = function() {
     //----------------------------------------------------------
     // Margin object with properties for the four directions
     vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-    vis.width = 650- vis.margin.left -vis.margin.right,
-    vis.height = 650- vis.margin.top -vis.margin.bottom,
+    vis.columnwidth = $("#" + vis.parentElement).width();
+    vis.width = 500- vis.margin.left -vis.margin.right,
+    vis.height = 500- vis.margin.top -vis.margin.bottom,
     vis.padding = 10;
 
     //color range for comparisons
@@ -59,7 +60,8 @@ LifeStyle.prototype.initVis = function() {
 
 
     // SVG drawing area
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+    // vis.svg = d3.select("#" + vis.parentElement).append("svg")
+    vis.svg = d3.select("#lifestyle").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
@@ -144,11 +146,45 @@ LifeStyle.prototype.initVis = function() {
     };
 
 
+    //Create checkboxes
+    //----------------------------------------------------------
     //categories for filtering
     vis.checkboxCategories = ["sex", "full_part_time"];
 
-    //append checkbox
-    //$("#" + vis.parentElement).append('<input type="checkbox" name="myCheckbox" />');
+    for (i = 0; i < vis.checkboxCategories.length; i++) {
+
+        //group data by checkboxCategories (sex, etc)
+        vis["nested" + vis.checkboxCategories[i]] = d3.nest()
+            .key(function (d) {
+                return d[vis.checkboxCategories[i]];
+            })
+            .rollup(function (leaves) {
+                return leaves.length;
+            })
+            .entries(vis.displayData);
+    };
+
+    // $("#checktable1").append('<tr><td>my data</td><td>more data</td></tr>');
+    // $("#checktable1").append('<tr><td>my data</td><td>more data</td></tr>');
+    //
+    // //add checks to two rows
+    // for (k = 1; k <= 2; k++) {
+    //     // $("#" + vis.parentElement)
+    //     $("#allchecks" + k)
+    //         .append(
+    //             $(document.createElement('input')).attr({
+    //                 id:    'myCheckbox'+k,
+    //                 name:  'myCheckbox'+k,
+    //                 value: 'myValue'+k,
+    //                 type:  'checkbox'
+    //             })
+    //         )
+    //         .append(text,k);
+    // };
+
+
+    //----------------------------------------------------------
+
 
 
 
@@ -205,23 +241,10 @@ LifeStyle.prototype.filterData = function(){
     for (i = 0; i < vis.checkboxCategories.length; i++) {
 
         //group data by checkboxCategories (sex, etc)
-        vis["nested" + vis.checkboxCategories[i]] = d3.nest()
-            .key(function(d) { return d[vis.checkboxCategories[i]]; })
-            .rollup(function(leaves) { return leaves.length; })
-            .entries(vis.displayData);
-
-
-        // $("#" + vis.parentElement)
-        $("#checkboxes")
-            .append(
-                $(document.createElement('input')).attr({
-                    id:    'myCheckbox'
-                    ,name:  'myCheckbox'
-                    ,value: 'myValue'
-                    ,type:  'checkbox'
-                })
-            );
-
+        // vis["nested" + vis.checkboxCategories[i]] = d3.nest()
+        //     .key(function(d) { return d[vis.checkboxCategories[i]]; })
+        //     .rollup(function(leaves) { return leaves.length; })
+        //     .entries(vis.displayData);
 
 
         //create two filtered arrays

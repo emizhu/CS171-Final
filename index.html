@@ -129,32 +129,38 @@
 
 
     <div class="section">
-        <h2>Lifestyles: Compare how you spend your time with another</h2>
 
-        <p>
-            Are you a student? Employed? A parent?
-            Wondering how you spend your time compares to someone with a different lifestyle?<br>
-            <br>
-            Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>
-            <br>
-            The farther the circle is from the center, the more time that group spends on an activity.<br>
-            The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>
-            For example, an orange circle with a percentile of 90 for sleep means that on average,
-            respondents in the orange group spent more time on sleep than 90% of all respondents.<br>
-            <i>Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as though all have been checked.<i/>
-
-        <p>
-
-        <div class = "container">
+        <div class="container-fluid">
 
             <div class="row">
-                <div id="checkboxes"></div>
-            </div>
+
+                <div class="col-md-3" style="background: lightgray">
+
+                    <h2>Lifestyles: Compare how you spend your time with another</h2>
+
+                        Are you a student? Employed? A parent?
+                        Wondering how you spend your time compares to someone with a different lifestyle?<br>
+                        <br>
+                        Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>
+                        <br>
+                        The farther the circle is from the center, the more time that group spends on an activity.<br>
+                        The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>
+                        For example, an orange circle with a percentile of 90 for sleep means that on average,
+                        respondents in the orange group spent more time on sleep than 90% of all respondents.<br>
+                        Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as
+                            though all have been checked.
 
 
-            <div class="row">
+                </div>
+
+                <div class="col-md-7" id="lifestylecolumn">
+                    <!--<div id="legend" align="middle"></div>-->
+                    <div id ="lifestyle"></div>
+                </div>
+
 
                 <div class="col-md-2">
+
                     <div id="checkboxes0" class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="sex_checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
@@ -165,13 +171,7 @@
                         <input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>
                         <input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>
                     </div>
-                </div>
 
-                <div class="col-lg-7">
-                    <div id ="lifestyle"></div>
-                </div>
-
-                <div class="col-md-2">
                     <div id="checkboxes1"  class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
@@ -182,12 +182,79 @@
                         <input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>
                         <input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>
                     </div>
+
+                    <!--<div id="allchecks1"></div>-->
+                    <!--<div id="allchecks2"></div>-->
+                    <!--<table id="checktable1"></table>-->
                 </div>
+
+
+
+
+
+
             </div>
 
         </div>
-
     </div>
+
+        <!--<h2>Lifestyles: Compare how you spend your time with another</h2>-->
+
+        <!--<p>-->
+            <!--Are you a student? Employed? A parent?-->
+            <!--Wondering how you spend your time compares to someone with a different lifestyle?<br>-->
+            <!--<br>-->
+            <!--Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>-->
+            <!--<br>-->
+            <!--The farther the circle is from the center, the more time that group spends on an activity.<br>-->
+            <!--The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>-->
+            <!--For example, an orange circle with a percentile of 90 for sleep means that on average,-->
+            <!--respondents in the orange group spent more time on sleep than 90% of all respondents.<br>-->
+            <!--<i>Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as though all have been checked.<i/>-->
+
+        <!--<p>-->
+
+        <!--//<div class = "container"></div>-->
+
+
+
+
+
+            <!--<div class="row">-->
+
+                <!--<div class="col-md-2">-->
+                    <!--<div id="checkboxes0" class="checkboxes">-->
+                        <!--Sex<br>-->
+                        <!--<input type="checkbox" class="sex_checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>-->
+                        <!--<input type="checkbox" class="sex_checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>-->
+                        <!--<br>-->
+                        <!--Employed<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--&lt;!&ndash;<div class="col-lg-7">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div id ="lifestyle"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--<div class="col-md-2">-->
+                    <!--<div id="checkboxes1"  class="checkboxes">-->
+                        <!--Sex<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Female2" value="Female" checked onchange="onToggle()">Female<br>-->
+                        <!--<br>-->
+                        <!--Employed<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Full_time2" value="Full_time" checked onchange="onToggle()">Full Time<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>-->
+                        <!--<input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+
 
 
 
