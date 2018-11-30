@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/diffvis_css.css">
     <link rel="stylesheet" href="css/stackedChart.css">
     <link rel="stylesheet" href="css/lifestyle.css">
-    <link rel="stylesheet" href="css/demovis.css">
 
 
     <!--font-->
@@ -68,87 +67,60 @@
         </div>
     </div>
 
-    <!--<div class="section">-->
-
-        <!--<div class="col-md-12" align="middle">-->
-        <!--</div>-->
-
-    <!--</div>-->
+    <div class="section">
+        <div class="slide" id="slide1" data-anchor="slide1">
+            <h2>Losing Time: The Implications of Different Time Usage Among Groups</h2>
+            <p> On a day to day basis, we lose countless minutes on day-to-day tasks, from running errands to transportation
+                to answering emails. Over longer periods, these minutes add up to take on days, then weeks, then months of our time!
+                Different individuals spend their time very differently, but particular demographic groups tend to spend their
+                time differently. Scroll to explore what these differences look like over the span of a year and
+                why these differences arise.
+            <p>
+        </div>
+    </div>
 
     <div class="section" id="section1">
         <div class="slide" id="slide1" data-anchor="slide1">
-            <div class="intro">
-                <h2>Losing Time: The Implications of Different Time Usage Among Groups</h2>
-                <p> On a day to day basis, we lose countless minutes on day-to-day tasks, from running errands to transportation
-                    to answering emails. Over longer periods, these minutes add up to take on days, then weeks, then months of our time!
-                    Different individuals spend their time very differently, but particular demographic groups tend to spend their
-                    time differently. Scroll to explore what these differences look like over the span of a year and
-                    why these differences arise.
-                <p>
-            </div>
+
         </div>
 
         <div class="slide" id="slide2" data-anchor="slide2">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3" style="background: lightgray;">
-                        <h4>Gender & Domestic Labor</h4>
-                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]
-                            <br>
-                            There may be additional explanatory factors, such as employment or family status, that are associated with gender.
-                            We hold these constant by limiting our sample to only full-time currently employed individuals with a spouse
-                            and children present in their household.
-                        </div>
-                        <div class = "instructions">Play the animation to see how time use builds up over a year. Each square that appears
-                            represents one hour of that particular activity, as described in the legend to the left.
-                            <br>
-                            Hover over the saturated squares to see how much time is spent on average in a year on this activity.
-                            Hover over the lighter squares to see how much more time women spend on these tasks.</div>
-                    </div>
-                    <div class="col-md-9">
-                        <div id="gendervis"></div>
-                    </div>
-                </div>
+            <h4>Gender & Domestic Labor</h4>
+            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]
+            <br>
+            There may be additional explanatory factors, such as employment or family status, that are associated with gender.
+            We hold these constant by limiting our sample to only full-time currently employed individuals with a spouse
+                and children present in their household.
             </div>
+            <div class = "instructions">Play the animation to see how time use builds up over a year. Each square that appears
+                represents one hour of that particular activity, as described in the legend to the left.
+                <br>
+                Hover over the saturated squares to see how much time is spent on average in a year on this activity.
+                Hover over the lighter squares to see how much more time women spend on these tasks.</div>
+            <div id="gendervis"></div>
         </div>
 
         <div class="slide" id="slide3" data-anchor="slide3">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3" style="background: lightgray;">
-                        <h4>Location Type & Transportation</h4>
-                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
-                        <div class = "instructions">Play the animation to see how time spend on transportation for work builds up
-                            over a year.
-                            <br>Each square that appears represents one hour of that particular activity. Hover over the saturated squares to see how much time is spent on average over a
-                            year. Hover over the lighter squares to see how much more time those who live in a city spend compared
-                            to those who do not live in a city.</div>
-                    </div>
-                    <div class="col-md-9">
-                        <div id="transvis"></div>
-                    </div>
-                </div>
-            </div>
+            <h4>Location Type & Transportation</h4>
+            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
+            <div class = "instructions">Play the animation to see how time spend on transportation for work builds up
+                over a year.
+                <br>Each square that appears represents one hour of that particular activity. Hover over the saturated squares to see how much time is spent on average over a
+                year. Hover over the lighter squares to see how much more time those who live in a city spend compared
+                to those who do not live in a city.</div>
+            <div id="transvis"></div>
         </div>
 
         <div class="slide" id="slide3" data-anchor="slide3">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3" style="background: lightgray;">
-                        <h4>Labor Market Status & Leisure Time</h4>
-                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
-                        <div class = "instructions">Play the animation to see how leisure time builds up over a year.
-                            Each square that appears represents  <b>24 hours or one full day</b> of leisure.
-                            <br>
-                            Hover over the saturated squares to see how much time is spent on average in a year.
-                            Hover over the lighter squares to see how much more time those off the labor market spend on leisure than
-                            those who are currently employed</div>
-                    </div>
-                    <div class="col-md-9">
-                        <div id="labor"></div>
-                    </div>
-                </div>
-            </div>
+            <h4>Labor Market Status & Leisure Time</h4>
+            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
+            <div class = "instructions">Play the animation to see how leisure time builds up over a year.
+                Each square that appears represents  <b>24 hours or one full day</b> of leisure.
+                <br>
+                Hover over the saturated squares to see how much time is spent on average in a year.
+                Hover over the lighter squares to see how much more time those off the labor market spend on leisure than
+                those who are currently employed</div>
+            <div id="labor"></div>
         </div>
 
     </div>
@@ -161,9 +133,10 @@
             <div class="row">
 
                 <div class="col-md-3" style="background: lightgray">
+
                     <h2>Lifestyles: Compare how you spend your time with another</h2>
 
-                        Are you a student? Employed? A parent?
+                    <p> Are you a student? Employed? A parent?
                         Wondering how you spend your time compares to someone with a different lifestyle?<br>
                         <br>
                         Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>
@@ -173,7 +146,9 @@
                         For example, an orange circle with a percentile of 90 for sleep means that on average,
                         respondents in the orange group spent more time on sleep than 90% of all respondents.<br>
                         Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as
-                            though all have been checked.
+                        though all have been checked.</p>
+
+
                 </div>
 
                 <div class="col-md-7" id="lifestylecolumn">
@@ -193,8 +168,9 @@
                         <input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>
                         <input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>
                         <input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>
+                        <br><br>
                     </div>
-                    <br>
+
                     <div id="checkboxes1"  class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
@@ -205,7 +181,19 @@
                         <input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>
                         <input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>
                     </div>
+
                 </div>
+
+                <!--<div class="col-lg-7">-->
+                    <!--<div id ="lifestyle"></div>-->
+                <!--</div>-->
+
+
+                    <!--<div id="allchecks1"></div>-->
+                    <!--<div id="allchecks2"></div>-->
+                    <!--<table id="checktable1"></table>-->
+
+
 
 
             </div>
@@ -337,14 +325,6 @@
     </div>
 
     <div class="section">
-        <div id="demovis">
-            <!--<div id = "label">Hover over the nodes and links for more info!</div>-->
-            <canvas width='960' height='960' ></canvas>
-            <svg width='960' height='960' ></svg>
-        </div>
-    </div>
-
-    <div class="section">
         <h2>Reference</h2>
         American Time Use Data: https://www.bls.gov/tus/#data
     </div>
@@ -373,8 +353,6 @@
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>
     <script src="js/stackedchart.js"></script>
-    <script src="js/demovis.js"></script>
-    <!--<script src="js/demoVis.js"></script>-->
     <script src="js/demoVisSave.js"></script>
     <script src="js/lifestyle.js"></script>
 

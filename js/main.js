@@ -20,7 +20,7 @@ var stackedchart;
      navigationTooltips: ['01', '02', '03', '04', '05','06', '07', '08', '09'],
      showActiveTooltip: true,
      slidesNavigation: true,
-     sectionsColor: ['white', 'lightgray', 'white', 'white', 'white'],
+     sectionsColor: ['white', 'lightgray', 'white', 'lightgray', 'white'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
     });
 
