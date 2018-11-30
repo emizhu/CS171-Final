@@ -74,4 +74,19 @@
     {"source": 12, "target": 16, "value": 19},
     {"source": 12, "target": 17, "value": 23},
     {"source": 12, "target": 18, "value": 24}
-  ]}
+  ],
+"totals":{
+  "Female": 5581,
+  "Male": 4642,
+  "Employed":6521,
+  "Unemployed":3702,
+  "Not in Job Market":8081,
+  "White": 1503,
+  "Black":79,
+  "Native":442,
+  "AAPI": 118,
+  "Mixed": 118,
+  "Metro":8602
+
+}[5581, 4642, 6521,3702, 8081, 1503, 79, 442, 118, 8602, 1510, 111]
+}
