@@ -3,6 +3,7 @@ var keyselected2;
 var colorindex;
 var colorindexDetail;
 var averagetime;
+var barHeight;
 
 StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
@@ -26,11 +27,12 @@ StackedChart.prototype.initVis = function() {
     vis.active_link = "0"; //to control legend selections and hover
 
 // Margin object with properties for the four directions
-    vis.margin = {top: 40, right: 30, bottom: 20, left:40};
+    vis.margin = {top: 20, right: 20, bottom: 20, left:20};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 800- vis.margin.top -vis.margin.bottom,
-        vis.padding = 30;
+        vis.height = 800 - vis.margin.top -vis.margin.bottom,
+        vis.onethirdheight = vis.height*0.6 -vis.margin.top -vis.margin.bottom;
+        vis.padding = 24;
 
 // SVG drawing area
     vis.facts = d3.select(".facts").append("text")
@@ -38,17 +40,17 @@ StackedChart.prototype.initVis = function() {
         .attr("class", "facts");
 
     vis.svg_legend = d3.select("#legend").append("svg")
-        .attr("width", vis.width*0.6 + vis.margin.left + vis.margin.right)
-        .attr("height", vis.height/4 + vis.margin.top + vis.margin.bottom + 10)
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height*0.4 + vis.margin.top + vis.margin.bottom + 10)
         .append("g")
-        .attr("transform", "translate(" + (vis.margin.left +75) + "," + 50+ ")");
+        .attr("transform", "translate(" + (vis.margin.left) + "," + 120+ ")");
 
 
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+    vis.svg = d3.select("#stackedchart").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height)
         .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + 0+ ")");
+        .attr("transform", "translate(" + vis.margin.left + "," + (-vis.margin.top) + ")");
 
 
 //Create linear scales by using the D3 scale functions
@@ -57,10 +59,10 @@ StackedChart.prototype.initVis = function() {
 
     vis.x = d3.scaleLinear()
         .domain([0,vis.max])
-        .range([0, vis.width - vis.margin.right -vis.margin.left]);
+        .range([0, vis.width]);
 
     vis.y = d3.scaleBand()
-        .rangeRound([-vis.height, -50])
+        .rangeRound([-vis.onethirdheight + vis.padding , -50])
         .padding(0.1)
         .round(true);
 
@@ -86,12 +88,12 @@ StackedChart.prototype.initVis = function() {
     // Define X Axis
     vis.svg.append("g")
         .attr("class", "Xaxis")
-        .attr("transform", "translate(20," + (vis.height - vis.padding -20) +")");
+        .attr("transform", "translate(20," + (vis.onethirdheight - vis.padding -20) +")");
 
     // Define Y Axis
     vis.svg.append("g")
         .attr("class", "Yaxis")
-        .attr("transform", "translate(20," + (vis.height +15)+")")
+        .attr("transform", "translate(20," + (vis.onethirdheight +15)+")")
         .call(customYAxis);
 
     // Y Axis
@@ -107,7 +109,7 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg.append("text")
         .attr("class", "axis")
-        .attr("x", vis.width -45).attr("y", vis.height-vis.margin.bottom +5)
+        .attr("x", vis.width -45).attr("y", vis.onethirdheight-vis.margin.bottom +5)
         .text("Time (Min)");
 
     function customYAxis(g) {
@@ -334,7 +336,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
 // Update X Axis
     vis.svg.select(".Xaxis")
-        .attr("transform", "translate(20," + (vis.height -vis.margin.bottom -8) + ")")
+        .attr("transform", "translate(20," + (vis.onethirdheight -vis.margin.bottom -8) + ")")
         .transition()
         .call(customXAxis);
 
@@ -345,6 +347,9 @@ StackedChart.prototype.updateVis_filtered = function(){
         g.select(".domain").remove();
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
+
+    barHeight = (vis.onethirdheight / 6 - vis.margin.top -24);
+
     if (keyselected.length === 3) {
 
     // Plot Single Bar Chart
@@ -353,7 +358,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .transition()
             .duration(500)
             .attr("y", function (d, i) { console.log(d[i]);
-                return 40 + i * (vis.height / 6 - 10)
+                return 40 + i * (barHeight +  vis.padding)
             })
             .attr("x", function (d) {
                 return vis.x(d[0]);
@@ -366,7 +371,7 @@ StackedChart.prototype.updateVis_filtered = function(){
                     return 0;
                 }
             })
-            .attr("height", vis.height / 6 - vis.margin.top - 10)
+            .attr("height", barHeight)
             .attr("fill", vis.z(colorindex));
 
     }
@@ -382,11 +387,11 @@ StackedChart.prototype.updateVis_filtered = function(){
             .data(function(d) { return d;})
             .enter().append("rect")
             .attr("class", "bars")
-            .attr("y", function(d, i) {   return  40+ i*(vis.height/6 - 10) })
+            .attr("y", function(d, i) {   return  40+ i*(barHeight + vis.padding) })
             .attr("x", function(d) {   return vis.x(d[0]); })
             .attr("width", function(d) {
                 return vis.x(d[1]) - vis.x(d[0]); })
-            .attr("height", vis.height/6 - vis.margin.top -10)
+            .attr("height", barHeight)
             .attr("transform", "translate(20,0)")
             .on("mouseover", function(d,i) {
                 d3.select(this)
@@ -437,11 +442,11 @@ StackedChart.prototype.updateVisDetails = function(){
         .data(function(d) { return d;})
         .enter().append("rect")
         .attr("class", "bars")
-        .attr("y", function(d, i) {   return  40 + i*(vis.height/6 - 10) })
+        .attr("y", function(d, i) {   return  40 + i*(barHeight +  vis.padding) })
         .attr("x", function(d) {   return vis.x(d[0]); })
         .attr("width", function(d) {
             return vis.x(d[1]) - vis.x(d[0]); })
-        .attr("height", vis.height/6 - vis.margin.top -10)
+        .attr("height", barHeight)
         .attr("transform", "translate(20,0)")
 
 }
