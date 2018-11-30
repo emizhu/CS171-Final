@@ -4,9 +4,8 @@
 
 #stackedchart{
 
-    margin-left: 60px;
-    margin-right: 120px;
-    margin-bottom: 40px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .x-axis text {
@@ -15,7 +14,7 @@
 
 #hours{
     font-family: 'Roboto Slab', serif;
-    color: white;
+    color: #404040;
     font-weight: bolder;
     font-size: 200px;
     /*animation-duration: 1s;*/
@@ -23,17 +22,33 @@
     /*animation-iteration-count: infinite;*/
 }
 
+#hours:before
+{
+    position: absolute;
+    color: yellow;
+    font-weight: bolder;
+    font-size: 200px;
+    width: 0%;
+    overflow: hidden;
+    transition: .5s;
+
+    /*animation-duration: 1s;*/
+    /*animation-delay: 2s;*/
+    /*animation-iteration-count: infinite;*/
+}
+
+#hours:hover:before{
+
+    width: 100%;
+}
 .legend,
-.legend2,
 .Xaxis,
 .Yaxis,
-.tooltip,
 .axis {
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 10px;
     margin-bottom: 30px;
-    color: black;
 }
 
 .grid,

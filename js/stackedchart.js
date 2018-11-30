@@ -1,11 +1,10 @@
 var keyselected;
+var keyselected2;
 var colorindex;
+var colorindexDetail;
 var averagetime;
 var barHeight;
-var format = d3.format(".2f");
 var Y_pos = 58;
-var colorselected;
-var textColor;
 
 StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
@@ -18,9 +17,7 @@ StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.initVis();
 }
 
-//--------------------------------------------------------------------
-//                          initVis
-//--------------------------------------------------------------------
+
 StackedChart.prototype.initVis = function() {
     var vis = this;
 
@@ -28,38 +25,37 @@ StackedChart.prototype.initVis = function() {
 
     vis.filtered = vis.data;
     console.log(keyselected.length);
-    console.log(keyselected);
     vis.active_link = "0"; //to control legend selections and hover
 
-    // Margin object with properties for the four directions
-    vis.margin = {top: 20, right: 15, bottom: 20, left:15};
+// Margin object with properties for the four directions
+    vis.margin = {top: 20, right: 20, bottom: 20, left:20};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 700 - vis.margin.top -vis.margin.bottom,
+        vis.height = 800 - vis.margin.top -vis.margin.bottom,
         vis.onethirdheight = vis.height*0.6 -vis.margin.top -vis.margin.bottom;
         vis.padding = 24;
 
-    // SVG drawing area
+// SVG drawing area
     vis.facts = d3.select(".facts").append("text")
         .attr("x", 10).attr("y", 10)
         .attr("class", "facts");
 
     vis.svg_legend = d3.select("#legend").append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
-        .attr("height", vis.height*0.4 - vis.margin.top -10)
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height*0.4 + vis.margin.top + vis.margin.bottom - 20)
         .append("g")
-        .attr("transform", "translate(" + (-80 )  + "," + 120+ ")");
+        .attr("transform", "translate(" + (vis.margin.left )  + "," + 120+ ")");
 
 
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+    vis.svg = d3.select("#stackedchart").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
         .attr("height", vis.height*0.6)
         .append("g")
-        .attr("transform", "translate(" + (vis.margin.left  + vis.margin.right +10)  + "," +(-20)+ ")");
+        .attr("transform", "translate(" + (vis.margin.left  + vis.margin.right)  + "," +(-20)+ ")");
 
 
 //Create linear scales by using the D3 scale functions
-    // Extend X : 24hours *60 minutes = 1440 minutes
+// Extend X : 24hours *60 minutes = 1440 minutes
     vis.max = 1440;
 
     vis.x = d3.scaleLinear()
@@ -71,7 +67,7 @@ StackedChart.prototype.initVis = function() {
         .padding(0.1)
         .round(true);
 
-    //Create color scales for stacking chart
+//Create color scales for stacking chart
     vis.colors = d3.schemeCategory20;
     vis.colors = vis.colors.slice(0, 18);
 
@@ -82,8 +78,13 @@ StackedChart.prototype.initVis = function() {
         .range(vis.colors);
 
     //Create color scales for detailed stacking chart
+    // vis.colorsTwo = d3.schemeCategory20c;
+    //
     vis.q = d3.scaleLinear()
-        .domain([0, 8]);
+        .domain([1, 5]);
+        // .interpolate(d3.interpolateHcl);
+    //     .domain(vis.dataCat.columns)
+    //     .range(vis.colorsTwo);
 
     // Define X Axis
     vis.svg.append("g")
@@ -119,9 +120,6 @@ StackedChart.prototype.initVis = function() {
     }
 
 
-    vis.barsdetails = vis.svg.append("g")
-        .selectAll("g") ;
-
 // Define Legends
     vis.legend = vis.svg_legend.selectAll(".legend")
         .data(vis.dataCat.columns)
@@ -129,18 +127,11 @@ StackedChart.prototype.initVis = function() {
         .attr("class", "legend")
         .attr("transform", function(d, i) { return "translate("+ i*30+"," + 0 +")"; });
 
-    // var rect = 18;
-    // console.log(vis.width);
-    var rect = vis.width/60;
-    // console.log(rewidth)
-
+    var rect = 18;
 
     vis.dataCat2 = d3.values(vis.dataCat[0]);
     vis.dataAverage = d3.values(vis.dataCat[1]);
     vis.facts = d3.values(vis.dataCat[3]);
-    vis.intfacts = d3.values(vis.dataCat[4]);
-
-    console.log(vis.intfacts);
     // console.log(vis.facts);
     // console.log(vis.dataAverage);
     vis.legend.append("rect")
@@ -193,15 +184,11 @@ StackedChart.prototype.initVis = function() {
         });
 
     vis.legend.append("text")
-        .attr("class", "legend2")
-        .attr("transform", function(d) {
-            return "rotate(-45)" })
-        .attr("transform", function(d) {
-            return "rotate(-45)" })
-        .attr("x", 160).attr("y", 145)
+        .attr("x", 176).attr("y", rect*8)
         .style("text-anchor", "end")
-        // .attr("dx", "-.8em").attr("dy", ".15em")
-
+        .attr("dx", "-.8em").attr("dy", ".15em")
+        .attr("transform", function(d) {
+            return "rotate(-45)" })
         .text(function(d, i) { return vis.dataCat2[i]});
 
     vis.svg_legend.append("text")
@@ -222,30 +209,30 @@ StackedChart.prototype.initVis = function() {
     vis.tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-    //
-    // vis.tooltip.append("rect")
-    //     .attr("width", 30)
-    //     .attr("height", 20)
-    //     .attr("fill", "white")
-    //     .style("opacity", 1);
+
+    vis.tooltip.append("rect")
+        .attr("width", 30)
+        .attr("height", 20)
+        .attr("fill", "white")
+        .style("opacity", 0.5);
 
     vis.tooltip.append("text")
         .attr("x", 15)
-        // .attr("dy", "1.2em")
-        // .style("text-anchor", "middle")
-        // .attr("font-size", "12px")
+        .attr("dy", "1.2em")
+        .style("text-anchor", "middle")
+        .attr("font-size", "12px")
         .attr("font-weight", "bold");
 
     vis.bars = vis.svg.append("g")
         .selectAll("g") ;
 
+    vis.barsdetails = vis.svg.append("g")
+        .selectAll("g") ;
+
     vis.updateVis_filtered();
 }
 
-//--------------------------------------------------------------------
-//                          Wrangle Data
-//--------------------------------------------------------------------
-
+// noinspection JSAnnotator
 StackedChart.prototype.wrangleData = function(keyselected){
 
     var vis = this;
@@ -253,25 +240,11 @@ StackedChart.prototype.wrangleData = function(keyselected){
     var actTypes = vis.dataCat.columns;
     var actTypesDetail =vis.detail.columns;
 
-    vis.detailCategory = vis.detail[6];
 
-    var tempdata = vis.detail.slice(0, 6);;
 
-    tempdata.forEach(function (d) {
-        var i;
-        for (i = 0; i < (actTypesDetail.length) ; i++) {
-            var cat = actTypesDetail[i];
-            if (cat[0] == 't') {
-                d[cat] = +d[cat];
-            }
-        }
-    });
-
-    filtered2 = tempdata;
-
+    console.log(actTypesDetail);
     averagetime = actTypes.indexOf(keyselected,1) ;
     colorindex = actTypes.indexOf(keyselected,0) ;
-
 
     vis.filtered =[];
     vis.data.map(function(d){
@@ -284,22 +257,34 @@ StackedChart.prototype.wrangleData = function(keyselected){
     var filteredDetail =[];
     vis.keyselected2 = [];
 
+
+
     for (i=0; i<actTypesDetail.length; i++){
         var sub =  actTypesDetail[i].substring(0,3);
         if (keyselected == sub){
             vis.keyselected2.push(actTypesDetail[i])
         }
     }
+    console.log(vis.keyselected2);
 
-//define colors for detailed stack chart
-    colorselected = vis.z(colorindex);
-    var colorrange = [colorselected, 'white'];
+    var colorselected = vis.z(colorindex);
+    console.log(vis.z(colorindex));
+
+
+
+    // vis.colorsTwo = d3.schemeCategory20c;
+    //
+
+    var colorrange = [0, colorselected];
     vis.q
-        .range(colorrange)
-        .interpolate(d3.interpolateHcl);
+        .range(colorrange);
 
+    console.log(vis.q(1));
+    console.log(vis.q(2));
+    console.log(vis.q(3));
+    console.log(vis.q(4));
+    console.log(vis.q(5));
 
-//filter data based on the selected category
     vis.detail.map(function(d){
 
         filteredDetail.push({
@@ -309,34 +294,35 @@ StackedChart.prototype.wrangleData = function(keyselected){
                 [vis.keyselected2[2]] : d[vis.keyselected2[2]],
                 [vis.keyselected2[3]] : d[vis.keyselected2[3]],
                 [vis.keyselected2[4]] : d[vis.keyselected2[4]],
-                [vis.keyselected2[5]] : d[vis.keyselected2[5]],
-                [vis.keyselected2[5]] : d[vis.keyselected2[6]],
-                [vis.keyselected2[5]] : d[vis.keyselected2[7]]
+                [vis.keyselected2[5]] : d[vis.keyselected2[5]]
         })
     });
 
     vis.filtered2 = filteredDetail;
 
-    // console.log(vis.filtered2);
-    // console.log(vis.keyselected2);
-    // console.log(filteredDetail);
-    //
+    console.log(vis.filtered2);
+    console.log(vis.keyselected2);
+    console.log(filteredDetail);
+
+
     vis.updateVis_filtered();
     vis.updateVisDetails();
 } ;
 
 
-//--------------------------------------------------------------------
-//                       Update Vis.
-//--------------------------------------------------------------------
+
 
 
 StackedChart.prototype.updateVis_filtered = function(){
 
     var vis = this;
+    //
+    // console.log(vis.filtered);
+    // console.log(keyselected);
+
 
     vis.svg = d3.select("body").transition();
-    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts, vis.intfacts);
+    getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts);
     // Update domains
     vis.max = d3.max(vis.filtered.map(function(d){
         if (keyselected.length === 3){
@@ -355,6 +341,8 @@ StackedChart.prototype.updateVis_filtered = function(){
         .transition()
         .call(customXAxis);
 
+
+
     function customXAxis(g) {
         g.call(d3.axisBottom(vis.x).ticks(12).tickSize(-vis.width));
         g.select(".domain").remove();
@@ -367,26 +355,30 @@ StackedChart.prototype.updateVis_filtered = function(){
     if (keyselected.length === 3) {
 
     // Plot Single Bar Chart
+
         vis.svg.selectAll(".bars")
             .transition()
-            // .duration(10)
+            .duration(500)
             .attr("y", function (d, i) { console.log(d[i]);
                 return Y_pos + i * (barHeight +  vis.padding)
             })
             .attr("x", function (d) {
                 return vis.x(d[0]);
             })
-            .attr("width", 0)
 
+            .attr("width", function (d, i) {
+                if (d[0] ===0){
+                    return vis.x(d.data[keyselected]);
+                } else{
+                    return 0;
+                }
+            })
             .attr("height", barHeight)
-            .attr("fill", "white");
-            // .attr("fill", vis.z(colorindex));
+            .attr("fill", vis.z(colorindex));
 
     }
     else{
         // Plot Stacked Bar Chart
-        vis.barsdetails.selectAll(".bars")
-            .exit().remove();
 
         vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
             .enter().append("g")
@@ -412,7 +404,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
                 if (keyselected.length === 3){
                     console.log(d.data[keyselected]);
-                    vis.tooltip.html("<b>" + format(d.data[keyselected])+"</b>"+ " Minutes" )
+                    vis.tooltip.html(parseInt(d.data[keyselected]) + " Minutes")
                         .style("left", (d3.event.pageX + 3) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
 
@@ -420,23 +412,14 @@ StackedChart.prototype.updateVis_filtered = function(){
                     // document.getElementById("facts").innerHTML=summary;
                 }
                 else {
-                    // console.log(this);
-
-                    var ke = getKeyByValue(d.data, (d[1]-d[0]));
-
-                    var activityr = vis.dataCat2[keyselected.indexOf(ke,0)];
-                    // console.log(vis.dataCat2[activityr]);
-
-                    textColor = vis.z(keyselected.indexOf(ke,0));
-
-                    getText_Average (d.data.age, format((d[1] - d[0])), activityr);
-
-                    vis.tooltip.html("<b>" + format((d[1] - d[0]))+"</b>" + " Minutes " )
+                    console.log("min");
+                    vis.tooltip.html(parseInt((d[1] - d[0])) + " Minutes")
                         .style("left", (d3.event.pageX + 3) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
                 }
             })
             .on("mouseout", function(d) {
+
                 vis.tooltip.transition()
                     .duration(100)
                     .style("opacity", 0); });
@@ -445,42 +428,21 @@ StackedChart.prototype.updateVis_filtered = function(){
     }
 }
 
-//--------------------------------------------------------------------
-//               Update Vis Details Stacked Chart
-//--------------------------------------------------------------------
-
 StackedChart.prototype.updateVisDetails = function(){
 
     var vis = this;
+    console.log(colorindex);
 
-    vis.bars.selectAll(".bars")
-        .exit().remove();
-
+    console.log(colorindex);
     // Plot detailed Chart
     vis.barsdetails.data(d3.stack().keys(vis.keyselected2)(vis.filtered2))
         .enter().append("g")
-
         .attr("fill", function(d, index) {
-            // console.log(index);
-            return vis.q(index);})
-        .on("mouseover", function(d, index) {
-            d3.select(this)
-            vis.tooltip.transition()
-                .duration(100)
-                .style("opacity",1);
-            vis.tooltip.html("<b>"+ vis.detailCategory[d.key] +"</b>")
-                .style("left", (d3.event.pageX + 15) + "px")
-                .style("top", (d3.event.pageY + 15) + "px")
-        })
-        .on("mouseout", function(d) {
-                vis.tooltip.transition()
-                    .duration(100)
-                    .style("opacity", 0); })
-
+            console.log(1);
+            return vis.z(index);})
         .selectAll("rect")
         .data(function(d) { return d;})
         .enter().append("rect")
-
         .attr("class", "bars")
         .attr("y", function(d, i) {   return  Y_pos + i*(barHeight +  vis.padding) })
         .attr("x", function(d) {   return vis.x(d[0]); })
@@ -488,36 +450,24 @@ StackedChart.prototype.updateVisDetails = function(){
             return vis.x(d[1]) - vis.x(d[0]); })
         .attr("height", barHeight)
         .attr("transform", "translate(20,0)")
+
 }
 
-function getText(index, datacat, averagetime, facts, intfacts) {
 
-    console.log(colorselected);
+
+
+
+function getText(index, datacat, averagetime, facts) {
+
     if (index ==null){
 
         var summary= " <p> The average American spent ______  hours a day on ______</p>";
         document.getElementById("facts").innerHTML=summary;
     }
     else {
-        if (intfacts[index].length < 3){
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a style='color:" + String(colorselected) + "'>"
-                + datacat[index] + ".</a></strong><br><br>" +facts[index]+"<br><br><b></p>";
-        }
-        else{
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a  style='color:" + String(colorselected) + "'>"
-                +   datacat[index] + ".</a></strong> <br><br>" +facts[index]+"<br><br><b> Did you know ? <sup>3</sup></sum></b><br>" + intfacts[index] +"</p>";
-        }
+        var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
+            + datacat[index] + ".</b></p><br>" + "<p>"+facts[index]+"</p>" ;
+
         document.getElementById("facts").innerHTML = summary;
     }
 }
-
-function getText_Average (age, hours, activity){
-    var summary= " <p> The average American age group from " + age + " spent "+ "<b>" + hours + "</b>" +" hours a day on <strong><a  style='color:" + String(textColor) + "'>"
-            + activity + "</a></strong></p>";
-    document.getElementById("facts").innerHTML=summary;
-}
-
-function getKeyByValue (obj, value) {
-    return Object.keys(obj).find(key => format(obj[key]) === format(value));
-}
-
