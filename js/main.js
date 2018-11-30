@@ -29,6 +29,7 @@ queue()
     .defer(d3.csv,"data/atussum_0317_two_digits_cat.csv")
     //lifestyle data
     .defer(d3.csv,"data/individuals_by_category_0317_removespaces.csv")
+    .defer(d3.csv,"data/demo_2017_edit")
     .await(createVis);
 
 
@@ -76,6 +77,8 @@ queue()
 
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
+
+     var demoVis = new DemoVis("DemoVis", demo_2017_edit.csv)
 
  }
 
