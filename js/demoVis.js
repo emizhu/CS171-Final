@@ -7,7 +7,7 @@ const formatNumber = d3.format(',.0f');
 const format = d => `${formatNumber(d)} TWh`;
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
-const svg = d3.select("#demovis").append("svg")
+const svg = d3.select('#demovis svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
@@ -23,7 +23,6 @@ const path = sankey.link();
 const freqCounter = 1;
 
 d3.json('data/demo.json', (energy) => {
-    console.log(energy);
     sankey
         .nodes(energy.nodes)
         .links(energy.links)
@@ -122,7 +121,7 @@ d3.json('data/demo.json', (energy) => {
     }
 
     function particleEdgeCanvasPath(elapsed) {
-        const context = d3.select('canvas').node().getContext('2d');
+        const context = d3.select('#demovis canvas').node().getContext('2d');
 
         context.clearRect(0, 0, 1000, 1000);
 
