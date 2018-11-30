@@ -2,6 +2,8 @@
 //#todo make checkboxes match circles
 //#todo add more checkboxes
 //#todo percentiles
+//#todo align checkboxes
+//#todo show avg and percentiles in tooltip
 
 LifeStyle = function(_parentElement, _data){
     this.parentElement = _parentElement;
@@ -28,7 +30,6 @@ LifeStyle.prototype.initVis = function() {
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
     vis.checkboxCategories = ["sex", "full_part_time"];
 
-    vis.lineNumber = vis.headers.length;
     vis.lineLength = 250;
     vis.circleradius = 7;
     vis.labelBuffer = 30;
@@ -44,6 +45,17 @@ LifeStyle.prototype.initVis = function() {
     };
     vis.labels.splice(1, 0, "Sleep"); // at index position 1, remove 0 elements, then add "Sleep"
 
+
+    //headers for filtering data
+    //these values must EXACTLY match the headers in vis.displayData and should be in the same order as vis.labels
+    vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
+        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
+        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+
+
+
+
+
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -51,6 +63,7 @@ LifeStyle.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    vis.lineNumber = vis.headers.length;
     vis.angle = 360/vis.lineNumber;
     vis.angleRadian = vis.angle * Math.PI / 180;
     vis.outerArcLength = vis.lineLength * vis.angleRadian;
@@ -63,11 +76,6 @@ LifeStyle.prototype.initVis = function() {
         return d.year == "2017";
     });
 
-    //headers for filtering data
-    //these values must EXACTLY match the headers in vis.displayData
-    vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
-        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
 
     for (i = 0; i < vis.headers.length; i++) {
 
@@ -100,9 +108,9 @@ LifeStyle.prototype.initVis = function() {
             .attr("y", pointLabel.y)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
-            .attr("font-size", "10px")
+          //  .attr("font-size", "10px")
             .text(vis.labels[i])
-            .attr("class","x-labels")
+            .attr("class","lifestyle-x-labels")
             .attr("class","x-axis")
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
         //----------------------------------------------------------
@@ -112,29 +120,41 @@ LifeStyle.prototype.initVis = function() {
         //----------------------------------------------------------
         // create scales
         vis["x" + i] = d3.scaleLinear()
-            .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
+            // .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
+            .domain([.2,1.2])
             .range([vis.innerAxis,vis.lineLength]);
         vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
 
-        console.log("extent: " + d3.extent(vis.displayData, function(d){return d[vis.headers[i]];})  );
+        //console.log("extent: " + d3.extent(vis.displayData, function(d){return d[vis.headers[i]];})  );
 
         vis["svgx" + i]= vis.svg.append("g")
             .attr("class","axis")
             .attr("class","life-x-axis")
-            // .attr("transform",  "translate(" + (pointInner.x + vis.width/2) +
-            //     "," +  ( pointInner.y + vis.height/2) + ")" +
-            //     "rotate(" + vis.angle*i + ")" )
             .attr("transform", "translate(" + vis.width/2 + ","  + (vis.height/2)   + ") " + "rotate(" + vis.angle*i + ")" )
-            //.attr("transform", "rotate(" + vis.angle*i + ") " + "translate(" + vis.width/2 + ","  + (vis.height/2) + ")" )
-            // .attr("transform", "rotate(" + vis.angle*i + ") " + "translate(" + (pointInner.y + vis.innerAxis)+ ","  + pointInner.x + ")" )
             .call(vis["xAxis" + i].ticks(0));
         //----------------------------------------------------------
+
+
 
         $("#checkboxes0").css("color",vis.color[0]);
         $("#checkboxes1").css("color",vis.color[1]);
 
     };
 
+
+    //append checkbox
+    //$("#" + vis.parentElement).append('<input type="checkbox" name="myCheckbox" />');
+
+    // $("#" + vis.parentElement)
+    $("#" + vis.parentElement)
+        .append(
+            $(document.createElement('input')).attr({
+                id:    'myCheckbox'
+                ,name:  'myCheckbox'
+                ,value: 'myValue'
+                ,type:  'checkbox'
+            })
+        );
 
     //create tooltip
     //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
@@ -147,8 +167,8 @@ LifeStyle.prototype.initVis = function() {
         .html(function(d){
             d3.select(".d3-tip").style("background-color", d3.schemeCategory20[2]);
             // d3.select(".d3-tip").style("background", d3.schemeCategory20[2]);
-            //return value rounded to 1 decimal point
-            return ("Average time: " +Math.round( d * 10 ) / 10 + " min");
+            //return value rounded to 1 decimal point Math.round(d * 10)/10 );
+            return ("Percentile: " + Math.round(d * 100));
         });
 
     //convert categories to numeric
@@ -217,40 +237,36 @@ LifeStyle.prototype.filterData = function(){
                     vis[vis.checkboxCategories[i] + "values" +k].push($(str).val());
                 };
 
-            };
+                // $("." + vis.checkboxCategories[i] + "_checkbox").prop("checked", true);
 
-            // final filtered arrays
-            // vis["filtered" + k] = [];
-            // vis["filtered" + k] = vis.displayData.filter(function(value){
-            //     return vis["sexvalues" + k].includes(value.sex) && vis["full_part_timevalues" + k].includes(value.full_part_time);
-            // });
-            // console.log("sex values" + k + ": "+ vis["sexvalues" + k]);
-            // console.log("full_part_time values" + k + ": "+ vis["full_part_timevalues" + k]);
+            };
 
         };
 
     };
 
 
-    //final filtered arrays
-    vis.filtered1 = [];
-    vis.filtered1 = vis.displayData.filter(function(value){
-        return vis.sexvalues1.includes(value.sex) && vis.full_part_timevalues1.includes(value.full_part_time);
-    });
 
-    vis.filtered2 = [];
-    vis.filtered2 = vis.displayData.filter(function(value){
-        return vis.sexvalues2.includes(value.sex) && vis.full_part_timevalues2.includes(value.full_part_time);
-    });
+    // final filtered arrays
+    for (k = 1; k <= 2; k++) {
+
+        vis["filtered" + k] = [];
+        vis["filtered" + k] = vis.displayData.filter(function(value){
+            return (vis["sexvalues" + k].includes(value.sex) && vis["full_part_timevalues" + k].includes(value.full_part_time));
+        });
+        console.log("sex values" + k + ": "+ vis["sexvalues" + k]);
+        console.log("full_part_time values" + k + ": "+ vis["full_part_timevalues" + k]);
+
+    };
 
 
-    console.log("Filtered: " + vis.filtered1.length);
-    console.log("sex values1: " + vis.sexvalues1);
-    console.log("full_part_time values1: " + vis.full_part_timevalues1);
 
-    console.log("sex values2: " + vis.sexvalues2);
-    console.log("full_part_time values2: " + vis.full_part_timevalues2);
-
+    // console.log("Filtered: " + vis.filtered1.length);
+    // console.log("sex values1: " + vis.sexvalues1);
+    // console.log("full_part_time values1: " + vis.full_part_timevalues1);
+    //
+    // console.log("sex values2: " + vis.sexvalues2);
+    // console.log("full_part_time values2: " + vis.full_part_timevalues2);
 
 
     // create arrays with selected values
@@ -284,16 +300,26 @@ LifeStyle.prototype.filterData = function(){
 LifeStyle.prototype.calcData = function(){
 
     var vis = this;
+
     //function for calculating averages
     function calcAverages(array, number){
         var i, j;
         for (j = 0; j < vis.headers.length; j++) {
+
+            //calculate totals for averages
             vis[vis.headers[j] + "total" + number] = 0;
+
+            //create array for percentiles
+            vis[vis.headers[j] + "array" + number] =[];
+
             for (i = 0; i < array.length; i++) {
                 vis[vis.headers[j] + "total" + number] += array[i][vis.headers[j]];
+                vis[vis.headers[j] + "array" + number].push(array[i][vis.headers[j]]);
             };
-            //calculate average
+
+            //calculate averages and percentiles
             vis[vis.headers[j] + "avg" + number] = vis[vis.headers[j] + "total" + number]/ array.length;
+            vis[vis.headers[j] + "per" + number] = jStat.percentileOfScore(vis[vis.headers[j] + "array" + number], vis[vis.headers[j] + "avg" + number]);
 
         };
     }
@@ -309,7 +335,17 @@ LifeStyle.prototype.calcData = function(){
         vis[vis.headers[i] + "AvgArray"] = [];
         vis[vis.headers[i] + "AvgArray"].push(vis[vis.headers[i] + "avg0"]);
         vis[vis.headers[i] + "AvgArray"].push(vis[vis.headers[i] + "avg1"]);
+
+
+        vis[vis.headers[i] + "PerArray"] = [];
+        vis[vis.headers[i] + "PerArray"].push(vis[vis.headers[i] + "per0"]);
+        vis[vis.headers[i] + "PerArray"].push(vis[vis.headers[i] + "per1"]);
     };
+
+
+
+
+
 
     //draw circles and call tooltip
     vis.updateVis();
@@ -326,7 +362,8 @@ LifeStyle.prototype.updateVis = function(){
         //draw circles
         var circle = vis["svgx" + i]
             .selectAll("circle")
-            .data(vis[vis.headers[i] + "AvgArray"]);
+            // .data(vis[vis.headers[i] + "AvgArray"]);
+            .data(vis[vis.headers[i] + "PerArray"]);
         circle.enter()
             .append("circle")
             .merge(circle)
@@ -338,7 +375,8 @@ LifeStyle.prototype.updateVis = function(){
             .transition().duration(800)
             .attr("fill", function(d) {
                 //get data position in array
-                var value = vis[vis.headers[i] + "AvgArray"].indexOf(d);
+                var value = vis[vis.headers[i] + "PerArray"].indexOf(d);
+                // var value = vis[vis.headers[i] + "AvgArray"].indexOf(d);
                 return vis.color[value];
             })
             .attr("cx", function(d) { return vis["x" + i](d); })

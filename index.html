@@ -33,18 +33,27 @@
         </div>
     </div>
 
+
     <div class="section">
-        <div class="animated bounce" id="hours"> 689,328 </div>
-        <h3 style="color: black">Life expectancy for Americans is <b> 689,328 hours</b> (78.7 years). <br>
-            If the average night's sleep is eight hours, that's 26 years asleep, or 229,904 hours.<br>
-            <br><b>How would you like to spend your time?</b></h3>
+
+        <div class="animated bounce" id="hours"> 689,328</div>
+        The life expectancy for Americans is 78.7 years, or <b> 689,328 hours</b>.<br>
+
+        <h3 style="color: black"><br>How are Americans using their time? Well, it depends.</h3>
+
+        It depends on who you are - your age, for example, or maybe your employment status.<br>
+        Depending on who you are, you might spend your time on different activities than others.<br>
+        Let's visualize some of these differences and explore the nuances of time in America.
+
     </div>
 
 
     <div class="section">
 
-        <h2>How Do Other Americans Spend Their Time? </h2>
-        <p>Click a square color (Activity) to see each activity</p>
+        <h2>Age Affects How Americans Spend Their Time</h2>
+        <p>Click a square color(activity) to see each activity
+        <br>Hover over the bars for more details.
+        </p>
 
         <div class="row">
             <div class="col-md-6">
@@ -61,12 +70,12 @@
     </div>
 
 
-    <div class="section">
+    <!--<div class="section">-->
 
-        <div class="col-md-12" align="middle">
-        </div>
+        <!--<div class="col-md-12" align="middle">-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
     <div class="section" id="section1">
         <div class="slide" id="slide1" data-anchor="slide1">
@@ -124,8 +133,23 @@
 
 
     <div class="section">
+        <h2>Lifestyles: Compare how you spend your time with another</h2>
+
+        <p>
+            Are you a student? Employed? A parent?
+            Wondering how you spend your time compares to someone with a different lifestyle?<br>
+            <br>
+            Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>
+            <br>
+            The farther the circle is from the center, the more time that group spends on an activity.<br>
+            The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>
+            For example, an orange circle with a percentile of 90 for sleep means that on average,
+            respondents in the orange group spent more time on sleep than 90% of all respondents.<br>
+            <i>Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as though all have been checked.<i/>
+
+        <p>
+
         <div class = "container">
-            <h2>How does your lifestyle compare to someone else's?</h2>
 
 
             <div class="row">
@@ -133,8 +157,8 @@
                 <div class="col-md-2">
                     <div id="checkboxes0" class="checkboxes">
                         Sex<br>
-                        <input type="checkbox" class="checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
-                        <input type="checkbox" class="checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>
+                        <input type="checkbox" class="sex_checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
+                        <input type="checkbox" class="sex_checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>
                         <br>
                         Employed<br>
                         <input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>
@@ -171,19 +195,67 @@
 
     <div class="section">
         <div class="about">
-            <h2>About American Time Use Data</h2>
-            <p>The dataset measure how individuals divide their time between
-                different activities, including work, childcare, and leisure.
-                Each entry in the dataset corresponds to one individual, and captures their demographic
-         data and their exact time breakdown over a 24-hour period.</p>
+            <h2>About the American Time Use Survey (ATUS)</h2>
+
+            <br>
+
+            <div class="container" id="about_table">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>WHO</h3>
+                    </div>
+
+                    <div class="col-md-10">
+                        The American Time Use Survey is sponsored by the Bureau of Labor Statistics
+                        and conducted by the U.S. Census Bureau. The Census Bureau collects and processes the data.
+                        Households that have completed their final (8th) month of the Current Population Survey are eligible
+                        for the ATUS. From this eligible group, households are selected that represent a range of demographic
+                        characteristics. Then, one person age 15 or over is randomly chosen from the household to answer questions
+                        about his or her time use. This person is interviewed for the ATUS 2-5 months after the household's final
+                        CPS interview.<br><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>HOW</h3>
+                    </div>
+
+                    <div class="col-md-10">
+                        ATUS data are collected via telephone interviews. Census Bureau interviewers use Computer Assisted Telephone
+                        Interviewing, a system that automatically advances interviewers to the next question based on a respondent's
+                        answers to previous questions. Respondents receive an advance letter and pamphlet explaining the purpose of
+                        the ATUS and notifying them of the day they will be called. The main part of the ATUS interview is the 24-hour
+                        time diary. This part of the interview is used to collect a detailed account of the respondent's activities,
+                        starting at 4 a.m. the previous day and ending at 4 a.m. on the interview day. For each activity reported,
+                        the interviewer asks how long the activity lasted. For most activities, the interviewer also asks who was in
+                        the room or accompanied the respondent during the activity and where the activity took place.<br><br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>WHAT</h3>
+                    </div>
+
+                    <div class="col-md-10">
+                        The dataset measure how individuals divide their time between
+                        different activities, including work, childcare, and leisure.
+                        Each entry in the dataset corresponds to one individual, and captures their demographic
+                        data and their exact time breakdown over a 24-hour period.<br><br>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
         <div class = "largephoto">photo placeholder</div>
     </div>
 
     <div class="section">
-        <img src="img/fastpeople.jpg" alt="img/fastpeople2.jpg" style="width:100%; height: auto;">
         <h2>Reference</h2>
+        American Time Use Data: https://www.bls.gov/tus/#data
     </div>
 
 </div>
@@ -201,6 +273,9 @@
     <script src="js/d3-sankey.min.js"></script>
     <!--<script src="js/sankey.js"></script>-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.4.2/d3-sankey.js' charset='utf-8' type='text/javascript'></script>
+    <!--https://jstat.github.io/all.html#percentile-->
+    <script src="js/jstat.js"></script>
+    <script src="js/jstat.min.js"></script>
     <!--https://github.com/d4rkr00t/percentile-->
     <script src="js/percentile-master/lib/index_percentile.js"></script>
 
