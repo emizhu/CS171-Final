@@ -5,6 +5,7 @@ var dataCat = [];
 var lifestyle;
 var stackedchart;
 
+
  var textTypeInterval = 40;
  var basePause = 1000;
  var text_slide_01 ="Life expectancy for Americans is 689,328 hours (78.7 years). How would you like to spend your time?";
@@ -93,7 +94,7 @@ queue()
      stackedchart = new StackedChart("stackedchart", data, dataCategory, detail);
 
      //create visualization for different lifestyles
-     // lifestyle = new LifeStyle("lifestyle", data_lifestyle);
+     lifestyle = new LifeStyle("lifestyle", data_lifestyle);
 
      var demoVis = new DemoVis("DemoVis", demo_2017_edit.csv)
 
