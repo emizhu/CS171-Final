@@ -1,20 +1,20 @@
-.desc, .instructions {
-    margin-left: 100px;
-    margin-right:100px;
-    font-size:14px;
-}
+/*.desc, .instructions {*/
+    /*margin-left: 100px;*/
+    /*margin-right:100px;*/
+    /*font-size:14px;*/
+/*}*/
 
-.fp-bottom {
-    bottom:25px;
-}
+/*.fp-bottom {*/
+    /*bottom:25px;*/
+/*}*/
 
-.df-p {
-    padding-top: 20px;
-    padding-right: 100px;
-    padding-bottom: 20px;
-    padding-left: 100px;
-    font-size: 13px;
-}
+/*.df-p {*/
+    /*padding-top: 20px;*/
+    /*padding-right: 100px;*/
+    /*padding-bottom: 20px;*/
+    /*padding-left: 100px;*/
+    /*font-size: 13px;*/
+/*}*/
 
 .dv-axis-label {
     text-anchor: middle;

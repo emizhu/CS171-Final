@@ -88,42 +88,66 @@
         </div>
 
         <div class="slide" id="slide2" data-anchor="slide2">
-            <h4>Gender & Domestic Labor</h4>
-            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]
-            <br>
-            There may be additional explanatory factors, such as employment or family status, that are associated with gender.
-            We hold these constant by limiting our sample to only full-time currently employed individuals with a spouse
-                and children present in their household.
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3" style="background: lightgray;">
+                        <h4>Gender & Domestic Labor</h4>
+                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]
+                            <br>
+                            There may be additional explanatory factors, such as employment or family status, that are associated with gender.
+                            We hold these constant by limiting our sample to only full-time currently employed individuals with a spouse
+                            and children present in their household.
+                        </div>
+                        <div class = "instructions">Play the animation to see how time use builds up over a year. Each square that appears
+                            represents one hour of that particular activity, as described in the legend to the left.
+                            <br>
+                            Hover over the saturated squares to see how much time is spent on average in a year on this activity.
+                            Hover over the lighter squares to see how much more time women spend on these tasks.</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="gendervis"></div>
+                    </div>
+                </div>
             </div>
-            <div class = "instructions">Play the animation to see how time use builds up over a year. Each square that appears
-                represents one hour of that particular activity, as described in the legend to the left.
-                <br>
-                Hover over the saturated squares to see how much time is spent on average in a year on this activity.
-                Hover over the lighter squares to see how much more time women spend on these tasks.</div>
-            <div id="gendervis"></div>
         </div>
 
         <div class="slide" id="slide3" data-anchor="slide3">
-            <h4>Location Type & Transportation</h4>
-            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
-            <div class = "instructions">Play the animation to see how time spend on transportation for work builds up
-                over a year.
-                <br>Each square that appears represents one hour of that particular activity. Hover over the saturated squares to see how much time is spent on average over a
-                year. Hover over the lighter squares to see how much more time those who live in a city spend compared
-                to those who do not live in a city.</div>
-            <div id="transvis"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3" style="background: lightgray;">
+                        <h4>Location Type & Transportation</h4>
+                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
+                        <div class = "instructions">Play the animation to see how time spend on transportation for work builds up
+                            over a year.
+                            <br>Each square that appears represents one hour of that particular activity. Hover over the saturated squares to see how much time is spent on average over a
+                            year. Hover over the lighter squares to see how much more time those who live in a city spend compared
+                            to those who do not live in a city.</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="transvis"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="slide" id="slide3" data-anchor="slide3">
-            <h4>Labor Market Status & Leisure Time</h4>
-            <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
-            <div class = "instructions">Play the animation to see how leisure time builds up over a year.
-                Each square that appears represents  <b>24 hours or one full day</b> of leisure.
-                <br>
-                Hover over the saturated squares to see how much time is spent on average in a year.
-                Hover over the lighter squares to see how much more time those off the labor market spend on leisure than
-                those who are currently employed</div>
-            <div id="labor"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3" style="background: lightgray;">
+                        <h4>Labor Market Status & Leisure Time</h4>
+                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
+                        <div class = "instructions">Play the animation to see how leisure time builds up over a year.
+                            Each square that appears represents  <b>24 hours or one full day</b> of leisure.
+                            <br>
+                            Hover over the saturated squares to see how much time is spent on average in a year.
+                            Hover over the lighter squares to see how much more time those off the labor market spend on leisure than
+                            those who are currently employed</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="labor"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -358,6 +382,7 @@
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>
     <script src="js/stackedchart.js"></script>
+    <script src="js/demoVis.js"></script>
     <script src="js/demoVisSave.js"></script>
     <script src="js/lifestyle.js"></script>
 

@@ -88,7 +88,7 @@ queue()
      // Married, full-time employed, currently working women vs men with children in household
      //Childcare = 0301 + 0302 + 0303 codes
      var gendervis = new DiffVis("gendervis", 88.91, 59.72, 111.89, 51.12, "Women", "Men", "Childcare", "Housework");
-     var leisurevis = new DiffVis("transvis", 48.52, 36.54, null, null, "Metropolitan", "Non-Metropolitan", "Transportation for Work", null);
+     var transvis = new DiffVis("transvis", 48.52, 36.54, null, null, "Metropolitan", "Non-Metropolitan", "Transportation for Work", null);
      var leisurevis = new DiffVis("labor", 407.9, 230.9, null, null, "Off Labor Market", "Currently Employed", "Lesiure Time", null);
 
      stackedchart = new StackedChart("stackedchart", data, dataCategory, detail);
@@ -96,7 +96,7 @@ queue()
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
 
-     var demoVis = new DemoVis("demovis", data_demo);
+    // var demoVis = new DemoVis("demovis", data_demo);
 
  }
 
