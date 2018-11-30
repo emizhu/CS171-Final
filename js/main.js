@@ -96,12 +96,6 @@ queue()
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
 
-<<<<<<< HEAD
-     // var demoVis = new DemoVis("demovis", data_demo);
-=======
-    // var demoVis = new DemoVis("demovis", data_demo);
->>>>>>> b7b954cda88220cd168c11e009edf027ccad4e49
-
  }
 
 
