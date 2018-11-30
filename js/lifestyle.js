@@ -3,6 +3,7 @@
 //#todo add more checkboxes
 //#todo percentiles
 //#todo align checkboxes
+//#todo show avg and percentiles in tooltip
 
 LifeStyle = function(_parentElement, _data){
     this.parentElement = _parentElement;
@@ -50,6 +51,8 @@ LifeStyle.prototype.initVis = function() {
     vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
         "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
         "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+
+
 
 
 
@@ -131,11 +134,27 @@ LifeStyle.prototype.initVis = function() {
             .call(vis["xAxis" + i].ticks(0));
         //----------------------------------------------------------
 
+
+
         $("#checkboxes0").css("color",vis.color[0]);
         $("#checkboxes1").css("color",vis.color[1]);
 
     };
 
+
+    //append checkbox
+    //$("#" + vis.parentElement).append('<input type="checkbox" name="myCheckbox" />');
+
+    // $("#" + vis.parentElement)
+    $("#" + vis.parentElement)
+        .append(
+            $(document.createElement('input')).attr({
+                id:    'myCheckbox'
+                ,name:  'myCheckbox'
+                ,value: 'myValue'
+                ,type:  'checkbox'
+            })
+        );
 
     //create tooltip
     //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
@@ -217,6 +236,8 @@ LifeStyle.prototype.filterData = function(){
                     var str = "#" + vis["nested" + vis.checkboxCategories[i]][j].key +k;
                     vis[vis.checkboxCategories[i] + "values" +k].push($(str).val());
                 };
+
+                // $("." + vis.checkboxCategories[i] + "_checkbox").prop("checked", true);
 
             };
 
