@@ -27,8 +27,9 @@ StackedChart.prototype.initVis = function() {
 
 // Margin object with properties for the four directions
     vis.margin = {top: 40, right: 30, bottom: 20, left:40};
+
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 500- vis.margin.top -vis.margin.bottom,
+        vis.height = 800- vis.margin.top -vis.margin.bottom,
         vis.padding = 30;
 
 // SVG drawing area
