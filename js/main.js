@@ -32,11 +32,11 @@ queue()
     .defer(d3.csv,"data/atussum_0317_four_digits_by_age.csv")
     //lifestyle data
     .defer(d3.csv,"data/individuals_by_category_0317_removespaces.csv")
-    .defer(d3.csv,"data/demo_2017_edit")
+    .defer(d3.csv,"data/demo_2017_edit.csv")
     .await(createVis);
 
 
- function createVis(error, data, dataCategory, detail, data_lifestyle) {
+ function createVis(error, data, dataCategory, detail, data_lifestyle, data_demo) {
      if (error) {
          console.log(error);
      }
@@ -96,7 +96,7 @@ queue()
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
 
-     var demoVis = new DemoVis("DemoVis", demo_2017_edit.csv)
+     var demoVis = new DemoVis("Demo_Vis", demo_2017_edit.csv)
 
  }
 
