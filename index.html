@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/diffvis_css.css">
     <link rel="stylesheet" href="css/stackedChart.css">
     <link rel="stylesheet" href="css/lifestyle.css">
-    <link rel="stylesheet" href="css/demovis.css">
+
 
     <!--font-->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:500" rel="stylesheet">
@@ -172,7 +172,13 @@
                         <input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>
                         <input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>
                     </div>
+                </div>
 
+                <div class="col-lg-7">
+                    <div id ="lifestyle"></div>
+                </div>
+
+                <div class="col-md-2">
                     <div id="checkboxes1"  class="checkboxes">
                         Sex<br>
                         <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
@@ -323,19 +329,8 @@
     </div>
 
     <div class="section">
-        <div id="demovis"></div>
-    </div>
-
-    <div class="section">
-
-        <img src="img/fastpeople.jpg" alt="img/fastpeople2.jpg" style="width:100%; height: auto;">
-
-        <div id="reference">
-            <h2>Reference</h2>
-            <p style="color: white">American Time Use Data: https://www.bls.gov/tus/#data </p><br>
-        </div>
-
-
+        <h2>Reference</h2>
+        American Time Use Data: https://www.bls.gov/tus/#data
     </div>
 
 </div>
@@ -352,15 +347,12 @@
     <script src="js/d3-sankey.js"></script>
     <script src="js/d3-sankey.min.js"></script>
     <!--<script src="js/sankey.js"></script>-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.4.2/d3-sankey.js' charset='utf-8' type='text/javascript'></script>
     <!--https://jstat.github.io/all.html#percentile-->
     <script src="js/jstat.js"></script>
     <script src="js/jstat.min.js"></script>
     <!--https://github.com/d4rkr00t/percentile-->
     <script src="js/percentile-master/lib/index_percentile.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js' charset='utf-8' type='text/javascript'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.4.2/d3-sankey.js' charset='utf-8' type='text/javascript'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3-timer/1.0.5/d3-timer.js' charset='utf-8' type='text/javascript'></script>
-
 
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>
