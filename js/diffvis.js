@@ -46,7 +46,7 @@ DiffVis.prototype.initVis = function() {
     vis.margin = {top: 40, right: 140, bottom: 60, left: 140};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.height = 800 - vis.margin.top - vis.margin.bottom;
 
     vis.totalwidth = vis.width + vis.margin.left + vis.margin.right;
     vis.sideMargin = 25;
@@ -54,6 +54,7 @@ DiffVis.prototype.initVis = function() {
     vis.boxWidth = ((vis.width/2) - (vis.sideMargin) - (vis.rownum*vis.boxMargin))/vis.rownum;
 
     // SVG drawing area
+
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
@@ -67,8 +68,8 @@ DiffVis.prototype.initVis = function() {
     //     .attr("stroke", "black")
     //     .attr("d", "M 0 0 H " + (vis.width - 200));
 
-    vis.legend = vis.svg.append("g");
-    // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+    vis.legend = vis.svg.append("g")
+    .attr("transform", "translate(" + 0 + "," + (vis.margin.top+30) + ")");
 
 
     if (vis.activity2) {
@@ -94,6 +95,7 @@ DiffVis.prototype.initVis = function() {
             .attr("y",63);
 
         vis.legend.append("text")
+            .attr("class", "legend-text2")
             .attr("x", vis.margin.left + 25)
             .attr("y", 75)
             .attr("font-size", 12)
@@ -128,7 +130,8 @@ DiffVis.prototype.initVis = function() {
 
     vis.calendarline = vis.legend.append("path")
         .attr("d", "M" + vis.legendstart + " 60 " + "L " + (vis.totalwidth-vis.margin.right-vis.sideMargin) + " 60 ")
-        .attr("stroke", "black");
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "3,3");
 
     var months = [ "Jan", "Feb", "March", "Apr", "May", "June",
         "July", "Aug", "Sept", "Oct", "Nov", "Dec" ];
@@ -137,16 +140,15 @@ DiffVis.prototype.initVis = function() {
     for (var i = 0; i < 12; i++) {
         vis.legend.append("path")
             .attr("d", "M" + (vis.legendstart + i*vis.increment) + " 65 " + "L " + (vis.legendstart + i*vis.increment) + " 55 ")
+            .attr("class","path")
             .attr("stroke", "black");
 
         vis.legend.append("text")
             .attr("x", vis.legendstart + i*vis.increment)
             .attr("y", 80)
-            .attr("text-anchor", "middle")
-            .attr("font-size", 10)
+            .attr("class","pathText")
             .text(months[i]);
     }
-
 
     vis.calendararrow = vis.legend.append("path")
         .attr("d", "M" + (vis.legendstart-2) + " 70 " + " L " + (vis.legendstart + 14) + " 60 " + " L " + (vis.legendstart-2) + " 50")
@@ -154,11 +156,11 @@ DiffVis.prototype.initVis = function() {
 
     vis.left = vis.svg.append("g")
         .attr("class", "left-vis")
-        .attr("transform",  "translate(" + vis.margin.left + ",120)");
+        .attr("transform",  "translate(" + vis.margin.left + ",300)");
 
     vis.right = vis.svg.append("g")
         .attr("class", "right-vis")
-        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 120)");
+        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 300)");
 
     vis.left
         .append("text")
@@ -173,8 +175,8 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 24)
         .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)
         .attr("y2", 24)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "3,3");
 
     vis.left
         .append("line")
@@ -182,8 +184,7 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 20)
         .attr("x2", 0)
         .attr("y2", 28)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black") ;
 
     vis.left
         .append("line")
@@ -191,13 +192,12 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 20)
         .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)
         .attr("y2", 28)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black") ;
 
     vis.left
         .append("text")
         .attr("x", (vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)/2)
-        .attr("y", 22)
+        .attr("y", 18)
         .attr("class", "dv-axis-label")
         .text(vis.label);
 
@@ -214,8 +214,8 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 24)
         .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum + vis.sideMargin)
         .attr("y2", 24)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black")
+        .attr("stroke-dasharray", "3,3");
 
     vis.right
         .append("line")
@@ -223,8 +223,7 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 20)
         .attr("x2", vis.sideMargin)
         .attr("y2", 28)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black") ;
 
     vis.right
         .append("line")
@@ -232,13 +231,12 @@ DiffVis.prototype.initVis = function() {
         .attr("y1", 20)
         .attr("x2", vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum + vis.sideMargin)
         .attr("y2", 28)
-        .attr("stroke", "rgba(188, 188, 188)")
-        .attr("stroke-width", 1);
+        .attr("stroke", "black") ;
 
     vis.right
         .append("text")
         .attr("x", (vis.boxMargin*(vis.rownum-1) + vis.boxWidth*vis.rownum)/2 + vis.sideMargin)
-        .attr("y", 22)
+        .attr("y", 18)
         .attr("class", "dv-axis-label")
         .text(vis.label);
 
@@ -278,10 +276,10 @@ DiffVis.prototype.drawVis = function() {
     var vis = this;
 
     vis.leftrect=vis.left.append("g")
-        .attr("transform", "translate(0, 20)");
+        .attr("transform", "translate(0, 30)");
 
     vis.rightrect=vis.right.append("g")
-        .attr("transform", "translate(0, 20)");
+        .attr("transform", "translate(0, 30)");
 
     var array1a = Array(Math.round(vis.total1a)).fill(0);
     var array1b = Array(Math.round(vis.total1b)).fill(0);

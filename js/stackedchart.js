@@ -466,7 +466,7 @@ function getText(index, datacat, averagetime, facts) {
     }
     else {
         var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-            + datacat[index] + ".</b></p><br>" + facts[index] ;
+            + datacat[index] + ".</b></p><br>" + "<p>"+facts[index]+"</p>" ;
 
         document.getElementById("facts").innerHTML = summary;
     }

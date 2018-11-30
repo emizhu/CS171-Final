@@ -14,12 +14,16 @@ g.life-x-axis path{
 
 
 .lifestyle-x-labels {
-    font-size: 20px;
-}
+    text-anchor: middle;
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
 
+}
 
 .checkboxes {
     text-align: left;
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
 }
 
 /*.life-x-axis {*/
