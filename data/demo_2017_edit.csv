@@ -260,7 +260,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 31,1,1,1,1
 31,2,2,1,1
 51,1,1,1,1
-58,2,1,2,Unemployed - on layoff
+58,2,1,2,2
 15,2,1,1,3
 68,1,1,1,1
 25,1,1,2,1
@@ -1204,7 +1204,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 53,2,1,1,1
 16,1,1,1,1
 63,2,1,3,1
-36,2,1,1,Unemployed - on layoff
+36,2,1,1,2
 78,2,1,1,3
 44,2,1,1,3
 48,2,1,1,1
@@ -1820,7 +1820,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 15,1,1,2,3
 28,2,2,1,1
 39,1,1,1,3
-63,1,2,1,Unemployed - on layoff
+63,1,2,1,2
 15,1,1,1,1
 73,1,2,1,1
 37,1,2,1,2
@@ -2016,7 +2016,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 71,1,1,1,3
 62,1,1,1,1
 53,1,1,1,3
-28,2,1,1,Unemployed - on layoff
+28,2,1,1,2
 22,1,1,1,3
 54,2,1,2,1
 74,2,1,3,3
@@ -2219,7 +2219,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 33,2,1,1,1
 22,2,1,1,1
 68,2,1,2,3
-52,2,1,1,Unemployed - on layoff
+52,2,1,1,2
 46,2,7,1,1
 79,2,1,2,3
 27,1,4,1,1
@@ -2342,7 +2342,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 58,1,1,1,1
 61,1,1,1,1
 31,1,1,1,1
-53,2,1,2,Unemployed - on layoff
+53,2,1,2,2
 76,2,2,1,3
 85,2,1,1,3
 60,1,1,1,3
@@ -2615,7 +2615,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 23,1,1,2,1
 33,2,1,1,1
 66,1,1,1,3
-55,2,1,1,Unemployed - on layoff
+55,2,1,1,2
 61,2,1,1,1
 17,2,1,1,1
 75,1,1,1,3
@@ -2632,7 +2632,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 47,2,1,1,1
 17,2,1,1,1
 43,2,1,1,1
-41,2,2,1,Unemployed - on layoff
+41,2,2,1,2
 34,2,1,2,1
 35,1,1,1,1
 47,2,1,1,1
@@ -2948,7 +2948,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 62,1,2,1,3
 62,1,1,1,1
 18,2,1,1,1
-22,1,1,1,Unemployed - on layoff
+22,1,1,1,2
 29,1,1,1,1
 80,1,1,2,3
 71,2,1,1,3
@@ -3981,7 +3981,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 50,2,1,2,1
 49,2,1,1,1
 57,2,1,2,1
-38,1,2,1,Unemployed - on layoff
+38,1,2,1,2
 43,2,1,1,1
 30,2,1,2,1
 30,1,1,1,1
@@ -4629,7 +4629,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 48,1,1,1,1
 17,1,4,1,3
 38,2,1,1,1
-61,1,1,1,Unemployed - on layoff
+61,1,1,1,2
 79,1,4,1,3
 46,2,1,1,1
 35,2,1,1,1
@@ -4721,7 +4721,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 29,2,1,1,1
 85,1,1,1,3
 54,1,1,1,1
-18,2,1,1,Unemployed - on layoff
+18,2,1,1,2
 78,1,1,1,3
 49,1,1,1,1
 54,2,3,2,3
@@ -4754,7 +4754,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 68,1,1,1,3
 26,1,2,1,1
 41,1,1,2,1
-50,1,1,1,Unemployed - on layoff
+50,1,1,1,2
 44,1,1,1,1
 79,2,1,2,3
 65,2,1,1,3
@@ -4907,7 +4907,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 57,1,1,1,3
 50,2,1,1,3
 57,1,1,1,1
-38,1,3,1,Unemployed - on layoff
+38,1,3,1,2
 16,2,1,2,2
 70,2,1,1,3
 42,1,1,2,1
@@ -5115,7 +5115,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 43,1,1,1,1
 15,2,1,1,3
 80,1,1,2,3
-52,1,1,1,Unemployed - on layoff
+52,1,1,1,2
 17,1,1,2,2
 54,2,4,1,1
 30,1,2,1,3
@@ -5439,7 +5439,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 85,1,1,3,3
 35,2,1,1,1
 59,1,2,1,1
-47,1,1,1,Unemployed - on layoff
+47,1,1,1,2
 47,1,1,1,1
 38,2,1,1,1
 57,2,1,1,3
@@ -5459,7 +5459,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 47,1,1,1,1
 45,1,1,1,1
 85,2,6,1,3
-55,1,1,2,Unemployed - on layoff
+55,1,1,2,2
 42,1,2,1,1
 85,1,2,1,3
 58,2,3,1,1
@@ -5600,7 +5600,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 35,1,1,1,1
 80,1,1,1,3
 30,1,1,2,3
-37,1,1,2,Unemployed - on layoff
+37,1,1,2,2
 31,1,1,1,2
 55,1,1,1,1
 54,2,1,1,1
@@ -5636,7 +5636,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 54,1,1,1,1
 52,2,1,1,3
 85,1,2,1,3
-25,1,1,1,Unemployed - on layoff
+25,1,1,1,2
 38,2,2,1,1
 41,1,4,1,1
 76,1,1,2,3
@@ -5756,7 +5756,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 18,2,1,1,1
 30,2,1,1,1
 25,2,1,1,1
-36,1,1,1,Unemployed - on layoff
+36,1,1,1,2
 78,1,1,1,1
 54,1,1,1,1
 17,1,1,3,1
@@ -5857,7 +5857,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 37,2,1,2,3
 21,1,1,2,3
 32,2,1,1,1
-34,1,1,1,Unemployed - on layoff
+34,1,1,1,2
 80,1,1,1,3
 27,1,1,1,1
 80,1,1,1,3
@@ -5964,7 +5964,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 25,2,1,1,1
 68,2,1,1,3
 16,2,1,1,3
-46,1,3,1,Unemployed - on layoff
+46,1,3,1,2
 75,1,1,1,3
 26,2,2,1,3
 34,1,1,2,1
@@ -6116,7 +6116,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 85,1,1,2,3
 77,1,1,1,3
 25,1,1,1,1
-40,2,1,1,Unemployed - on layoff
+40,2,1,1,2
 71,2,2,1,1
 27,1,2,1,3
 30,2,1,1,1
@@ -6232,7 +6232,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 70,2,1,2,3
 66,1,1,1,3
 33,1,4,1,1
-24,1,2,1,Unemployed - on layoff
+24,1,2,1,2
 23,2,1,1,1
 79,2,1,1,3
 40,1,1,2,1
@@ -6608,7 +6608,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 78,2,1,1,1
 35,1,1,1,1
 35,1,1,1,3
-34,1,1,1,Unemployed - on layoff
+34,1,1,1,2
 40,1,2,1,1
 76,1,2,2,3
 15,2,1,1,1
@@ -6848,7 +6848,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 26,1,1,1,1
 18,1,1,2,1
 68,2,1,1,1
-63,2,1,2,Unemployed - on layoff
+63,2,1,2,2
 21,1,1,1,1
 68,1,2,1,1
 23,2,1,3,2
@@ -9370,7 +9370,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 66,1,1,1,1
 40,2,1,2,1
 72,1,2,1,3
-42,1,1,1,Unemployed - on layoff
+42,1,1,1,2
 72,2,1,1,1
 66,2,1,2,1
 67,2,1,2,1
@@ -9652,7 +9652,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 65,2,2,1,1
 57,1,1,1,1
 41,2,1,2,3
-25,2,1,1,Unemployed - on layoff
+25,2,1,1,2
 18,1,6,1,3
 71,1,1,1,3
 37,1,1,1,1
@@ -9814,7 +9814,7 @@ Age,Sex,Race,Metropolitan status,Labor force status
 64,2,1,1,1
 29,1,1,1,1
 54,1,1,1,3
-59,1,2,1,Unemployed - on layoff
+59,1,2,1,2
 25,1,6,1,3
 33,2,1,1,1
 36,2,1,1,1
