@@ -1,11 +1,14 @@
 var keyselected;
+var keyselected2;
 var colorindex;
+var colorindexDetail;
 var averagetime;
 
-StackedChart = function(_parentElement, _data, _dataCategory){
+StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
     this.data = _data;
     this.dataCat = _dataCategory;
+    this.detail =_detail;
 
     this.activityType= "t";
     this.filtered =this.data;
@@ -60,15 +63,24 @@ StackedChart.prototype.initVis = function() {
         .padding(0.1)
         .round(true);
 
-//Create color scales
+//Create color scales for stacking chart
     vis.colors = d3.schemeCategory20;
     vis.colors = vis.colors.slice(0, 18);
 
-    console.log(vis.data);
+    // console.log(vis.data);
     vis.y.domain(vis.data.map(function(d) { return d.age; }));
     vis.z = d3.scaleOrdinal()
         .domain(vis.dataCat.columns)
         .range(vis.colors);
+
+    //Create color scales for detailed stacking chart
+    // vis.colorsTwo = d3.schemeCategory20c;
+    //
+    vis.q = d3.scaleLinear()
+        .domain([1, 5]);
+        // .interpolate(d3.interpolateHcl);
+    //     .domain(vis.dataCat.columns)
+    //     .range(vis.colorsTwo);
 
     // Define X Axis
     vis.svg.append("g")
@@ -116,7 +128,7 @@ StackedChart.prototype.initVis = function() {
     vis.dataCat2 = d3.values(vis.dataCat[0]);
     vis.dataAverage = d3.values(vis.dataCat[1]);
     vis.facts = d3.values(vis.dataCat[3]);
-    console.log(vis.facts);
+    // console.log(vis.facts);
     // console.log(vis.dataAverage);
     vis.legend.append("rect")
         .attr("x", 210).attr("y", -40)
@@ -165,7 +177,6 @@ StackedChart.prototype.initVis = function() {
 
             vis.updateVis_filtered();
             colorindex = null;
-
         });
 
     vis.legend.append("text")
@@ -211,6 +222,9 @@ StackedChart.prototype.initVis = function() {
     vis.bars = vis.svg.append("g")
         .selectAll("g") ;
 
+    vis.barsdetails = vis.svg.append("g")
+        .selectAll("g") ;
+
     vis.updateVis_filtered();
 }
 
@@ -220,7 +234,11 @@ StackedChart.prototype.wrangleData = function(keyselected){
     var vis = this;
 
     var actTypes = vis.dataCat.columns;
+    var actTypesDetail =vis.detail.columns;
 
+
+
+    console.log(actTypesDetail);
     averagetime = actTypes.indexOf(keyselected,1) ;
     colorindex = actTypes.indexOf(keyselected,0) ;
 
@@ -232,8 +250,65 @@ StackedChart.prototype.wrangleData = function(keyselected){
         });
     });
 
+    var filteredDetail =[];
+    vis.keyselected2 = [];
+
+
+
+    for (i=0; i<actTypesDetail.length; i++){
+        var sub =  actTypesDetail[i].substring(0,3);
+        if (keyselected == sub){
+            vis.keyselected2.push(actTypesDetail[i])
+        }
+    }
+    console.log(vis.keyselected2);
+
+    var colorselected = vis.z(colorindex);
+    console.log(vis.z(colorindex));
+
+
+
+    // vis.colorsTwo = d3.schemeCategory20c;
+    //
+
+    var colorrange = [0, colorselected];
+    vis.q
+        .range(colorrange);
+
+    console.log(vis.q(1));
+    console.log(vis.q(2));
+    console.log(vis.q(3));
+    console.log(vis.q(4));
+    console.log(vis.q(5));
+
+    vis.detail.map(function(d){
+
+        filteredDetail.push({
+                "age": d.age,
+                [vis.keyselected2[0]] : d[vis.keyselected2[0]],
+                [vis.keyselected2[1]] : d[vis.keyselected2[1]],
+                [vis.keyselected2[2]] : d[vis.keyselected2[2]],
+                [vis.keyselected2[3]] : d[vis.keyselected2[3]],
+                [vis.keyselected2[4]] : d[vis.keyselected2[4]],
+                [vis.keyselected2[5]] : d[vis.keyselected2[5]]
+        })
+    });
+
+    vis.filtered2 = filteredDetail;
+
+    console.log(vis.filtered2);
+    console.log(vis.keyselected2);
+    console.log(filteredDetail);
+
+
     vis.updateVis_filtered();
-}
+    vis.updateVisDetails();
+} ;
+
+
+
+
+
 StackedChart.prototype.updateVis_filtered = function(){
 
     var vis = this;
@@ -262,22 +337,27 @@ StackedChart.prototype.updateVis_filtered = function(){
         .transition()
         .call(customXAxis);
 
+
+
     function customXAxis(g) {
         g.call(d3.axisBottom(vis.x).ticks(12).tickSize(-vis.width));
         g.select(".domain").remove();
         g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#777");
     }
     if (keyselected.length === 3) {
-// Plot Single Bar Chart
+
+    // Plot Single Bar Chart
+
         vis.svg.selectAll(".bars")
             .transition()
-
+            .duration(500)
             .attr("y", function (d, i) { console.log(d[i]);
                 return 40 + i * (vis.height / 6 - 10)
             })
             .attr("x", function (d) {
                 return vis.x(d[0]);
             })
+
             .attr("width", function (d, i) {
                 if (d[0] ===0){
                     return vis.x(d.data[keyselected]);
@@ -339,6 +419,34 @@ StackedChart.prototype.updateVis_filtered = function(){
         console.log("2");
     }
 }
+
+StackedChart.prototype.updateVisDetails = function(){
+
+    var vis = this;
+    console.log(colorindex);
+
+    console.log(colorindex);
+    // Plot detailed Chart
+    vis.barsdetails.data(d3.stack().keys(vis.keyselected2)(vis.filtered2))
+        .enter().append("g")
+        .attr("fill", function(d, index) {
+            console.log(1);
+            return vis.z(index);})
+        .selectAll("rect")
+        .data(function(d) { return d;})
+        .enter().append("rect")
+        .attr("class", "bars")
+        .attr("y", function(d, i) {   return  40 + i*(vis.height/6 - 10) })
+        .attr("x", function(d) {   return vis.x(d[0]); })
+        .attr("width", function(d) {
+            return vis.x(d[1]) - vis.x(d[0]); })
+        .attr("height", vis.height/6 - vis.margin.top -10)
+        .attr("transform", "translate(20,0)")
+
+}
+
+
+
 
 
 function getText(index, datacat, averagetime, facts) {
