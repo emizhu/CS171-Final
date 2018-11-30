@@ -28,9 +28,11 @@ LifeStyle.prototype.initVis = function() {
 
     //color range for comparisons
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
-    vis.checkboxCategories = ["sex", "full_part_time"];
 
-    vis.lineLength = 250;
+    //categories for filtering
+    // vis.checkboxCategories = ["sex", "full_part_time"];
+
+    vis.lineLength = 200;
     vis.circleradius = 7;
     vis.labelBuffer = 30;
     vis.innerAxis = 30;
@@ -142,19 +144,13 @@ LifeStyle.prototype.initVis = function() {
     };
 
 
+    //categories for filtering
+    vis.checkboxCategories = ["sex", "full_part_time"];
+
     //append checkbox
     //$("#" + vis.parentElement).append('<input type="checkbox" name="myCheckbox" />');
 
-    // $("#" + vis.parentElement)
-    $("#" + vis.parentElement)
-        .append(
-            $(document.createElement('input')).attr({
-                id:    'myCheckbox'
-                ,name:  'myCheckbox'
-                ,value: 'myValue'
-                ,type:  'checkbox'
-            })
-        );
+
 
     //create tooltip
     //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
@@ -213,6 +209,20 @@ LifeStyle.prototype.filterData = function(){
             .key(function(d) { return d[vis.checkboxCategories[i]]; })
             .rollup(function(leaves) { return leaves.length; })
             .entries(vis.displayData);
+
+
+        // $("#" + vis.parentElement)
+        $("#checkboxes")
+            .append(
+                $(document.createElement('input')).attr({
+                    id:    'myCheckbox'
+                    ,name:  'myCheckbox'
+                    ,value: 'myValue'
+                    ,type:  'checkbox'
+                })
+            );
+
+
 
         //create two filtered arrays
         for (k = 1; k <= 2; k++) {
