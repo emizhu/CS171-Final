@@ -23,8 +23,8 @@ LifeStyle.prototype.initVis = function() {
     // Margin object with properties for the four directions
     vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
     vis.columnwidth = $("#" + vis.parentElement).width();
-    vis.width = 500- vis.margin.left -vis.margin.right,
-    vis.height = 500- vis.margin.top -vis.margin.bottom,
+    vis.width = 750- vis.margin.left -vis.margin.right,
+    vis.height = 700- vis.margin.top -vis.margin.bottom,
     vis.padding = 10;
 
     //color range for comparisons
@@ -33,9 +33,9 @@ LifeStyle.prototype.initVis = function() {
     //categories for filtering
     // vis.checkboxCategories = ["sex", "full_part_time"];
 
-    vis.lineLength = 200;
+    vis.lineLength = 320;
     vis.circleradius = 7;
-    vis.labelBuffer = 30;
+    vis.labelBuffer = 25;
     vis.innerAxis = 30;
     //----------------------------------------------------------
 
@@ -48,12 +48,24 @@ LifeStyle.prototype.initVis = function() {
     };
     vis.labels.splice(1, 0, "Sleep"); // at index position 1, remove 0 elements, then add "Sleep"
 
+    // vis.labels =["Personal Care", "Sleep", "Household", "Help Household Members", "Help Non-Household Members",
+    //     "Work", "Education", "Consumer Purchases", "Prof/Personal Services", "Household Services", "Govt & Civic",
+    //     "Eat & Drink", "Leisure", "Sports", "Religious", "Volunteer", "Phone Calls", "Traveling",
+    //     "Miscellaneous"];
+
+    vis.labels =["Personal Care", "Sleep", "Household",
+        "Work", "Education", "Consumer Purchases",  "Household Services", "Govt & Civic",
+        "Eat & Drink", "Leisure", "Sports", "Religious", "Volunteer", "Phone Calls", "Traveling"];
 
     //headers for filtering data
     //these values must EXACTLY match the headers in vis.displayData and should be in the same order as vis.labels
-    vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
-        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+    // vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
+    //     "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
+    //     "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+
+    vis.headers = ["personal_care", 	"sleep",	"household", 	"work",	"education",
+        "consumer_purchases",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
+        "religious",	"volunteer",	"phone",	"traveling"];
 
 
 
@@ -99,25 +111,39 @@ LifeStyle.prototype.initVis = function() {
             .style("fill", "none")
             .attr('stroke-linejoin', 'round')
             .attr("class","arc")
+            .attr("id","arc" + i)
             .attr("d", outerArc())
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
 
-        //get position of arc
-        //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
-        var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
-
-        //append text labels
-        var text = vis.svg.append("text")
-            .attr("x", pointLabel.x)
-            .attr("y", pointLabel.y)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "central")
-          //  .attr("font-size", "10px")
+        // https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
+        //Append the month names to each slice
+        vis.svg
+            .append("text")
+            .append("textPath")
+            .attr("class", "activityText")
+            //.style("text-anchor","middle") //place the text halfway on the arc
+            .attr("startOffset", "50%")
+            .attr("xlink:href","#arc" + i)
             .text(vis.labels[i])
-            .attr("class","lifestyle-x-labels")
-            .attr("class","x-axis")
-            .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")");
-        //----------------------------------------------------------
+            .attr("font-size", "12px");
+
+
+        // //get position of arc
+        // //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
+        // var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
+        //
+        // //append text labels
+        // var text = vis.svg.append("text")
+        //     .attr("x", pointLabel.x)
+        //     .attr("y", pointLabel.y)
+        //     .attr("text-anchor", "left")
+        //     .attr("dominant-baseline", "central")
+        //     .attr("font-size", "12px")
+        //     .text(vis.labels[i])
+        //     .attr("class","lifestyle-x-labels")
+        //     .attr("class","x-axis")
+        //     .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")" );
+        // ----------------------------------------------------------
 
 
         //Create axes
