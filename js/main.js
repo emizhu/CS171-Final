@@ -32,7 +32,7 @@ queue()
     .defer(d3.csv,"data/atussum_0317_four_digits_by_age.csv")
     //lifestyle data
     .defer(d3.csv,"data/individuals_by_category_0317_removespaces.csv")
-    .defer(d3.csv,"data/demo_2017_edit")
+    .defer(d3.csv,"data/demo_2017_edit.csv")
     .await(createVis);
 
 
