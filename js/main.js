@@ -36,7 +36,7 @@ queue()
     .await(createVis);
 
 
- function createVis(error, data, dataCategory, detail, data_lifestyle) {
+ function createVis(error, data, dataCategory, detail, data_lifestyle, data_demo) {
      if (error) {
          console.log(error);
      }
@@ -96,7 +96,7 @@ queue()
      //create visualization for different lifestyles
      lifestyle = new LifeStyle("lifestyle", data_lifestyle);
 
-     var demoVis = new DemoVis("DemoVis", demo_2017_edit.csv)
+     var demoVis = new DemoVis("DemoVis", data_demo);
 
  }
 
