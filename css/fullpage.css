@@ -54,33 +54,35 @@ html.fp-enabled,
     position: relative;
 }
 .fp-controlArrow {
-    visibility: hidden;
+    /*visibility: hidden;*/
     -webkit-user-select: none; /* webkit (safari, chrome) browsers */
     -moz-user-select: none; /* mozilla browsers */
     -khtml-user-select: none; /* webkit (konqueror) browsers */
     -ms-user-select: none; /* IE10+ */
     position: absolute;
     z-index: 4;
-    top: 50%;
+    top: 45%;
     cursor: pointer;
-    width: 0;
-    height: 0;
+
     border-style: solid;
     margin-top: -38px;
+    margin-right: 40px;
+    width: 0.01%;
+    height: 0.01%;
     -webkit-transform: translate3d(0,0,0);
     -ms-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
 }
 .fp-controlArrow.fp-prev {
-    left: 46px;
+    left: 440px;
     width: 0;
-    border-width: 38.5px 34px 38.5px 0;
-    border-color: transparent #000 transparent transparent;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent darkslategray transparent transparent;
 }
 .fp-controlArrow.fp-next {
-    right: 46px;
-    border-width: 38.5px 0 38.5px 34px;
-    border-color: transparent transparent transparent #000;
+    right: 20px;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent transparent transparent darkslategray;
 }
 .fp-scrollable {
     overflow: hidden;
@@ -105,7 +107,7 @@ html.fp-enabled,
     -webkit-transform: translate3d(0,0,0);
 }
 #fp-nav.fp-right {
-    right: 17px;
+    right: 5px;
 }
 #fp-nav.fp-left {
     left: 5px;
@@ -122,10 +124,10 @@ html.fp-enabled,
     margin: 0 auto !important;
 }
 .fp-slidesNav.fp-bottom {
-    bottom: 17px;
+    bottom: 5px;
 }
 .fp-slidesNav.fp-top {
-    top: 17px;
+    top: 5px;
 }
 #fp-nav ul,
 .fp-slidesNav ul {

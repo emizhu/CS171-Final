@@ -55,13 +55,13 @@ LifeStyle.prototype.initVis = function() {
 
     //headers for filtering data
     //these values must EXACTLY match the headers in vis.displayData and should be in the same order as vis.labels
-    // vis.headers = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
-    //     "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-    //     "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+    // vis.headers = ["personal_care",     "sleep",   "household",   "helping_HH_members",  "helping_nonHH_members",   "work",    "education",
+    //     "consumer_purchases",   "professional_personal_services",  "HH_services", "govt_civic",  "eat_drink",   "leisure", "sports",
+    //     "religious",    "volunteer",   "phone",   "traveling",   "misc"];
 
-    vis.headers = ["personal_care", 	"sleep",	"household", 	"work",	"education",
-        "consumer_purchases",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-        "religious",	"volunteer",	"phone",	"traveling"];
+    vis.headers = ["personal_care",    "sleep",   "household",   "work",    "education",
+        "consumer_purchases",  "HH_services", "govt_civic",  "eat_drink",   "leisure", "sports",
+        "religious",   "volunteer",   "phone",   "traveling"];
 
 
 
@@ -145,7 +145,7 @@ LifeStyle.prototype.initVis = function() {
         //----------------------------------------------------------
         // create scales
         vis["x" + i] = d3.scaleLinear()
-            // .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
+        // .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
             .domain([.2,1.1])
             .range([vis.innerAxis,vis.lineLength]);
         vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
@@ -202,9 +202,9 @@ LifeStyle.prototype.wrangleData = function() {
     var vis = this;
 
     //convert categories to numeric
-    vis.numericheaders = ["personal_care", 	"sleep",	"household",	"helping_HH_members",	"helping_nonHH_members",	"work",	"education",
-        "consumer_purchases",	"professional_personal_services",	"HH_services",	"govt_civic",	"eat_drink",	"leisure",	"sports",
-        "religious",	"volunteer",	"phone",	"traveling",	"misc"];
+    vis.numericheaders = ["personal_care",     "sleep",   "household",   "helping_HH_members",  "helping_nonHH_members",   "work",    "education",
+        "consumer_purchases",  "professional_personal_services",  "HH_services", "govt_civic",  "eat_drink",   "leisure", "sports",
+        "religious",   "volunteer",   "phone",   "traveling",   "misc"];
     var i;
     for (i = 0; i < vis.numericheaders.length; i++) {
         vis.displayData.forEach(function(d){
@@ -424,7 +424,7 @@ LifeStyle.prototype.updateVis = function(){
     //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
     //http://bl.ocks.org/Caged/6476579
 
-     var tip = d3.tip()
+    var tip = d3.tip()
         .attr("class","d3-tip")
         .offset([-20,0])
         .html(function(d){
@@ -465,7 +465,4 @@ LifeStyle.prototype.updateVis = function(){
 
 
 }
-
-
-
 

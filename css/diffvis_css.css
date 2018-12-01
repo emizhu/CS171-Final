@@ -1,7 +1,7 @@
 .desc, .instructions {
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
     text-align: left;
-    font-size: 16px;
+    font-size: 12px;
     padding-top:10px;
     padding-right: 30px;
     padding-bottom: 10px;
@@ -11,7 +11,7 @@
 .fp-bottom {
     text-anchor: middle;
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 10px;
     margin-bottom: 30px;
 }
@@ -28,7 +28,7 @@
 .legend-text2{
     text-anchor: start;
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 10px;
     margin-bottom: 30px;
 }
@@ -45,7 +45,7 @@
 .dv-axis-label {
     text-anchor: middle;
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 10px;
     margin-bottom: 30px;
 }
