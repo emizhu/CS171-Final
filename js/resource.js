@@ -9,3 +9,5 @@ var ATUS_Lexicon = [ "American Time Use Survey Activity Lexicon",
 var ATUS_Average =[ "Average Time" ,src = "https://www.bls.gov/news.release/atus.t01.htm"];
 
     var Cover_Image =["Cover" , src ="https://www.happeninglondon.co.uk/2017/08/the-natural-history-museum-in-gifs.html"];
+
+    var facttravel =["travel", src ="https://www.telegraph.co.uk/travel/destinations/north-america/united-states/articles/what-american-tourists-are-really-like/"]

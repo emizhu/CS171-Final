@@ -20,7 +20,7 @@ var stackedchart;
      navigationTooltips: ['01', '02', '03', '04', '05','06', '07', '08', '09'],
      showActiveTooltip: true,
      slidesNavigation: true,
-     sectionsColor: ['white', 'lightgray', 'white', 'lightgray', 'white'],
+     sectionsColor: ['white', '#404040', 'white', '#404040', 'white', 'white', '#404040'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
     });
 
@@ -46,22 +46,26 @@ queue()
      dataCat = dataCategory;
      dataDetail = detail;
 
-//nest data by year
-
+// //nest data by year
+//
+     console.log(data);
      var keys = dataCategory.columns;
-     var keyDetail = detail.columns;
-     var displayData = d3.nest()
-         .key(function (d) {
-             return d.tuyear;
-         })
-         .entries(data);
 
-//store 2017 only
-     var data2017 = d3.values(displayData[14]);
-     data2017 = data2017[1];
+
+     // var detailCategory = dataDetail[6];
+
+//      var displayData = d3.nest()
+//          .key(function (d) {
+//              return d.tuyear;
+//          })
+//          .entries(data);
+//
+// //store 2017 only
+//      var data2017 = d3.values(displayData[14]);
+//      data2017 = data2017[1];
 
 // filter data
-     data2017.forEach(function (d) {
+     data.forEach(function (d) {
          //convert string to number
          var i;
          for (i = 0; i < keys.length; i++) {
@@ -71,18 +75,18 @@ queue()
              }
          }
      });
-     data = data2017;
+
 
  // filter data
-     dataDetail.forEach(function (d) {
-         var i;
-         for (i = 0; i < keyDetail.length; i++) {
-             var cat = keyDetail[i];
-             if (cat[0] == 't') {
-                 d[cat] = +d[cat];
-             }
-         }
-     });
+ //     dataDetail.forEach(function (d) {
+ //         var i;
+ //         for (i = 0; i < (keyDetail.length) ; i++) {
+ //             var cat = keyDetail[i];
+ //             if (cat[0] == 't') {
+ //                 d[cat] = +d[cat];
+ //             }
+ //         }
+ //     });
 
 
      // Married, full-time employed, currently working women vs men with children in household

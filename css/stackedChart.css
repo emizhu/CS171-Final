@@ -14,7 +14,7 @@
 
 #hours{
     font-family: 'Roboto Slab', serif;
-    color: #404040;
+    color: white;
     font-weight: bolder;
     font-size: 200px;
     /*animation-duration: 1s;*/
@@ -22,26 +22,8 @@
     /*animation-iteration-count: infinite;*/
 }
 
-#hours:before
-{
-    position: absolute;
-    color: yellow;
-    font-weight: bolder;
-    font-size: 200px;
-    width: 0%;
-    overflow: hidden;
-    transition: .5s;
-
-    /*animation-duration: 1s;*/
-    /*animation-delay: 2s;*/
-    /*animation-iteration-count: infinite;*/
-}
-
-#hours:hover:before{
-
-    width: 100%;
-}
 .legend,
+.legend2,
 .Xaxis,
 .Yaxis,
 .axis {
