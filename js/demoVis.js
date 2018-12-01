@@ -4,10 +4,10 @@ const margin = { top: 1, right: 1, bottom: 6, left: 1 };
 const width = 960 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 const formatNumber = d3.format(',.0f');
-const format = d => `${formatNumber(d)} TWh`;
+const format = d => `${formatNumber(d)} Respondents`;
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
-const svg = d3.select("#demovis").append("svg")
+const svg = d3.select('#demovis svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
@@ -22,15 +22,14 @@ const path = sankey.link();
 
 const freqCounter = 1;
 
-d3.json('data/demo.json', (energy) => {
-    console.log(energy);
+d3.json('data/demo.json', (demo) => {
     sankey
-        .nodes(energy.nodes)
-        .links(energy.links)
+        .nodes(demo.nodes)
+        .links(demo.links)
         .layout(32);
 
     const link = svg.append('g').selectAll('.link')
-        .data(energy.links)
+        .data(demo.links)
         .enter().append('path')
         .attr('class', 'link')
         .attr('d', path)
@@ -40,8 +39,16 @@ d3.json('data/demo.json', (energy) => {
     link.append('title')
         .text(d => `${d.source.name} → ${d.target.name}\n${format(d.value)}`);
 
+    link.on('mouseover', function(d) {
+        console.log(d);
+        // d3.select('#label').text(d.source)
+    })
+        .on('mouseout', function(d) {
+            d3.select('#label').text("");
+        });
+
     const node = svg.append('g').selectAll('.node')
-        .data(energy.nodes)
+        .data(demo.nodes)
         .enter().append('g')
         .attr('class', 'node')
         .attr('transform', d => `translate(${d.x},${d.y})`)
@@ -78,12 +85,12 @@ d3.json('data/demo.json', (energy) => {
         link.attr('d', path);
     }
 
-    const linkExtent = d3.extent(energy.links, d => d.value);
+    const linkExtent = d3.extent(demo.links, d => d.value);
     const frequencyScale = d3.scaleLinear().domain(linkExtent).range([0.05, 1]);
     const particleSize = d3.scaleLinear().domain(linkExtent).range([1, 5]);
 
 
-    energy.links.forEach((link) => {
+    demo.links.forEach((link) => {
         link.freq = frequencyScale(link.value);
         link.particleSize = 2;
         link.particleColor = d3.scaleLinear().domain([0, 1])
@@ -122,7 +129,7 @@ d3.json('data/demo.json', (energy) => {
     }
 
     function particleEdgeCanvasPath(elapsed) {
-        const context = d3.select('canvas').node().getContext('2d');
+        const context = d3.select('#demovis canvas').node().getContext('2d');
 
         context.clearRect(0, 0, 1000, 1000);
 
