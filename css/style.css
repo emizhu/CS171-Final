@@ -1,14 +1,17 @@
 /*general*/
+.storyboard_00,
 #intro {
-    text-align: center;
+    /*text-align: center;*/
     position: absolute;
     font-family: 'Roboto Slab', serif;
     font-size: 30px;
-    bottom: 350px;
     opacity: 0.6;
     stroke-width: 1;
-    -webkit-text-stroke-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
 
+    /*-webkit-text-stroke-color: white;*/
 }
 
 h1 {
@@ -66,8 +69,10 @@ p{
 }
 
 body {
+    color: white;
     font-family: 'Noto Sans SC', sans-serif;
     font-size: 18px;
+
 }
 
 .section {
@@ -86,9 +91,15 @@ body {
 
 #reference2{
     position: absolute;
-    fill: white;
-    text-align: center;
-    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
 
+}
+
+.container_00
+.container_02 {
+    position: relative;
+    text-align: center;
+    color: white;
 }
