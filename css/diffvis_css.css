@@ -1,25 +1,53 @@
-/*.desc, .instructions {*/
-    /*margin-left: 100px;*/
-    /*margin-right:100px;*/
-    /*font-size:14px;*/
-/*}*/
+.desc, .instructions {
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    text-align: left;
+    font-size: 16px;
+    padding-top:10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
 
-/*.fp-bottom {*/
-    /*bottom:25px;*/
-/*}*/
+.fp-bottom {
+    text-anchor: middle;
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
 
-/*.df-p {*/
-    /*padding-top: 20px;*/
-    /*padding-right: 100px;*/
-    /*padding-bottom: 20px;*/
-    /*padding-left: 100px;*/
-    /*font-size: 13px;*/
-/*}*/
+.df-p {
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    padding-top: 20px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    font-size: 13px;
+}
+.legend-text,
+.legend-text2{
+    text-anchor: start;
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
 
+
+.path{
+    fill: none;
+    stroke-width: 1px;
+    opacity: 0.8;
+    shape-rendering: crispEdges;
+}
+
+.pathText,
 .dv-axis-label {
     text-anchor: middle;
-    font-size: 10px;
-    fill: black;
+    font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 .dv-label {

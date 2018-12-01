@@ -26,9 +26,35 @@ g.life-x-axis path{
     font-size: 14px;
 }
 
-/*.life-x-axis {*/
-    /*transform: translate(lifestyle.width/2 + ","  + vis.height/2);*/
-/*}*/
+
+tr {
+    height: 10px;
+}
+
+.table td, .table th, .table thead th {
+    padding: 0px;
+    border-color: transparent;
+}
+
+.table {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 16px;
+    padding: 10px;
+    table-layout: auto;
+}
+
+.note {
+    font-size: 12px;
+    font-style: italic;
+    color: gray;
+    /*margin-bottom: 0;*/
+    margin-bottom: 20px;
+}
+#lifestyle {
+    padding: 0px;
+}
+
 
 /*tooltips*/
 /*--------------------------------------------------*/
@@ -38,8 +64,11 @@ g.life-x-axis path{
     font-weight: bold;
     padding: 5px;
     /*background: rgba(0, 0, 0, 0.8);*/
-    color: #fff;
+    /*color: #fff;*/
+    color: black;
     border-radius: 1px;
+    font-size: 12px;
+    text-align: center;
 }
 
 /* Creates a small triangle extender for the tooltip */

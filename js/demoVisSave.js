@@ -205,9 +205,9 @@ DemoVis.prototype.drawSankey = function() {
     vis.sankey
         .nodes(vis.sankeyData.nodes)
         .links(vis.sankeyData.links);
-        // .layout(32);
+    // .layout(32);
 
-     vis.link = vis.svg.append('g').selectAll('.dv .link')
+    vis.link = vis.svg.append('g').selectAll('.dv .link')
         .data(vis.sankeyData.links)
         .enter().append('path')
         .attr('class', 'dv link')

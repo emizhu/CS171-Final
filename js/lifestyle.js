@@ -1,9 +1,7 @@
-//#todo make tooltip color match circles
-//#todo make checkboxes match circles
-//#todo add more checkboxes
-//#todo percentiles
-//#todo align checkboxes
-//#todo show avg and percentiles in tooltip
+//#todo fix labels
+//#todo tooltip colors??
+//#todo remove tooltip QC text
+
 
 LifeStyle = function(_parentElement, _data){
     this.parentElement = _parentElement;
@@ -21,21 +19,19 @@ LifeStyle.prototype.initVis = function() {
     //Customize here
     //----------------------------------------------------------
     // Margin object with properties for the four directions
-    vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-    vis.columnwidth = $("#" + vis.parentElement).width();
-    vis.width = 750- vis.margin.left -vis.margin.right,
-    vis.height = 700- vis.margin.top -vis.margin.bottom,
+    vis.margin = {top: 30, right: 20, bottom: 30, left: 20};
+    //vis.columnwidth = $("#" + vis.parentElement).width();
+    //vis.width = 750- vis.margin.left -vis.margin.right,
+    vis.width = $("#" + vis.parentElement).width() - vis.margin.left -vis.margin.right;
+    vis.height = 700 - vis.margin.top -vis.margin.bottom;
     vis.padding = 10;
 
     //color range for comparisons
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
 
-    //categories for filtering
-    // vis.checkboxCategories = ["sex", "full_part_time"];
-
-    vis.lineLength = 320;
+    vis.lineLength = 280;
     vis.circleradius = 7;
-    vis.labelBuffer = 25;
+    vis.labelBuffer = 40;
     vis.innerAxis = 30;
     //----------------------------------------------------------
 
@@ -48,14 +44,14 @@ LifeStyle.prototype.initVis = function() {
     };
     vis.labels.splice(1, 0, "Sleep"); // at index position 1, remove 0 elements, then add "Sleep"
 
-    // vis.labels =["Personal Care", "Sleep", "Household", "Help Household Members", "Help Non-Household Members",
-    //     "Work", "Education", "Consumer Purchases", "Prof/Personal Services", "Household Services", "Govt & Civic",
-    //     "Eat & Drink", "Leisure", "Sports", "Religious", "Volunteer", "Phone Calls", "Traveling",
-    //     "Miscellaneous"];
+    vis.labels2 =["Personal Care", "Sleep", "Household", "Help Household Members", "Help Non-Household Members",
+        "Work", "Education", "Consumer Purchases", "Prof/Personal Services", "Household Services", "Govt & Civic",
+        "Eat & Drink", "Leisure", "Sports", "Religious", "Volunteer", "Phone Calls", "Traveling",
+        "Miscellaneous"];
 
-    vis.labels =["Personal Care", "Sleep", "Household",
+    vis.labels =["Volunteer", "Phone Calls", "Traveling", "Personal Care", "Sleep", "Household",
         "Work", "Education", "Consumer Purchases",  "Household Services", "Govt & Civic",
-        "Eat & Drink", "Leisure", "Sports", "Religious", "Volunteer", "Phone Calls", "Traveling"];
+        "Eat & Drink", "Leisure", "Sports", "Religious"];
 
     //headers for filtering data
     //these values must EXACTLY match the headers in vis.displayData and should be in the same order as vis.labels
@@ -72,8 +68,7 @@ LifeStyle.prototype.initVis = function() {
 
 
     // SVG drawing area
-    // vis.svg = d3.select("#" + vis.parentElement).append("svg")
-    vis.svg = d3.select("#lifestyle").append("svg")
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
@@ -82,9 +77,7 @@ LifeStyle.prototype.initVis = function() {
     vis.lineNumber = vis.headers.length;
     vis.angle = 360/vis.lineNumber;
     vis.angleRadian = vis.angle * Math.PI / 180;
-    vis.outerArcLength = vis.lineLength * vis.angleRadian;
-    vis.angleRadianNew = vis.outerArcLength/(vis.lineLength-vis.innerAxis);
-    vis.angleNew = vis.angleRadianNew/(Math.PI / 180);
+    // vis.outerArcLength = vis.lineLength * vis.angleRadian;
 
 
     //filter data for 2017 only
@@ -117,32 +110,34 @@ LifeStyle.prototype.initVis = function() {
 
         // https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
         //Append the month names to each slice
-        vis.svg
-            .append("text")
-            .append("textPath")
-            .attr("class", "activityText")
-            //.style("text-anchor","middle") //place the text halfway on the arc
-            .attr("startOffset", "50%")
-            .attr("xlink:href","#arc" + i)
-            .text(vis.labels[i])
-            .attr("font-size", "12px");
+        // vis.svg
+        //     .append("text")
+        //     .append("textPath")
+        //     .attr("class", "activityText")
+        //     //.style("text-anchor","middle") //place the text halfway on the arc
+        //     .attr("startOffset", "50%")
+        //     .attr("xlink:href","#arc" + i)
+        //     .text(vis.labels[i])
+        //     .attr("font-size", "12px")
+        //     .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")" );
+        // + "rotate(" + vis.angle*i + ")"
 
 
         // //get position of arc
         // //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
-        // var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
+        var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
         //
         // //append text labels
-        // var text = vis.svg.append("text")
-        //     .attr("x", pointLabel.x)
-        //     .attr("y", pointLabel.y)
-        //     .attr("text-anchor", "left")
-        //     .attr("dominant-baseline", "central")
-        //     .attr("font-size", "12px")
-        //     .text(vis.labels[i])
-        //     .attr("class","lifestyle-x-labels")
-        //     .attr("class","x-axis")
-        //     .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")" );
+        var text = vis.svg.append("text")
+            .attr("x", pointLabel.x -5)
+            .attr("y", pointLabel.y)
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "central")
+            .attr("font-size", "12px")
+            .text(vis.labels[i])
+            .attr("class","lifestyle-x-labels")
+            .attr("class","x-axis")
+            .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")" );
         // ----------------------------------------------------------
 
 
@@ -151,7 +146,7 @@ LifeStyle.prototype.initVis = function() {
         // create scales
         vis["x" + i] = d3.scaleLinear()
             // .domain(d3.extent(vis.displayData, function(d){return d[vis.headers[i]];}))
-            .domain([.2,1.2])
+            .domain([.2,1.1])
             .range([vis.innerAxis,vis.lineLength]);
         vis["xAxis" + i] = d3.axisBottom(vis["x" + i]);
 
@@ -166,8 +161,9 @@ LifeStyle.prototype.initVis = function() {
 
 
 
-        $("#checkboxes0").css("color",vis.color[0]);
-        $("#checkboxes1").css("color",vis.color[1]);
+        //color rows of checkboxes
+        $("#checkboxes1").css("color",vis.color[0]);
+        $("#checkboxes2").css("color",vis.color[1]);
 
     };
 
@@ -175,7 +171,7 @@ LifeStyle.prototype.initVis = function() {
     //Create checkboxes
     //----------------------------------------------------------
     //categories for filtering
-    vis.checkboxCategories = ["sex", "full_part_time"];
+    vis.checkboxCategories = ["sex", "full_part_time", "multiple_jobs","school_enrollment","number_children"];
 
     for (i = 0; i < vis.checkboxCategories.length; i++) {
 
@@ -190,44 +186,10 @@ LifeStyle.prototype.initVis = function() {
             .entries(vis.displayData);
     };
 
-    // $("#checktable1").append('<tr><td>my data</td><td>more data</td></tr>');
-    // $("#checktable1").append('<tr><td>my data</td><td>more data</td></tr>');
-    //
-    // //add checks to two rows
-    // for (k = 1; k <= 2; k++) {
-    //     // $("#" + vis.parentElement)
-    //     $("#allchecks" + k)
-    //         .append(
-    //             $(document.createElement('input')).attr({
-    //                 id:    'myCheckbox'+k,
-    //                 name:  'myCheckbox'+k,
-    //                 value: 'myValue'+k,
-    //                 type:  'checkbox'
-    //             })
-    //         )
-    //         .append(text,k);
-    // };
-
-
     //----------------------------------------------------------
 
 
 
-
-    //create tooltip
-    //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
-    //http://bl.ocks.org/Caged/6476579
-    vis.tip = d3.tip()
-        .attr("class","d3-tip")
-       // .style("background", d3.schemeCategory10[2])
-       // .style("color", d3.schemeCategory10[0])
-        .offset([-20,0])
-        .html(function(d){
-            d3.select(".d3-tip").style("background-color", d3.schemeCategory20[2]);
-            // d3.select(".d3-tip").style("background", d3.schemeCategory20[2]);
-            //return value rounded to 1 decimal point Math.round(d * 10)/10 );
-            return ("Percentile: " + Math.round(d * 100));
-        });
 
     //convert categories to numeric
     vis.wrangleData();
@@ -250,6 +212,23 @@ LifeStyle.prototype.wrangleData = function() {
         });
     };
 
+    vis.displayData.forEach(function(d){
+        d.number_children = +d.number_children;
+    });
+
+    var j;
+    for (j = 0; j < vis.headers.length; j++) {
+        vis[vis.headers[j] + "array"] = [];
+        for (i = 0; i < vis.displayData.length; i++) {
+            vis[vis.headers[j] + "array"].push(vis.displayData[i][vis[vis.headers[j]]]);
+        };
+    }
+
+
+
+
+
+
     // filter data based on checkbox selection
     vis.filterData();
 }
@@ -266,39 +245,58 @@ LifeStyle.prototype.filterData = function(){
 
     for (i = 0; i < vis.checkboxCategories.length; i++) {
 
-        //group data by checkboxCategories (sex, etc)
-        // vis["nested" + vis.checkboxCategories[i]] = d3.nest()
-        //     .key(function(d) { return d[vis.checkboxCategories[i]]; })
-        //     .rollup(function(leaves) { return leaves.length; })
-        //     .entries(vis.displayData);
-
-
         //create two filtered arrays
         for (k = 1; k <= 2; k++) {
             //create empty arrays for selected values using checkboxCategories
             vis[vis.checkboxCategories[i] + "values" +k] = [];
 
-            //push selected values to empty arrays
-            for (j = 0; j < vis["nested" + vis.checkboxCategories[i]].length; j++) {
-                //str = lifestyle.nestedsex[0].key = "Female"
-                var str = "#" + vis["nested" + vis.checkboxCategories[i]][j].key +k;
-                vis[vis.checkboxCategories[i] + "values" +k].push($(str + ":checked").val());
-            };
-
             //if no values are selected, treat as if all are selected
             function isundefined(currentValue) {
                 return currentValue === undefined;
             }
-            if (vis[vis.checkboxCategories[i] + "values" +k].every(isundefined)) {
-                vis[vis.checkboxCategories[i] + "values" +k] = [];
+
+            //for all categories except number of children the keys match the checkbox values
+            if (vis.checkboxCategories[i] != "number_children") {
+                //push selected values to empty arrays
                 for (j = 0; j < vis["nested" + vis.checkboxCategories[i]].length; j++) {
-                    var str = "#" + vis["nested" + vis.checkboxCategories[i]][j].key +k;
-                    vis[vis.checkboxCategories[i] + "values" +k].push($(str).val());
+                    //str = lifestyle.nestedsex[0].key = "Female"
+                    var str = "#" + vis.checkboxCategories[i] + vis["nested" + vis.checkboxCategories[i]][j].key +k;
+                    vis[vis.checkboxCategories[i] + "values" +k].push($(str + ":checked").val());
                 };
 
-                // $("." + vis.checkboxCategories[i] + "_checkbox").prop("checked", true);
+                //if array is undefined
+                if (vis[vis.checkboxCategories[i] + "values" +k].every(isundefined)) {
+                    vis[vis.checkboxCategories[i] + "values" +k] = [];
+                    for (j = 0; j < vis["nested" + vis.checkboxCategories[i]].length; j++) {
+                        var str = "#" + vis.checkboxCategories[i] + vis["nested" + vis.checkboxCategories[i]][j].key +k;
+                        vis[vis.checkboxCategories[i] + "values" +k].push($(str).val());
+                    };
+                }
+            }
 
-            };
+            //for number of children
+            else {
+                //create arrays of values
+                var str = "#" + vis.checkboxCategories[i] + "Yes" +k;
+                if ($(str + ":checked").val() == "Yes") {
+                    var j = 1;
+                    for (j=1; j<12; j++) {
+                        vis[vis.checkboxCategories[i] + "values" +k].push(j);
+                    }
+                }
+                var str = "#" + vis.checkboxCategories[i] + "No" +k;
+                if ($(str + ":checked").val() == "No") {
+                    vis[vis.checkboxCategories[i] + "values" +k].push(0);
+                }
+
+                //if array is undefined
+                if (vis[vis.checkboxCategories[i] + "values" +k].every(isundefined)) {
+                    var j = 0;
+                    for (j=0; j<12; j++) {
+                        vis[vis.checkboxCategories[i] + "values" +k].push(j);
+                    }
+                }
+            }
 
         };
 
@@ -311,42 +309,32 @@ LifeStyle.prototype.filterData = function(){
 
         vis["filtered" + k] = [];
         vis["filtered" + k] = vis.displayData.filter(function(value){
-            return (vis["sexvalues" + k].includes(value.sex) && vis["full_part_timevalues" + k].includes(value.full_part_time));
+            return (
+                vis["sexvalues" + k].includes(value.sex) &&
+                vis["full_part_timevalues" + k].includes(value.full_part_time) &&
+                vis["multiple_jobsvalues" + k].includes(value.multiple_jobs) &&
+                vis["school_enrollmentvalues" + k].includes(value.school_enrollment) &&
+                vis["number_childrenvalues" + k].includes(value.number_children)
+            );
         });
+
+        //if nothing matches all conditions, return nothing
+        if (vis["filtered" + k].length == 0) {
+            var i;
+            for (i = 0; i < vis.headers.length; i++) {
+                var dummy = {};
+                dummy[vis.headers] = 0;
+                vis["filtered" + k].push(dummy);
+            }
+        }
+
         console.log("sex values" + k + ": "+ vis["sexvalues" + k]);
         console.log("full_part_time values" + k + ": "+ vis["full_part_timevalues" + k]);
+        console.log("multiple_jobs values" + k + ": "+ vis["multiple_jobsvalues" + k]);
+        console.log("school_enrollment values" + k + ": "+ vis["school_enrollmentvalues" + k]);
+        console.log("number_children values" + k + ": "+ vis["number_childrenvalues" + k]);
 
     };
-
-
-
-    // console.log("Filtered: " + vis.filtered1.length);
-    // console.log("sex values1: " + vis.sexvalues1);
-    // console.log("full_part_time values1: " + vis.full_part_timevalues1);
-    //
-    // console.log("sex values2: " + vis.sexvalues2);
-    // console.log("full_part_time values2: " + vis.full_part_timevalues2);
-
-
-    // create arrays with selected values
-    // vis.sexvalues.push($('#Male:checked').val());
-    // vis.sexvalues.push($('#Female:checked').val());
-    //
-    // vis.fullpartvalues.push($('#Full:checked').val());
-    // vis.fullpartvalues.push($('#Part:checked').val());
-    // vis.fullpartvalues.push($('#NA:checked').val());
-
-
-    // if (vis.sexvalues.every(isundefined)) {
-    //     vis.sexvalues.push($('#Male').val());
-    //     vis.sexvalues.push($('#Female').val());
-    // }
-    // if (vis.full_part_timevalues.every(isundefined)) {
-    //     vis.full_part_timevalues.push($('#Full').val());
-    //     vis.full_part_timevalues.push($('#Part').val());
-    //     vis.full_part_timevalues.push($('#-1').val());
-    // }
-
 
 
     // calculate averages
@@ -377,7 +365,7 @@ LifeStyle.prototype.calcData = function(){
             };
 
             //calculate averages and percentiles
-            vis[vis.headers[j] + "avg" + number] = vis[vis.headers[j] + "total" + number]/ array.length;
+            vis[vis.headers[j] + "avg" + number] = vis[vis.headers[j] + "total" + number]/ vis[vis.headers[j] + "array" + number].length;
             vis[vis.headers[j] + "per" + number] = jStat.percentileOfScore(vis[vis.headers[j] + "array" + number], vis[vis.headers[j] + "avg" + number]);
 
         };
@@ -391,6 +379,9 @@ LifeStyle.prototype.calcData = function(){
     //create arrays for each category with 2 points each; first is all data, second is filtered
     var i;
     for (i = 0; i < vis.headers.length; i++) {
+        vis[vis.headers[i]+"test"] = {};
+        vis[vis.headers[i]] = [];
+
         vis[vis.headers[i] + "AvgArray"] = [];
         vis[vis.headers[i] + "AvgArray"].push(vis[vis.headers[i] + "avg0"]);
         vis[vis.headers[i] + "AvgArray"].push(vis[vis.headers[i] + "avg1"]);
@@ -399,7 +390,19 @@ LifeStyle.prototype.calcData = function(){
         vis[vis.headers[i] + "PerArray"] = [];
         vis[vis.headers[i] + "PerArray"].push(vis[vis.headers[i] + "per0"]);
         vis[vis.headers[i] + "PerArray"].push(vis[vis.headers[i] + "per1"]);
+
+        vis[vis.headers[i]].avg = vis[vis.headers[i] + "AvgArray"];
+        vis[vis.headers[i]].per = vis[vis.headers[i] + "PerArray"];
+
+
+        vis[vis.headers[i]].push(
+            {avg: vis[vis.headers[i] + "avg0"], per: vis[vis.headers[i] + "per0"] , color: vis.color[0], name: vis.headers[i]}
+        );
+        vis[vis.headers[i]].push(
+            {avg: vis[vis.headers[i] + "avg1"], per: vis[vis.headers[i] + "per1"] , color: vis.color[1], name: vis.headers[i]}
+        );
     };
+
 
 
 
@@ -416,38 +419,50 @@ LifeStyle.prototype.calcData = function(){
 LifeStyle.prototype.updateVis = function(){
     var vis = this;
 
+
+    //create tooltip
+    //https://stackoverflow.com/questions/10805184/show-data-on-mouseover-of-circle
+    //http://bl.ocks.org/Caged/6476579
+
+     var tip = d3.tip()
+        .attr("class","d3-tip")
+        .offset([-20,0])
+        .html(function(d){
+            // d3.select(".d3-tip").style("background-color", d.color);
+            // +"<br>"+d.name
+            var str = "Average min/day: "  + Math.round(d.avg*10)/10 + "<br>" + "Percentile: " + Math.round(d.per * 100);
+            var colorstr = str.fontcolor(d.color);
+
+            return (colorstr);
+        });
+
+
     for (i = 0; i < vis.headers.length; i++) {
 
         //draw circles
         var circle = vis["svgx" + i]
             .selectAll("circle")
             // .data(vis[vis.headers[i] + "AvgArray"]);
-            .data(vis[vis.headers[i] + "PerArray"]);
+            // .data(vis[vis.headers[i] + "PerArray"]);
+            .data(vis[vis.headers[i]]);
         circle.enter()
             .append("circle")
             .merge(circle)
-            .on("mouseover",vis.tip.show)
-            // .on("mouseover",function(d){
-            //     vis.tip.show
-            // })
-            .on("mouseout",vis.tip.hide)
+            .on("mouseover",tip.show)
+            .on("mouseout",tip.hide)
             .transition().duration(800)
-            .attr("fill", function(d) {
-                //get data position in array
-                var value = vis[vis.headers[i] + "PerArray"].indexOf(d);
-                // var value = vis[vis.headers[i] + "AvgArray"].indexOf(d);
-                return vis.color[value];
-            })
-            .attr("cx", function(d) { return vis["x" + i](d); })
-            .attr("r", vis.circleradius)
-            ;
+            .attr("fill", function(d) {return d.color;})
+            .attr("cx", function(d) { return vis["x" + i](d.per); })
+            .attr("r", vis.circleradius);
         circle.exit().remove();
+
 
     };
 
 
     //call tooltips
-    vis.svg.call(vis.tip);
+    vis.svg.call(tip);
+
 
 }
 
