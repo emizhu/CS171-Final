@@ -4,6 +4,8 @@ var averagetime;
 var barHeight;
 var format = d3.format(".2f");
 var Y_pos = 58;
+var colorselected;
+var textColor;
 
 StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
@@ -33,7 +35,7 @@ StackedChart.prototype.initVis = function() {
     vis.margin = {top: 20, right: 15, bottom: 20, left:15};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
-        vis.height = 800 - vis.margin.top -vis.margin.bottom,
+        vis.height = 700 - vis.margin.top -vis.margin.bottom,
         vis.onethirdheight = vis.height*0.6 -vis.margin.top -vis.margin.bottom;
         vis.padding = 24;
 
@@ -44,12 +46,12 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg_legend = d3.select("#legend").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
-        .attr("height", vis.height*0.4 + vis.margin.top)
+        .attr("height", vis.height*0.4 - vis.margin.top -10)
         .append("g")
         .attr("transform", "translate(" + (-80 )  + "," + 120+ ")");
 
 
-    vis.svg = d3.select("#stackedchart").append("svg")
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
         .attr("height", vis.height*0.6)
         .append("g")
@@ -229,9 +231,9 @@ StackedChart.prototype.initVis = function() {
 
     vis.tooltip.append("text")
         .attr("x", 15)
-        .attr("dy", "1.2em")
-        .style("text-anchor", "middle")
-        .attr("font-size", "12px")
+        // .attr("dy", "1.2em")
+        // .style("text-anchor", "middle")
+        // .attr("font-size", "12px")
         .attr("font-weight", "bold");
 
     vis.bars = vis.svg.append("g")
@@ -290,7 +292,7 @@ StackedChart.prototype.wrangleData = function(keyselected){
     }
 
 //define colors for detailed stack chart
-    var colorselected = vis.z(colorindex);
+    colorselected = vis.z(colorindex);
     var colorrange = [colorselected, 'white'];
     vis.q
         .range(colorrange)
@@ -419,11 +421,13 @@ StackedChart.prototype.updateVis_filtered = function(){
                 }
                 else {
                     // console.log(this);
-                    // console.log(d);
+
                     var ke = getKeyByValue(d.data, (d[1]-d[0]));
 
                     var activityr = vis.dataCat2[keyselected.indexOf(ke,0)];
                     // console.log(vis.dataCat2[activityr]);
+
+                    textColor = vis.z(keyselected.indexOf(ke,0));
 
                     getText_Average (d.data.age, format((d[1] - d[0])), activityr);
 
@@ -457,7 +461,7 @@ StackedChart.prototype.updateVisDetails = function(){
         .enter().append("g")
 
         .attr("fill", function(d, index) {
-            console.log(index);
+            // console.log(index);
             return vis.q(index);})
         .on("mouseover", function(d, index) {
             d3.select(this)
@@ -488,6 +492,7 @@ StackedChart.prototype.updateVisDetails = function(){
 
 function getText(index, datacat, averagetime, facts, intfacts) {
 
+    console.log(colorselected);
     if (index ==null){
 
         var summary= " <p> The average American spent ______  hours a day on ______</p>";
@@ -495,19 +500,20 @@ function getText(index, datacat, averagetime, facts, intfacts) {
     }
     else {
         if (intfacts[index].length < 3){
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-                + datacat[index] + ".</b><br><br>" +facts[index]+"<br><br><b></p>";
+            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a style='color:" + String(colorselected) + "'>"
+                + datacat[index] + ".</a></strong><br><br>" +facts[index]+"<br><br><b></p>";
         }
         else{
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-                + datacat[index] + ".</b><br><br>" +facts[index]+"<br><br><b> Did you know ? <sup>3</sup></sum></b><br>" + intfacts[index] +"</p>";
+            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a  style='color:" + String(colorselected) + "'>"
+                +   datacat[index] + ".</a></strong> <br><br>" +facts[index]+"<br><br><b> Did you know ? <sup>3</sup></sum></b><br>" + intfacts[index] +"</p>";
         }
         document.getElementById("facts").innerHTML = summary;
     }
 }
 
 function getText_Average (age, hours, activity){
-    var summary= " <p> The average American age group from " + age + " spent "+ "<b>" + hours + "</b>" +" hours a day on " +"<b>"+ activity + "</b></p>";
+    var summary= " <p> The average American age group from " + age + " spent "+ "<b>" + hours + "</b>" +" hours a day on <strong><a  style='color:" + String(textColor) + "'>"
+            + activity + "</a></strong></p>";
     document.getElementById("facts").innerHTML=summary;
 }
 
