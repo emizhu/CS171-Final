@@ -4,8 +4,9 @@
 
 #stackedchart{
 
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 60px;
+    margin-right: 120px;
+    margin-bottom: 40px;
 }
 
 .x-axis text {
@@ -26,11 +27,13 @@
 .legend2,
 .Xaxis,
 .Yaxis,
+.tooltip,
 .axis {
     font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 10px;
     margin-bottom: 30px;
+    color: black;
 }
 
 .grid,
