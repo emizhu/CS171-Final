@@ -38,11 +38,10 @@
 
         <div class="animated bounce" id="hours"> 689,328</div>
         The life expectancy for Americans is 78.7 years, or <b> 689,328 hours</b>.<br>
-        <h3 style="color: black"><br>How are Americans using their time? Well, it depends.</h3>
+        <h2 style="color: black"><br> How are Americans using their time? Well, it depends.</h2>
         It depends on who you are - your age, for example, or maybe your employment status.<br>
         Depending on who you are, you might spend your time on different activities than others.<br>
         Let's visualize some of these differences and explore the nuances of time in America.
-
     </div>
 
 
@@ -51,7 +50,7 @@
             <div class="row">
                 <div class="col-md-3" style="background: lightgray;">
 
-                    <h2>Age Affects How Americans Spend Their Time</h2>
+                    <h3>Age Affects How Americans Spend Their Time</h3>
                     <p>Click a square color(activity) to see each activity
                     <br>Hover over the bars for more details.
                     </p>
@@ -87,18 +86,20 @@
             </div>
         </div>
 
+
         <div class="slide" id="slide2" data-anchor="slide2">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3" style="background: lightgray;">
-                        <h4>Gender & Domestic Labor</h4>
-                        <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]
+                        <h3>Gender & Domestic Labor</h3>
+                        <div class = "desc">
+                            <!--[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION] -->
                             <br>
                             There may be additional explanatory factors, such as employment or family status, that are associated with gender.
                             We hold these constant by limiting our sample to only full-time currently employed individuals with a spouse
                             and children present in their household.
                         </div>
-                        <div class = "instructions">Play the animation to see how time use builds up over a year. Each square that appears
+                        <div class = "instructions"><br>Play the animation to see how time use builds up over a year. Each square that appears
                             represents one hour of that particular activity, as described in the legend to the left.
                             <br>
                             Hover over the saturated squares to see how much time is spent on average in a year on this activity.
@@ -115,7 +116,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3" style="background: lightgray;">
-                        <h4>Location Type & Transportation</h4>
+                        <h3>Location Type & Transportation</h3>
                         <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
                         <div class = "instructions">Play the animation to see how time spend on transportation for work builds up
                             over a year.
@@ -130,11 +131,11 @@
             </div>
         </div>
 
-        <div class="slide" id="slide3" data-anchor="slide3">
+        <div class="slide" id="slide4" data-anchor="slide4">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3" style="background: lightgray;">
-                        <h4>Labor Market Status & Leisure Time</h4>
+                        <h3>Labor Market Status & Leisure Time</h3>
                         <div class = "desc">[BACKGROUND INFO & DESCRIPTION OF VISUALIZATION]</div>
                         <div class = "instructions">Play the animation to see how leisure time builds up over a year.
                             Each square that appears represents  <b>24 hours or one full day</b> of leisure.
@@ -165,110 +166,94 @@
                         Are you a student? Employed? A parent?
                         Wondering how you spend your time compares to someone with a different lifestyle?<br>
                         <br>
-                        Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>
+                        <b>Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.</b><br>
                         <br>
-                        The farther the circle is from the center, the more time that group spends on an activity.<br>
-                        The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>
+                        The farther the circle is from the center, the more time that group spends on an activity.<br><br>
+                        The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.
                         For example, an orange circle with a percentile of 90 for sleep means that on average,
                         respondents in the orange group spent more time on sleep than 90% of all respondents.<br>
-                        Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as
-                            though all have been checked.
+
                 </div>
 
-                <div class="col-md-7" id="lifestylecolumn">
+                <div class="col-md-9" id="lifestylecolumn">
+
+
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sex</th>
+                                    <th>Employed</th>
+                                    <th>Multiple Jobs</th>
+                                    <th>In School</th>
+                                    <th>Parent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="checkboxes1">
+                                    <td class="sex">
+                                        <input type="checkbox" class="checkbox" id="sexMale1" value="Male" checked onchange="onToggle()">Male
+                                        <input type="checkbox" class="checkbox" id="sexFemale1" value="Female" onchange="onToggle()">Female
+                                    </td>
+                                    <td><input type="checkbox" class="checkbox" id="full_part_timeFull_time1" value="Full_time" checked onchange="onToggle()">Full Time
+                                        <input type="checkbox" class="checkbox" id="full_part_timePart_time1" value="Part_time" onchange="onToggle()">Part Time
+                                        <!--<input type="checkbox" class="checkbox" id="full_part_time-11" value="-1"  onchange="onToggle()">N/A</td>-->
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="multiple_jobsYes1" value="Yes" onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="multiple_jobsNo1" value="No" checked onchange="onToggle()">No
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="school_enrollmentYes1" value="Yes" onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="school_enrollmentNo1" value="No" checked onchange="onToggle()">No
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="number_childrenYes1" value="Yes" checked onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="number_childrenNo1" value="No"  onchange="onToggle()">No
+                                    </td>
+                                </tr>
+                                <tr id="checkboxes2">
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="sexMale2" value="Male" onchange="onToggle()">Male
+                                        <input type="checkbox" class="checkbox" id="sexFemale2" value="Female" checked onchange="onToggle()">Female
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="full_part_timeFull_time2" value="Full_time" checked onchange="onToggle()">Full Time
+                                        <input type="checkbox" class="checkbox" id="full_part_timePart_time2" value="Part_time" onchange="onToggle()">Part Time
+                                        <!--<input type="checkbox" class="checkbox" id="full_part_time-12" value="-1" onchange="onToggle()">N/A-->
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="multiple_jobsYes2" value="Yes" onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="multiple_jobsNo2" value="No" checked onchange="onToggle()">No
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="school_enrollmentYes2" value="Yes" onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="school_enrollmentNo2" value="No" checked onchange="onToggle()">No
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" class="checkbox" id="number_childrenYes2" value="Yes"  onchange="onToggle()">Yes
+                                        <input type="checkbox" class="checkbox" id="number_childrenNo2" value="No" checked onchange="onToggle()">No
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="note">Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as though
+                            all have been checked (e.g., "Male" and "Female").</div>
+
+                    </div>
+
                     <!--<div id="legend" align="middle"></div>-->
                     <div id ="lifestyle"></div>
+
+
                 </div>
-
-
-                <div class="col-md-2">
-
-                    <div id="checkboxes0" class="checkboxes">
-                        Sex<br>
-                        <input type="checkbox" class="sex_checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>
-                        <input type="checkbox" class="sex_checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>
-                        <br>
-                        Employed<br>
-                        <input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>
-                        <input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>
-                        <input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>
-                    </div>
-                    <br>
-                    <div id="checkboxes1"  class="checkboxes">
-                        Sex<br>
-                        <input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>
-                        <input type="checkbox" class="checkbox" id="Female2" value="Female" checked onchange="onToggle()">Female<br>
-                        <br>
-                        Employed<br>
-                        <input type="checkbox" class="checkbox" id="Full_time2" value="Full_time" checked onchange="onToggle()">Full Time<br>
-                        <input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>
-                        <input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>
-                    </div>
-                </div>
-
 
             </div>
 
         </div>
 
     </div>
-
-        <!--<h2>Lifestyles: Compare how you spend your time with another</h2>-->
-
-        <!--<p>-->
-            <!--Are you a student? Employed? A parent?-->
-            <!--Wondering how you spend your time compares to someone with a different lifestyle?<br>-->
-            <!--<br>-->
-            <!--Click on the checkboxes to visualize the time spent on daily activities for two different lifestyles.<br>-->
-            <!--<br>-->
-            <!--The farther the circle is from the center, the more time that group spends on an activity.<br>-->
-            <!--The circles represent the average time spent on an activity, and these averages are ranked in the whole population of survey respondents.<br>-->
-            <!--For example, an orange circle with a percentile of 90 for sleep means that on average,-->
-            <!--respondents in the orange group spent more time on sleep than 90% of all respondents.<br>-->
-            <!--<i>Note: if all the boxes under a category (e.g., "Sex") are unchecked, this is the same as though all have been checked.<i/>-->
-
-        <!--<p>-->
-
-        <!--//<div class = "container"></div>-->
-
-
-
-
-
-            <!--<div class="row">-->
-
-                <!--<div class="col-md-2">-->
-                    <!--<div id="checkboxes0" class="checkboxes">-->
-                        <!--Sex<br>-->
-                        <!--<input type="checkbox" class="sex_checkbox" id="Male1" value="Male" checked onchange="onToggle()">Male<br>-->
-                        <!--<input type="checkbox" class="sex_checkbox" id="Female1" value="Female" onchange="onToggle()">Female<br>-->
-                        <!--<br>-->
-                        <!--Employed<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Full_time1" value="Full_time"  onchange="onToggle()">Full Time<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Part_time1" value="Part_time" onchange="onToggle()">Part Time<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="-11" value="-1" checked onchange="onToggle()">N/A<br>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--&lt;!&ndash;<div class="col-lg-7">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div id ="lifestyle"></div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-                <!--<div class="col-md-2">-->
-                    <!--<div id="checkboxes1"  class="checkboxes">-->
-                        <!--Sex<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Male2" value="Male" onchange="onToggle()">Male<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Female2" value="Female" checked onchange="onToggle()">Female<br>-->
-                        <!--<br>-->
-                        <!--Employed<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Full_time2" value="Full_time" checked onchange="onToggle()">Full Time<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="Part_time2" value="Part_time" onchange="onToggle()">Part Time<br>-->
-                        <!--<input type="checkbox" class="checkbox" id="-12" value="-1" onchange="onToggle()">N/A<br>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
 
 
 
@@ -284,7 +269,7 @@
             <div class="container" id="about_table">
                 <div class="row">
                     <div class="col-md-2">
-                        <h3>WHO</h3>
+                        <h2>WHO</h2>
                     </div>
 
                     <div class="col-md-10">
@@ -300,7 +285,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <h3>HOW</h3>
+                        <h2>HOW</h2>
                     </div>
 
                     <div class="col-md-10">
@@ -317,7 +302,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <h3>WHAT</h3>
+                        <h2>WHAT</h2>
                     </div>
 
                     <div class="col-md-10">
@@ -336,18 +321,21 @@
     </div>
 
     <div class="section">
-<<<<<<< HEAD
+
         <div id="demovis">
             <canvas width='960' height='960' ></canvas>
             <svg width='960' height='960' ></svg>
         </div>
     </div>
 
-    <div class="section">
-=======
->>>>>>> b542e08b5c1dfce347f421fb0cc726f85d6b47c0
-        <h2>Reference</h2>
-        American Time Use Data: https://www.bls.gov/tus/#data
+    <div class="section fp-auto-height">
+
+        <img src="img/fastpeople.jpg" alt="img/fastpeople2.jpg" style="width:100%; height: auto;">
+        <div id="reference2">
+            <h1> Reference </h1>
+            American Time Use Data: https://www.bls.gov/tus/#data<br>
+        </div>
+
     </div>
 
 </div>
@@ -369,7 +357,7 @@
     <script src="js/jstat.js"></script>
     <script src="js/jstat.min.js"></script>
     <!--https://github.com/d4rkr00t/percentile-->
-    <script src="js/percentile-master/lib/index_percentile.js"></script>
+    <!--<script src="js/percentile-master/lib/index_percentile.js"></script>-->
 
     <!-- Visualization objects -->
     <script src="js/diffvis.js"></script>

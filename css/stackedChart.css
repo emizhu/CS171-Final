@@ -13,6 +13,7 @@
 }
 
 #hours{
+    font-family: 'Roboto Slab', serif;
     color: #404040;
     font-weight: bolder;
     font-size: 200px;
@@ -37,6 +38,7 @@
 }
 
 #hours:hover:before{
+
     width: 100%;
 }
 .legend,

@@ -22,9 +22,34 @@ g.life-x-axis path{
     text-align: left;
 }
 
-/*.life-x-axis {*/
-    /*transform: translate(lifestyle.width/2 + ","  + vis.height/2);*/
+/*table {*/
+    /*width: 100%;*/
 /*}*/
+
+tr {
+    height: 10px;
+}
+
+.table td, .table th, .table thead th {
+    padding: 0px;
+    border-color: transparent;
+}
+
+.table {
+    margin-bottom: 0;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.note {
+    font-size: 12px;
+    font-style: italic;
+    color: gray;
+}
+#lifestyle {
+    padding: 20px;
+}
+
 
 /*tooltips*/
 /*--------------------------------------------------*/

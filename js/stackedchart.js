@@ -33,7 +33,7 @@ StackedChart.prototype.initVis = function() {
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right,
         vis.height = 800 - vis.margin.top -vis.margin.bottom,
         vis.onethirdheight = vis.height*0.6 -vis.margin.top -vis.margin.bottom;
-        vis.padding = 24;
+    vis.padding = 24;
 
 // SVG drawing area
     vis.facts = d3.select(".facts").append("text")
@@ -82,7 +82,7 @@ StackedChart.prototype.initVis = function() {
     //
     vis.q = d3.scaleLinear()
         .domain([1, 5]);
-        // .interpolate(d3.interpolateHcl);
+    // .interpolate(d3.interpolateHcl);
     //     .domain(vis.dataCat.columns)
     //     .range(vis.colorsTwo);
 
@@ -163,15 +163,15 @@ StackedChart.prototype.initVis = function() {
         .attr("x", 150).attr("y", -40)
         .attr("width", rect).attr("height", rect)
         .style("fill", function(d){return "darkgray";})
-         .on("mouseover",function(){
+        .on("mouseover",function(){
 
-             if (vis.active_link === "0") d3.select(this).style("cursor", "pointer");
-             else {
-                 if (vis.active_link.split("class").pop() === this.id.split("id").pop()) {
-                     d3.select(this).style("cursor", "pointer");
-                 } else d3.select(this).style("cursor", "auto");
-             }
-         })
+            if (vis.active_link === "0") d3.select(this).style("cursor", "pointer");
+            else {
+                if (vis.active_link.split("class").pop() === this.id.split("id").pop()) {
+                    d3.select(this).style("cursor", "pointer");
+                } else d3.select(this).style("cursor", "auto");
+            }
+        })
         .on("click",function(d){
 
 
@@ -288,13 +288,13 @@ StackedChart.prototype.wrangleData = function(keyselected){
     vis.detail.map(function(d){
 
         filteredDetail.push({
-                "age": d.age,
-                [vis.keyselected2[0]] : d[vis.keyselected2[0]],
-                [vis.keyselected2[1]] : d[vis.keyselected2[1]],
-                [vis.keyselected2[2]] : d[vis.keyselected2[2]],
-                [vis.keyselected2[3]] : d[vis.keyselected2[3]],
-                [vis.keyselected2[4]] : d[vis.keyselected2[4]],
-                [vis.keyselected2[5]] : d[vis.keyselected2[5]]
+            "age": d.age,
+            [vis.keyselected2[0]] : d[vis.keyselected2[0]],
+            [vis.keyselected2[1]] : d[vis.keyselected2[1]],
+            [vis.keyselected2[2]] : d[vis.keyselected2[2]],
+            [vis.keyselected2[3]] : d[vis.keyselected2[3]],
+            [vis.keyselected2[4]] : d[vis.keyselected2[4]],
+            [vis.keyselected2[5]] : d[vis.keyselected2[5]]
         })
     });
 
@@ -354,7 +354,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
     if (keyselected.length === 3) {
 
-    // Plot Single Bar Chart
+        // Plot Single Bar Chart
 
         vis.svg.selectAll(".bars")
             .transition()
@@ -466,7 +466,7 @@ function getText(index, datacat, averagetime, facts) {
     }
     else {
         var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <b>"
-            + datacat[index] + ".</b></p><br>" + facts[index] ;
+            + datacat[index] + ".</b></p><br>" + "<p>"+facts[index]+"</p>" ;
 
         document.getElementById("facts").innerHTML = summary;
     }
