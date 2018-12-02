@@ -46,7 +46,7 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg_legend = d3.select("#legend").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
-        .attr("height", vis.height*0.4 - vis.margin.top -10)
+        .attr("height", vis.height*0.4 - vis.margin.top -5)
         .append("g")
         .attr("transform", "translate(" + (-80 )  + "," + 120+ ")");
 
@@ -392,6 +392,7 @@ StackedChart.prototype.updateVis_filtered = function(){
             .enter().append("g")
             .attr("fill", function(d, index) {
                 return vis.z(index);})
+            .attr("class", function(d, index) {return index})
             .selectAll("rect")
             .data(function(d) { return d;})
             .enter().append("rect")
@@ -405,6 +406,21 @@ StackedChart.prototype.updateVis_filtered = function(){
             .on("mouseover", function(d,i) {
                 d3.select(this)
 
+                // d3.select(d[0]).attr("opacity",0.2);
+                // console.log(d);
+                var ke = getKeyByValue(d.data, (d[1]-d[0]));
+                var inDex = keyselected.indexOf(ke,0);
+
+
+                d3.selectAll(".bars").attr("opacity",0.2);
+                d3.select(this).attr("opacity",1);
+
+                // g.selectAll("0").attr("opacity",1);
+                // d3.select(d[0]).attr("opacity",1);
+                // vis.legend.attr("opacity",0.2);
+
+
+
                 vis.tooltip.transition()
                     .duration(100)
                     .style("opacity",1);
@@ -415,15 +431,15 @@ StackedChart.prototype.updateVis_filtered = function(){
                         .style("left", (d3.event.pageX + 3) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
 
+
+
                     // var summary= " <p> The average American spent <b>9.59</b> hours a day on <b>" + vis.dataCat[keyselected] + "</b>.</p>";
                     // document.getElementById("facts").innerHTML=summary;
                 }
                 else {
                     // console.log(this);
 
-                    var ke = getKeyByValue(d.data, (d[1]-d[0]));
 
-                    var inDex = keyselected.indexOf(ke,0);
                     var activityr = vis.dataCat2[inDex];
                     // console.log(vis.dataCat2[activityr]);
 
@@ -437,9 +453,13 @@ StackedChart.prototype.updateVis_filtered = function(){
                 }
             })
             .on("mouseout", function(d) {
+                d3.selectAll(".bars").attr("opacity",1);
+
+
                 vis.tooltip.transition()
                     .duration(100)
                     .style("opacity", 0); });
+
 
         console.log("2");
     }
@@ -464,7 +484,8 @@ StackedChart.prototype.updateVisDetails = function(){
             // console.log(index);
             return vis.q(index);})
         .on("mouseover", function(d, index) {
-            d3.select(this)
+            d3.select(this);
+
             vis.tooltip.transition()
                 .duration(100)
                 .style("opacity",1);
@@ -473,6 +494,8 @@ StackedChart.prototype.updateVisDetails = function(){
                 .style("top", (d3.event.pageY + 15) + "px")
         })
         .on("mouseout", function(d) {
+
+            d3.selectAll(".bars").attr("opacity",1);
                 vis.tooltip.transition()
                     .duration(100)
                     .style("opacity", 0); })
@@ -488,6 +511,8 @@ StackedChart.prototype.updateVisDetails = function(){
             return vis.x(d[1]) - vis.x(d[0]); })
         .attr("height", barHeight)
         .attr("transform", "translate(20,0)")
+
+
 }
 
 function getText(index, datacat, averagetime, facts, intfacts) {
@@ -515,7 +540,7 @@ function getText(index, datacat, averagetime, facts, intfacts) {
 
 function getText_Average (age, hours, activity, index, facts){
 
-    var summary= " <p> The average American age group from " + age + " spent <b><a style='color:" + String(textColor) + "'>" + hours +
+    var summary= " <p> The average American age group from " + age + " spent <b><a style='color:" + String(textColor) + "'>" + format(hours/60) +
         "</a></b>" +" hours a day on <strong><a  style='color:" + String(textColor) + "'>"
             + activity + "</a></strong><br><br>"+ facts[index]+ "</p>";
     document.getElementById("facts").innerHTML=summary;

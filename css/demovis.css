@@ -19,14 +19,38 @@
     stroke-opacity: .25;
 }
 
-svg {
+.demo svg {
     position: absolute;
 }
 
-canvas {
+.demo canvas {
     position: absolute;
 }
 
 #label {
     height:20px;
+}
+
+.demo .fp-tableCell{
+    vertical-align:top;
+}
+
+#demovis {
+    text-align:left;
+    margin:auto;
+    /*padding-top: 100px;*/
+}
+
+#demolabel {
+    margin-top:15px;
+    color:#212529;
+}
+
+#demoinfo, #instructions{
+    color:#212529;
+}
+
+#demoinfo {
+    margin-top:20px;
+    height: 20px;
 }

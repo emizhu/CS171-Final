@@ -59,8 +59,8 @@
                         breakdown for that activity. Hover over the bars for more details on the selected activity.
                     </p>
 
-                    <div id="facts" align="middle"></div>
-                    <div id="result" align="middle"></div>
+                    <div id="facts"></div>
+                    <div id="result"></div>
                 </div>
                 <div class="col-md-9">
                     <div id="legend" align="middle"></div>
@@ -179,7 +179,7 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                            <tr>
+                            <tr id="headerrow">
                                 <th>Sex</th>
                                 <th>Employed</th>
                                 <th>Multiple Jobs</th>
@@ -195,14 +195,16 @@
                                 </td>
                                 <td><input type="checkbox" class="checkbox" id="full_part_timeFull_time1" value="Full_time" checked onchange="onToggle()">Full Time
                                     <input type="checkbox" class="checkbox" id="full_part_timePart_time1" value="Part_time" onchange="onToggle()">Part Time
-                                    <!--<input type="checkbox" class="checkbox" id="full_part_time-11" value="-1"  onchange="onToggle()">N/A</td>-->
+                                    <!--<input type="checkbox" class="checkbox" id="full_part_time-11" value="-1"  onchange="onToggle()">N/A-->
                                 <td>
                                     <input type="checkbox" class="checkbox" id="multiple_jobsYes1" value="Yes" onchange="onToggle()">Yes
                                     <input type="checkbox" class="checkbox" id="multiple_jobsNo1" value="No" checked onchange="onToggle()">No
+                                    <!--<input type="checkbox" class="checkbox" id="multiple_jobs-11" value="-1"  onchange="onToggle()">N/A-->
                                 </td>
                                 <td>
                                     <input type="checkbox" class="checkbox" id="school_enrollmentYes1" value="Yes" onchange="onToggle()">Yes
                                     <input type="checkbox" class="checkbox" id="school_enrollmentNo1" value="No" checked onchange="onToggle()">No
+                                    <input type="checkbox" class="checkbox" id="school_enrollment-11" value="-1"  onchange="onToggle()">N/A
                                 </td>
                                 <td>
                                     <input type="checkbox" class="checkbox" id="number_childrenYes1" value="Yes" checked onchange="onToggle()">Yes
@@ -222,10 +224,12 @@
                                 <td>
                                     <input type="checkbox" class="checkbox" id="multiple_jobsYes2" value="Yes" onchange="onToggle()">Yes
                                     <input type="checkbox" class="checkbox" id="multiple_jobsNo2" value="No" checked onchange="onToggle()">No
+                                    <!--<input type="checkbox" class="checkbox" id="multiple_jobs-12" value="-1"  onchange="onToggle()">N/A-->
                                 </td>
                                 <td>
                                     <input type="checkbox" class="checkbox" id="school_enrollmentYes2" value="Yes" onchange="onToggle()">Yes
                                     <input type="checkbox" class="checkbox" id="school_enrollmentNo2" value="No" checked onchange="onToggle()">No
+                                    <input type="checkbox" class="checkbox" id="school_enrollment-12" value="-1"  onchange="onToggle()">N/A
                                 </td>
                                 <td>
                                     <input type="checkbox" class="checkbox" id="number_childrenYes2" value="Yes"  onchange="onToggle()">Yes
@@ -253,6 +257,15 @@
 
     </div>
 
+    <div class="section demo">
+        <div id = "demoheader">
+            <h2 id = "demolabel">The 2017 ATUS Resondents</h2>
+            <div id = "instructions">Hover over the visualization to learn more about the demographics of ATUS respondents!</div>
+            <div id = "demoinfo"></div>
+        </div>
+        <div id="demovis">
+        </div>
+    </div>
 
 
     <div class="section">
@@ -311,6 +324,8 @@
         </div>
 
     </div>
+
+
 
     <div class="section fp-auto-height">
         <div class="container_02">

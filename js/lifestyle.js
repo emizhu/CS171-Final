@@ -1,6 +1,6 @@
-//#todo fix labels
+//#todo fix height
+//#todo why isn't -1 filter/NA working for fulltime?
 //#todo tooltip colors??
-//#todo remove tooltip QC text
 
 
 LifeStyle = function(_parentElement, _data){
@@ -19,17 +19,17 @@ LifeStyle.prototype.initVis = function() {
     //Customize here
     //----------------------------------------------------------
     // Margin object with properties for the four directions
-    vis.margin = {top: 30, right: 20, bottom: 30, left: 20};
+    vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
     //vis.columnwidth = $("#" + vis.parentElement).width();
     //vis.width = 750- vis.margin.left -vis.margin.right,
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left -vis.margin.right;
-    vis.height = 700 - vis.margin.top -vis.margin.bottom;
+    vis.height = 600 - vis.margin.top -vis.margin.bottom;
     vis.padding = 10;
 
     //color range for comparisons
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
 
-    vis.lineLength = 280;
+    vis.lineLength = 250;
     vis.circleradius = 7;
     vis.labelBuffer = 40;
     vis.innerAxis = 30;
@@ -39,6 +39,8 @@ LifeStyle.prototype.initVis = function() {
     //DO NOT CHANGE ORDER OF ROWS/COLUMNS IN THE CSV - only text in column 2
     var i = 0;
     vis.labels = [];
+    vis.facts = [];
+
     for (i = 0; i < dataCat["columns"].length; i++) {
         vis.labels.push(dataCat[0][dataCat["columns"][i]]);
     };
@@ -52,6 +54,25 @@ LifeStyle.prototype.initVis = function() {
     vis.labels =["Volunteer", "Phone Calls", "Traveling", "Personal Care", "Sleep", "Household",
         "Work", "Education", "Consumer Purchases",  "Household Services", "Govt & Civic",
         "Eat & Drink", "Leisure", "Sports", "Religious"];
+
+    vis.facts = ["Volunteer Activities include doing Social Service & Care Activities, volunteering Indoor & Outdoor Maintenance, Building, & Clean-up Activities, Participating in Performance & Cultural Activities and so on.",
+        "Telephone Calls include activities such as Talking on the phone to/from family, friends, and acquaintances and Waiting Associated with Telephone Calls.",
+        "Traveling includes all kind activities?happening while traveling from Personal care to Volunteering.",
+        "Personal Care includes activities such as Grooming, taking medicine, having sex, and  being involved in a personal accident.",
+        "Sleeping",
+        "Household Activities include Cleaning, Doing laundry, Preparing food, Repairing, Caring for household pets, Decorating and Maintaining a house.",
+        // "Caring For & Helping Household (HH) Members includes activities such as playing with household children, helping to do homework, caring for household members and so on.",
+        // "Caring For & Helping Non-Household (NonHH) Members includes activities such as playing with NonHH children, Attending NonHH children's events, Dropping off/picking up NonHH children, caring for household members and so on.",
+        "Work & Work-Related Activities include Working, Waiting associated with working, Attending social event w/coworkers, Doing Income-generating performances/Services, Searching jobs and so on.",
+        "Education includes activities such as Taking a class, Doing a research, Spending a time in extracurricular school activities, Looking at course descriptions, Waiting to enroll in a class.",
+        "Consumer Purchases include Shopping (Store, Telephone, Internet), Researching Purchases, and Being searched at a security checkpoint.",
+        // "Professional & Personal Care Services include Childcare Services, Financial Services, Legal Services, Medical and Care Services, Personal Care Services such as getting a haircut, having nails done and having a message.",
+        "Household Services include activities such as Using interior cleaning services, Using meal preparation services, Using home maint/repair/decoration/construction services, Getting Pet Services, and Having Vehicle Maint. & Repair Services.",
+        "Government Services & Civic Obligations include activities such as Using Government Services, Participating Civic Obligations, Waiting associated with using government services and so on.",
+        "Eating and Drinking includes activities such as Eating and drinking and Waiting associated w/eating & drinking.",
+        "Socializing, Relaxing, and Leisure include activities such as Socializing and communicating with others, Attending or Hosting Social Events, Relaxing and Leisure, Attending performing arts, museums, and movies/film, and Waiting Associated with Socializing, Relaxing, and Leisure.",
+        "Sports, Exercise, and Recreation include activities such as Participating in Sports, Exercise, or Recreation, Attending Sporting/Recreational Events and Waiting Associated with Sports, Exercise, & Recreation.",
+        "Religious and Spiritual Activities include Attending religious services, Participation in religious practices and Waiting associated w/religious & spiritual activities."];
 
     //headers for filtering data
     //these values must EXACTLY match the headers in vis.displayData and should be in the same order as vis.labels
@@ -123,11 +144,11 @@ LifeStyle.prototype.initVis = function() {
         // + "rotate(" + vis.angle*i + ")"
 
 
-        // //get position of arc
-        // //https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
+        // get position of arc
+        // https://stackoverflow.com/questions/49382836/how-to-add-text-at-the-end-of-arc
         var pointLabel = vis["svgarc" + i].node().getPointAtLength(vis["svgarc" + i].node().getTotalLength() / 2);
-        //
-        // //append text labels
+
+        // append text labels
         var text = vis.svg.append("text")
             .attr("x", pointLabel.x -5)
             .attr("y", pointLabel.y)
@@ -138,7 +159,20 @@ LifeStyle.prototype.initVis = function() {
             .attr("class","lifestyle-x-labels")
             .attr("class","x-axis")
             .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height/2) + ")" );
+
+
+
+        //create hover content for text labels
+        $("text.x-axis").hover(function() {
+            var label = $(this).text();
+            var n = vis.labels.indexOf(label);
+            $("#hoverdetails").html(vis.facts[n]);
+
+        }, function() {
+            $("#hoverdetails").html("");
+        });
         // ----------------------------------------------------------
+
 
 
         //Create axes
@@ -161,9 +195,12 @@ LifeStyle.prototype.initVis = function() {
 
 
 
+
         //color rows of checkboxes
-        $("#checkboxes1").css("color",vis.color[0]);
-        $("#checkboxes2").css("color",vis.color[1]);
+        $("#checkboxes1").css("color","white").css('background-color',vis.color[0]).css('opacity', '0.6');
+        $("#checkboxes2").css("color","white").css('background-color',vis.color[1]).css('opacity', '0.7');
+        $("#headerrow").css("color","#404040");
+
 
     };
 
@@ -220,7 +257,7 @@ LifeStyle.prototype.wrangleData = function() {
     for (j = 0; j < vis.headers.length; j++) {
         vis[vis.headers[j] + "array"] = [];
         for (i = 0; i < vis.displayData.length; i++) {
-            vis[vis.headers[j] + "array"].push(vis.displayData[i][vis[vis.headers[j]]]);
+            vis[vis.headers[j] + "array"].push(vis.displayData[i][vis.headers[j]]);
         };
     }
 
@@ -366,7 +403,8 @@ LifeStyle.prototype.calcData = function(){
 
             //calculate averages and percentiles
             vis[vis.headers[j] + "avg" + number] = vis[vis.headers[j] + "total" + number]/ vis[vis.headers[j] + "array" + number].length;
-            vis[vis.headers[j] + "per" + number] = jStat.percentileOfScore(vis[vis.headers[j] + "array" + number], vis[vis.headers[j] + "avg" + number]);
+            // vis[vis.headers[j] + "per" + number] = jStat.percentileOfScore(vis[vis.headers[j] + "array" + number], vis[vis.headers[j] + "avg" + number]);
+            vis[vis.headers[j] + "per" + number] = jStat.percentileOfScore(vis[vis.headers[j] + "array"], vis[vis.headers[j] + "avg" + number]);
 
         };
     }
@@ -418,6 +456,17 @@ LifeStyle.prototype.calcData = function(){
 
 LifeStyle.prototype.updateVis = function(){
     var vis = this;
+    var str1 = vis.filtered1.length + " respondents";
+    var colorstr1 = str1.fontcolor(vis.color[0]);
+
+    var str2 = vis.filtered2.length + " respondents";
+    var colorstr2 = str2.fontcolor(vis.color[1]);
+
+
+    var str = "Averages based on: <br>" + colorstr1 + "<br>" + colorstr2;
+    $("#filtered-counts").html(str);
+
+
 
 
     //create tooltip
