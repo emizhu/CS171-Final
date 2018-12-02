@@ -23,13 +23,13 @@ LifeStyle.prototype.initVis = function() {
     //vis.columnwidth = $("#" + vis.parentElement).width();
     //vis.width = 750- vis.margin.left -vis.margin.right,
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left -vis.margin.right;
-    vis.height = 600 - vis.margin.top -vis.margin.bottom;
+    vis.height = 580 - vis.margin.top -vis.margin.bottom;
     vis.padding = 10;
 
     //color range for comparisons
     vis.color = [d3.schemeCategory20[0],d3.schemeCategory20[2]];
 
-    vis.lineLength = 250;
+    vis.lineLength = 220;
     vis.circleradius = 7;
     vis.labelBuffer = 40;
     vis.innerAxis = 30;

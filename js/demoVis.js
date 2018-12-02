@@ -1,16 +1,15 @@
 DemoVis = function() {
-    console.log("hello?");
     this.initVis();
 };
 
 DemoVis.prototype.initVis = function() {
     var vis = this;
 
-
+    vis.labels = [];
     vis.maxWidth = Math.min ($(window).width()-60, 900);
     vis.maxHeight = $(window).height() - ($('#demoheader').height()+$('#demoinfo').height()+$('#instructions').height());
-    console.log(vis.maxHeight);
     vis.margin = { top: 1, right: 1, bottom: 6, left: 1 };
+    vis.margintoplabel = -19;
     vis.width = vis.maxWidth- vis.margin.left - vis.margin.right;
     vis.height = vis.maxHeight - vis.margin.top - vis.margin.bottom-100;
     vis.formatNumber = d3.format(',.0f');
@@ -19,12 +18,12 @@ DemoVis.prototype.initVis = function() {
         "#15537d",'#629fca',
         '#bd0026','#f03b20','#fd8d3c','#fecc5c','#fbff8b',
         '#31a354','#a1d99b','#e5f5e0',
-        '#dd1c77','#c994c7','#e7e1ef',
+        '#dd1c77','#c994c7',
         '#54278f','#756bb1','#9e9ac8','#bcbddc','#dadaeb','#f2f0f7',
     ]);
 
     let sidemargins = ($(window).width() - vis.maxWidth)/2;
-    let topmargin = (vis.height-(vis.height + vis.margin.top + vis.margin.bottom))/2 + 25;
+    let topmargin = (vis.height-(vis.height + vis.margin.top + vis.margin.bottom))/2 + 45;
         // (vis.height + vis.margin.top + vis.margin.bottom)+ 150);
 
     // console.log($("#demovis").width());
@@ -32,15 +31,24 @@ DemoVis.prototype.initVis = function() {
     $("#demovis").css("padding-left", sidemargins + "px");
     $("#demovis").css("padding-top", topmargin + "px");
 
-    d3.select("#demovis").append("canvas")
+    $("#demoheading").css("height", (topmargin-20) + "px");
+
+    d3.select("#demosankey").append("canvas")
         .attr("class", "demovis")
         .attr('width', 960)
         .attr('height',vis.height + vis.margin.top + vis.margin.bottom);
 
-    d3.select("#demovis").append("svg")
-        .attr("class", ".demovis .demo");
+    d3.select("#demosankey").append("svg")
+        .attr("class", "demovis demo");
 
-    vis.svg = d3.select('#demovis svg')
+    vis.heading = d3.select("#demoheading")
+        .append("svg")
+        .attr("class", "headings")
+        .attr('width', vis.width + vis.margin.left + vis.margin.right)
+        .attr('height', 20);
+
+
+    vis.svg = d3.select('#demosankey svg')
         .attr('width', vis.width + vis.margin.left + vis.margin.right)
         .attr('height', vis.height + vis.margin.top + vis.margin.bottom)
         .attr("x", 0)
@@ -64,6 +72,48 @@ DemoVis.prototype.initVis = function() {
             .nodes(demo.nodes)
             .links(demo.links)
             .layout(0);
+
+
+        demo.nodes.forEach(function(d) {
+            console.log(vis.labels);
+                if (!vis.labels.includes(d.x)) {
+                    vis.labels.push(d.x);
+                }
+            }
+        );
+        console.log(vis.labels);
+
+        vis.names = ["Sex", "Race", "Employment", "Geography", "Age"];
+
+        vis.labels.forEach(function(entry, index){
+            console.log(entry);
+            vis.heading.append("text")
+                .attr("x", function () {
+                    if (index != 0 && index != 4){
+                        return (entry + 7.5);
+                    }
+                    else if (index == 0) {
+                        return entry;
+                    }
+                    else {
+                        return (entry + 15);
+                    }})
+                .attr("y", 15)
+                .attr("text-anchor", function () {
+                    if (index != 0 && index != 4){
+                        return "middle";
+                    }
+                    else if (index == 0) {
+                        return "start";
+                    }
+                    else {
+                        return "end";
+                    }
+                })
+                .attr("font-size", 10)
+                .attr("fill", "white")
+                .text(vis.names[index]);
+        });
 
         vis.link = vis.svg.append('g').selectAll('.link')
             .data(demo.links)
@@ -99,6 +149,7 @@ DemoVis.prototype.initVis = function() {
                 .on('start', function () { this.parentNode.appendChild(this); })
                 .on('drag', dragmove))
             .on('mouseover', function(d) {
+                // console.log(d);
                 $("#demoinfo").text(d.value + " respondents or " + Math.floor(100*(d.value/10223)) + " % of all respondents are " + convertName(d.name));
             })
             .on('mouseout', function(d) {

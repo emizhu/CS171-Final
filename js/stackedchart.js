@@ -6,6 +6,7 @@ var format = d3.format(".2f");
 var Y_pos = 58;
 var colorselected;
 var textColor;
+var inDex;
 
 StackedChart = function(_parentElement, _data, _dataCategory, _detail){
     this.parentElement = _parentElement;
@@ -46,7 +47,7 @@ StackedChart.prototype.initVis = function() {
 
     vis.svg_legend = d3.select("#legend").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right +50)
-        .attr("height", vis.height*0.4 - vis.margin.top -5)
+        .attr("height", vis.height*0.4 - vis.margin.top +5)
         .append("g")
         .attr("transform", "translate(" + (-80 )  + "," + 120+ ")");
 
@@ -336,6 +337,7 @@ StackedChart.prototype.updateVis_filtered = function(){
     var vis = this;
 
     vis.svg = d3.select("body").transition();
+
     getText(colorindex, vis.dataCat2, vis.dataAverage, vis.facts, vis.intfacts);
     // Update domains
     vis.max = d3.max(vis.filtered.map(function(d){
@@ -385,6 +387,8 @@ StackedChart.prototype.updateVis_filtered = function(){
     }
     else{
         // Plot Stacked Bar Chart
+
+
         vis.barsdetails.selectAll(".bars")
             .exit().remove();
 
@@ -392,7 +396,8 @@ StackedChart.prototype.updateVis_filtered = function(){
             .enter().append("g")
             .attr("fill", function(d, index) {
                 return vis.z(index);})
-            .attr("class", function(d, index) {return index})
+            .attr("class", function(d, index) {return "class"+ index})
+            .attr("opacity", 1)
             .selectAll("rect")
             .data(function(d) { return d;})
             .enter().append("rect")
@@ -402,19 +407,27 @@ StackedChart.prototype.updateVis_filtered = function(){
             .attr("width", function(d) {
                 return vis.x(d[1]) - vis.x(d[0]); })
             .attr("height", barHeight)
+            // .attr("opacity", 0.6)
             .attr("transform", "translate(20,0)")
             .on("mouseover", function(d,i) {
-                d3.select(this)
+                d3.select(this);
 
                 // d3.select(d[0]).attr("opacity",0.2);
                 // console.log(d);
                 var ke = getKeyByValue(d.data, (d[1]-d[0]));
-                var inDex = keyselected.indexOf(ke,0);
+                inDex = keyselected.indexOf(ke,0);
 
 
-                d3.selectAll(".bars").attr("opacity",0.2);
+                d3.selectAll(".bars").attr("opacity",0.4);
                 d3.select(this).attr("opacity",1);
+                // $("g.class" + ", .bars").attr("opacity", 0.5);
 
+
+                console.log(inDex);
+                // d3.select(this.getAttribute(inDex)).attr("opacity",1);
+                // $("g.class" + inDex +".bars").attr("opacity", 0.1);
+
+                $("g.class" + inDex ).attr("opacity", 1.2)
                 // g.selectAll("0").attr("opacity",1);
                 // d3.select(d[0]).attr("opacity",1);
                 // vis.legend.attr("opacity",0.2);
@@ -445,6 +458,7 @@ StackedChart.prototype.updateVis_filtered = function(){
 
                     textColor = vis.z(inDex);
 
+
                     getText_Average (d.data.age, format((d[1] - d[0])), activityr, inDex, vis.facts);
 
                     vis.tooltip.html("<b>" + format((d[1] - d[0]))+"</b>" + " Minutes " )
@@ -454,7 +468,8 @@ StackedChart.prototype.updateVis_filtered = function(){
             })
             .on("mouseout", function(d) {
                 d3.selectAll(".bars").attr("opacity",1);
-
+                // d3.selectAll(".bars").attr("opacity",1);
+                // $("g.class" + inDex).attr("opacity", 1);
 
                 vis.tooltip.transition()
                     .duration(100)
@@ -485,6 +500,10 @@ StackedChart.prototype.updateVisDetails = function(){
             return vis.q(index);})
         .on("mouseover", function(d, index) {
             d3.select(this);
+
+            console.log(d);
+            var activityr = vis.dataCat2[inDex];
+            getText_Average (d.data.age, format((d[1] - d[0])), activityr, inDex, vis.facts);
 
             vis.tooltip.transition()
                 .duration(100)

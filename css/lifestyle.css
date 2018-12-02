@@ -26,6 +26,11 @@ g.life-x-axis path{
     font-size: 14px;
 }
 
+#hoverdetails {
+    font-size: 12px;
+    padding: 20px;
+}
+
 
 tr {
     height: 10px;
@@ -49,7 +54,7 @@ tr {
     font-style: italic;
     color: gray;
     /*margin-bottom: 0;*/
-    margin-bottom: 20px;
+    padding-bottom: 20;
 }
 #lifestyle {
     padding: 10px;

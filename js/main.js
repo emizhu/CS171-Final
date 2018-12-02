@@ -5,6 +5,10 @@ var dataCat = [];
 var lifestyle;
 var stackedchart;
 
+//set height of columns to fill page
+$(".page_row")
+    .css("height",$(window).height()+"px");
+
 
  new fullpage('#fullpage', {
 
@@ -62,8 +66,18 @@ queue()
      // Married, full-time employed, currently working women vs men with children in household
      // Childcare = 0301 + 0302 + 0303 codes
      var gendervis = new DiffVis("gendervis", 88.91, 59.72, 111.89, 51.12, "Women", "Men", "Childcare", "Housework");
-     var transvis = new DiffVis("transvis", 48.52, 36.54, null, null, "Metropolitan", "Non-Metropolitan", "Transportation for Work", null);
-     var leisurevis = new DiffVis("labor", 407.9, 230.9, null, null, "Off Labor Market", "Currently Employed", "Lesiure Time", null);
+     var transvis = new DiffVis("transvis", 48.52, 36.54, null, null, "Urban Residents", "Nonurban Residents", "Work Transportation", null);
+     var leisurevis = new DiffVis("labor", 407.9, 230.9, null, null, "Off the Labor Market", "Currently Employed", "Lesiure Time", null);
+
+     var colwidth = $('.col-md-3').width();
+     console.log(colwidth);
+
+     $('.fp-controlArrow.fp-prev').css("left", colwidth+60);
+
+     if (colwidth < 350) {
+         $('.col-md-3 p').css("padding-left", 20);
+         $('.col-md-3 p').css("font-size", 11);
+     }
 
      stackedchart = new StackedChart("stackedchart", data, dataCategory, detail);
 

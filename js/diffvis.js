@@ -43,13 +43,13 @@ DiffVis.prototype.initVis = function() {
 
     vis.timetotal = 1;
 
-    vis.margin = {top: 40, right: 140, bottom: 60, left: 140};
+    vis.margin = {top: 40, right: 140, bottom: 60, left: 80};
 
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 800 - vis.margin.top - vis.margin.bottom;
 
     vis.totalwidth = vis.width + vis.margin.left + vis.margin.right;
-    vis.sideMargin = 25;
+    vis.sideMargin = 15;
     vis.boxMargin = 2;
     vis.boxWidth = ((vis.width/2) - (vis.sideMargin) - (vis.rownum*vis.boxMargin))/vis.rownum;
 
@@ -58,8 +58,8 @@ DiffVis.prototype.initVis = function() {
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
-        // .append("g")
-        // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+    // .append("g")
+    // .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 
     // vis.calendar = vis.svg.append("g");
@@ -69,7 +69,8 @@ DiffVis.prototype.initVis = function() {
     //     .attr("d", "M 0 0 H " + (vis.width - 200));
 
     vis.legend = vis.svg.append("g")
-    .attr("transform", "translate(" + 0 + "," + (vis.margin.top+30) + ")");
+        .attr("id", "legend")
+        .attr("transform", "translate(" + 0 + "," + (vis.margin.top+70) + ")");
 
 
     if (vis.activity2) {
@@ -154,13 +155,19 @@ DiffVis.prototype.initVis = function() {
         .attr("d", "M" + (vis.legendstart-2) + " 70 " + " L " + (vis.legendstart + 14) + " 60 " + " L " + (vis.legendstart-2) + " 50")
         .attr("fill", d3.schemeCategory20[0]);
 
+
+    if (vis.group1 == "off the labor market") {
+        vis.group1 = "those off the labor market";
+        vis.group2 = "those currently employed";
+    }
+
     vis.left = vis.svg.append("g")
         .attr("class", "left-vis")
-        .attr("transform",  "translate(" + vis.margin.left + ",300)");
+        .attr("transform",  "translate(" + vis.margin.left + "," + (200+vis.margin.top) + ")");
 
     vis.right = vis.svg.append("g")
         .attr("class", "right-vis")
-        .attr("transform", "translate(" + vis.totalwidth/2 +  ", 300)");
+        .attr("transform", "translate(" + vis.totalwidth/2 +  "," + (200+vis.margin.top) + ")");
 
     vis.left
         .append("text")
@@ -201,7 +208,7 @@ DiffVis.prototype.initVis = function() {
         .attr("class", "dv-axis-label")
         .text(vis.label);
 
-     vis.right
+    vis.right
         .append("text")
         .attr("class", "dv-label")
         .attr("y", 0)
@@ -242,6 +249,8 @@ DiffVis.prototype.initVis = function() {
 
     vis.init = true;
     vis.wrangleData();
+
+
 
     vis.calendararrow
         .on("click", function (d) {
@@ -306,20 +315,22 @@ DiffVis.prototype.drawVis = function() {
 
 
     array1b.forEach(function(d, j) {
-            setTimeout(function() {
-                vis.rightrect.append("rect")
-                    .attr("class", "square1a")
-                    .attr("fill", d3.schemeCategory20[0])
-                    .attr("width", vis.boxWidth)
-                    .attr("height", vis.boxWidth)
-                    .attr("x", vis.sideMargin + (vis.boxWidth+vis.boxMargin) * (j % vis.rownum))
-                    .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/vis.rownum)+10);
-            },time2 * j);
-        });
+        setTimeout(function() {
+            vis.rightrect.append("rect")
+                .attr("class", "square1a")
+                .attr("fill", d3.schemeCategory20[0])
+                .attr("width", vis.boxWidth)
+                .attr("height", vis.boxWidth)
+                .attr("x", vis.sideMargin + (vis.boxWidth+vis.boxMargin) * (j % vis.rownum))
+                .attr("y",(vis.boxWidth+vis.boxMargin)* Math.floor(j/vis.rownum)+10);
+        },time2 * j);
+    });
 
     setTimeout(function () {
         vis.drawBlanks();
-        vis.showTooltip(false);
+        if (!vis.init) {
+            vis.showTooltip(false);
+        }
 
         if (vis.init && vis.activity2) {
             vis.showSecond();
@@ -339,7 +350,7 @@ DiffVis.prototype.drawVis = function() {
         }
         vis.calendararrow
             .transition()
-            .ease(d3.easeElastic)
+            .ease(d3.easeLinear)
             .attr("transform", "translate(0, 0)")
             .duration(400);
 
@@ -394,7 +405,7 @@ DiffVis.prototype.showSecond = function() {
     array2a.forEach(function(d, j) {
         setTimeout(function() {
             vis.leftrect.append("rect")
-                // .attr("class", "square1a")
+            // .attr("class", "square1a")
                 .attr("fill", d3.schemeCategory20[2])
                 .attr("width", vis.boxWidth)
                 .attr("height", vis.boxWidth)
@@ -424,7 +435,12 @@ DiffVis.prototype.showSecond = function() {
 
     setTimeout(function () {
         vis.drawBlanks();
-        vis.showTooltip(true);
+        if (!vis.init) {
+            vis.showTooltip(true);
+        }
+
+        vis.calendarlabel
+            .text("Click the arrow to start the animation!");
 
         vis.calendararrow
             .attr("fill", d3.schemeCategory20[0]);
@@ -467,15 +483,23 @@ DiffVis.prototype.drawBlanks = function() {
         })
         .attr("fill", function (d, i) {
             if (check == Math.round(vis.total1a - vis.total1b)) {
-                return d3.schemeCategory20[1];
+                return "rgb(174, 199, 232, 0.3)";
             }
             else if (i <= vis.total1a - vis.total1b) {
-                return d3.schemeCategory20[1];
+                return "rgb(174, 199, 232, 0.3)";
             }
             else {
-                return d3.schemeCategory20[3];
+                return "rgb(255, 187, 120, 0.3)";
             }
 
+        })
+        .attr("stroke", function() {
+            if (!vis.init)
+                return "#131313";
+        })
+        .attr("stroke-width", function() {
+            if (!vis.init)
+                return 0.25;
         })
         .attr("width", vis.boxWidth)
         .attr("height", vis.boxWidth)
@@ -485,6 +509,13 @@ DiffVis.prototype.drawBlanks = function() {
         .attr("y",function(d, i) {
             return (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb+i)/vis.rownum)+10;
         });
+
+    if (vis.init) {
+        vis.leftrect.selectAll("rect")
+            .attr("fill", "#d9d9d9");
+        vis.right.selectAll("rect")
+            .attr("fill", "#d9d9d9");
+    }
 };
 
 DiffVis.prototype.showTooltip = function (bool) {
@@ -497,7 +528,7 @@ DiffVis.prototype.showTooltip = function (bool) {
         .attr("fill", "black")
         .attr("x", 0)
         .attr("y", 0)
-        .text(vis.group1.charAt(0).toUpperCase() + " spend approximately " + Math.round(vis.savea*vis.hours) + " hours a year on " + vis.activity1);
+        .text(vis.group1.charAt(0).toUpperCase() + " spend approximately " + Math.round(vis.savea*vis.hours) + " hr/yr on " + vis.activity1);
 
     vis.placeholder = vis.svg.selectAll(".placeholder");
 
@@ -543,8 +574,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
-            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round(vis.savea*vis.hours) + " hours a year on " + vis.activity1);
+            .attr("y", center_y-2)
+            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately ");
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text(Math.round(vis.savea*vis.hours) + " hrs/yr on " + vis.activity1);
 
 
         x1 = vis.sideMargin;
@@ -569,7 +607,6 @@ DiffVis.prototype.showTooltip = function (bool) {
                 + " V " + y5 + " H " + x6 + " V " + y7)
             .attr("fill","transparent");
 
-
         vis.wrapper.append("rect")
             .attr("class", "dv-tooltip-box")
             .attr("x", center_x - bbox.width/2)
@@ -581,8 +618,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
-            .text(vis.group2.charAt(0).toUpperCase() + vis.group2.slice(1) + " spend approximately " + Math.round(vis.saveb*vis.hours) + " hours a year on " + vis.activity1);
+            .attr("y", center_y-2)
+            .text(vis.group2.charAt(0).toUpperCase() + vis.group2.slice(1) + " spend approximately ");
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text(Math.round(vis.saveb*vis.hours) + " hrs/yr on " + vis.activity1);
 
 
         x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum)+vis.sideMargin;
@@ -620,13 +664,13 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("x", center_x)
             .attr("y", center_y-2)
             .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round((vis.total1a - vis.total1b)*vis.hours)
-                + " more hours a year")
+                + " more");
         vis.wrapper2.append("text")
             .attr("class", "dv-tooltip-text")
             .attr("fill", "white")
             .attr("x", center_x)
             .attr("y", center_y+10)
-            .text("on " + vis.activity1 + " than " + vis.group2);
+            .text("hrs/yr on " + vis.activity1 + " than " + vis.group2);
 
     }
 
@@ -667,9 +711,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
+            .attr("y", center_y-2)
             .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) +
-                " spend approximately " + Math.round(vis.total2a*vis.hours) + " hours a year on " + vis.activity2);
+                " spend approximately ")
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text( Math.round(vis.total2a*vis.hours) + " hrs/yr on " + vis.activity2);
 
 
 
@@ -708,8 +758,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
-            .text(vis.group2.charAt(0).toUpperCase() + vis.group2.slice(1) + " spend approximately " + Math.round(vis.total2b*vis.hours) + " hours a year on " + vis.activity2);
+            .attr("y", center_y-2)
+            .text(vis.group2.charAt(0).toUpperCase() + vis.group2.slice(1) + " spend approximately " );
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text(Math.round(vis.total2b*vis.hours) + " hrs/yr on " + vis.activity2);
 
         x1 = (vis.boxWidth+vis.boxMargin) * ((vis.finalb) % vis.rownum)+vis.sideMargin;
         y1 = (vis.boxWidth+vis.boxMargin) * Math.floor((vis.finalb)/vis.rownum)+10;
@@ -745,9 +802,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text wrap")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
-            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round(vis.total1a - vis.total1b) + " more hours a year on "
-                + vis.activity1 + " than " + vis.group2);
+            .attr("y", center_y-2)
+            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round(vis.total1a - vis.total1b) + " more");
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text wrap")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text("hrs/yr on " + vis.activity1 + " than " + vis.group2);
 
 
         x1 = x4 + vis.boxMargin;
@@ -784,9 +847,15 @@ DiffVis.prototype.showTooltip = function (bool) {
             .attr("class", "dv-tooltip-text wrap")
             .attr("fill", "white")
             .attr("x", center_x)
-            .attr("y", center_y+3)
-            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round((vis.total2a - vis.total2b)*vis.hours) + " more hours a year on "
-                + vis.activity2 + " than " + vis.group2);
+            .attr("y", center_y-2)
+            .text(vis.group1.charAt(0).toUpperCase() + vis.group1.slice(1) + " spend approximately " + Math.round((vis.total2a - vis.total2b)*vis.hours) + " more")
+
+        vis.wrapper.append("text")
+            .attr("class", "dv-tooltip-text wrap")
+            .attr("fill", "white")
+            .attr("x", center_x)
+            .attr("y", center_y+10)
+            .text("hrs/yr on " + vis.activity2 + " than " + vis.group2);
     }
 
     // d3plus.textwrap()
@@ -799,7 +868,7 @@ DiffVis.prototype.startAnimation = function(bool) {
     var vis = this;
 
     vis.arrowend = vis.totalwidth-vis.margin.right-vis.sideMargin-vis.legendstart;
-    vis.timetotal = 7000;
+    vis.timetotal = 6000;
     vis.init = false;
 
     if (bool) {
@@ -818,32 +887,6 @@ DiffVis.prototype.startAnimation = function(bool) {
         .duration(vis.timetotal);
 
 }
-//
-// DiffVis.prototype.calMove = function () {
-//     var vis = this;
-//
-//     var start = Date.now(); // remember start time
-//
-//     var timer = setInterval(function() {
-//         // how much time passed from the start?
-//         let timePassed = Date.now() - start;
-//
-//         if (timePassed >= vis.timetotal) {
-//             clearInterval(timer); // finish the animation after 2 seconds
-//             return;
-//         }
-//
-//         // draw the animation at the moment timePassed
-//         draw(timePassed);
-//
-//     }, 20);
-//
-// // as timePassed goes from 0 to 2000
-// // left gets values from 0px to 400px
-//     function draw(timePassed) {
-//         train.style.left = timePassed / 5 + 'px';
-//     }
-// }
 
 
 function toUpper(str) {
