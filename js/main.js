@@ -22,7 +22,8 @@ var stackedchart;
      slidesNavigation: true,
      sectionsColor: ['white', '#404040', 'white', '#404040', 'white', 'white', '#404040'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
-    });
+ });
+
 
 //Load Data
 queue()
@@ -51,19 +52,6 @@ queue()
      console.log(data);
      var keys = dataCategory.columns;
 
-
-     // var detailCategory = dataDetail[6];
-
-//      var displayData = d3.nest()
-//          .key(function (d) {
-//              return d.tuyear;
-//          })
-//          .entries(data);
-//
-// //store 2017 only
-//      var data2017 = d3.values(displayData[14]);
-//      data2017 = data2017[1];
-
 // filter data
      data.forEach(function (d) {
          //convert string to number
@@ -75,19 +63,6 @@ queue()
              }
          }
      });
-
-
- // filter data
- //     dataDetail.forEach(function (d) {
- //         var i;
- //         for (i = 0; i < (keyDetail.length) ; i++) {
- //             var cat = keyDetail[i];
- //             if (cat[0] == 't') {
- //                 d[cat] = +d[cat];
- //             }
- //         }
- //     });
-
 
      // Married, full-time employed, currently working women vs men with children in household
      // Childcare = 0301 + 0302 + 0303 codes

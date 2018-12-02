@@ -391,7 +391,6 @@ StackedChart.prototype.updateVis_filtered = function(){
         vis.bars.data(d3.stack().keys(keyselected)(vis.filtered))
             .enter().append("g")
             .attr("fill", function(d, index) {
-                console.log(1);
                 return vis.z(index);})
             .selectAll("rect")
             .data(function(d) { return d;})
@@ -424,12 +423,13 @@ StackedChart.prototype.updateVis_filtered = function(){
 
                     var ke = getKeyByValue(d.data, (d[1]-d[0]));
 
-                    var activityr = vis.dataCat2[keyselected.indexOf(ke,0)];
+                    var inDex = keyselected.indexOf(ke,0);
+                    var activityr = vis.dataCat2[inDex];
                     // console.log(vis.dataCat2[activityr]);
 
-                    textColor = vis.z(keyselected.indexOf(ke,0));
+                    textColor = vis.z(inDex);
 
-                    getText_Average (d.data.age, format((d[1] - d[0])), activityr);
+                    getText_Average (d.data.age, format((d[1] - d[0])), activityr, inDex, vis.facts);
 
                     vis.tooltip.html("<b>" + format((d[1] - d[0]))+"</b>" + " Minutes " )
                         .style("left", (d3.event.pageX + 3) + "px")
@@ -500,20 +500,24 @@ function getText(index, datacat, averagetime, facts, intfacts) {
     }
     else {
         if (intfacts[index].length < 3){
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a style='color:" + String(colorselected) + "'>"
+            var summary = " <p> The average American spent <b><a style='color:" + String(colorselected) + "'>" + averagetime[index] +
+                "</a></b> hours a day on <strong><a style='color:" + String(colorselected) + "'>"
                 + datacat[index] + ".</a></strong><br><br>" +facts[index]+"<br><br><b></p>";
         }
         else{
-            var summary = " <p> The average American spent <b>" + averagetime[index] + "</b> hours a day on <strong><a  style='color:" + String(colorselected) + "'>"
+            var summary = " <p> The average American spent <b><a style='color:" + String(colorselected) + "'>" + averagetime[index] +
+                "</a></b> hours a day on <strong><a  style='color:" + String(colorselected) + "'>"
                 +   datacat[index] + ".</a></strong> <br><br>" +facts[index]+"<br><br><b> Did you know ? <sup>3</sup></sum></b><br>" + intfacts[index] +"</p>";
         }
         document.getElementById("facts").innerHTML = summary;
     }
 }
 
-function getText_Average (age, hours, activity){
-    var summary= " <p> The average American age group from " + age + " spent "+ "<b>" + hours + "</b>" +" hours a day on <strong><a  style='color:" + String(textColor) + "'>"
-            + activity + "</a></strong></p>";
+function getText_Average (age, hours, activity, index, facts){
+
+    var summary= " <p> The average American age group from " + age + " spent <b><a style='color:" + String(textColor) + "'>" + hours +
+        "</a></b>" +" hours a day on <strong><a  style='color:" + String(textColor) + "'>"
+            + activity + "</a></strong><br><br>"+ facts[index]+ "</p>";
     document.getElementById("facts").innerHTML=summary;
 }
 
