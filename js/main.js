@@ -15,7 +15,7 @@ var stackedchart;
      navigationTooltips: ['01', '02', '03', '04', '05','06', '07', '08', '09'],
      showActiveTooltip: true,
      slidesNavigation: true,
-     sectionsColor: ['white', '#404040', 'white', '#404040', 'white', 'white', '#404040'],
+     sectionsColor: ['white', '#404040', 'white', '#404040','white','#404040','white','#404040','#404040'],
      licenseKey:'OPEN-SOURCE-GPLV3-LICENSE'
  });
 

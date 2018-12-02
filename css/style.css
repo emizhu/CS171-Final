@@ -4,7 +4,7 @@
     /*text-align: center;*/
     position: absolute;
     font-family: 'Roboto Slab', serif;
-    font-size: 30px;
+    font-size: 20px;
     opacity: 0.6;
     stroke-width: 1;
     top: 50%;
@@ -86,7 +86,14 @@ body {
 }
 
 #about_table {
-    text-align:left;
+    text-align: left;
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Noto Sans SC', sans-serif;
 }
 
 
@@ -99,6 +106,7 @@ body {
 }
 
 .container_00,
+.container_01,
 .container_02 {
     position: relative;
     text-align: center;
